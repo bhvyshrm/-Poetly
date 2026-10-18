@@ -28,9 +28,7 @@ export default function WriterCard({
 
   return (
     <div
-      className={`group flex items-center justify-between gap-3.5 transition-colors ${
-        isRow ? "py-2" : "py-3"
-      } ${className}`}
+      className={`group flex items-center justify-between gap-3.5 transition-all p-3 rounded-xl hover:bg-surface-hover/40 ${className}`}
     >
       <Link
         href={`/profile/${writer.username}`}
@@ -40,18 +38,18 @@ export default function WriterCard({
           src={writer.profile_image}
           name={writer.display_name}
           size={isRow ? "sm" : "md"}
-          className="shrink-0 group-hover:ring-2 group-hover:ring-brand/30 transition-all"
+          className="shrink-0 group-hover:ring-2 group-hover:ring-primary/40 transition-all"
         />
 
         <div className="min-w-0 flex-1">
-          <p className="font-medium text-xs sm:text-sm text-text-primary group-hover:text-brand transition-colors truncate">
+          <p className="font-semibold text-xs sm:text-sm text-text-primary group-hover:text-primary transition-colors truncate">
             {writer.display_name}
           </p>
           <p className="text-[11px] text-text-tertiary truncate">
             @{writer.username}
           </p>
           {showBio && writer.bio && (
-            <p className="text-xs text-text-secondary mt-0.5 line-clamp-1 font-serif italic text-text-secondary/80">
+            <p className="text-xs text-text-secondary mt-0.5 line-clamp-1 font-verse italic text-text-secondary/80">
               {writer.bio}
             </p>
           )}
@@ -66,10 +64,10 @@ export default function WriterCard({
             e.stopPropagation();
             onFollowToggle();
           }}
-          className={`shrink-0 text-xs font-medium px-3.5 py-1.5 rounded-full transition-all duration-150 select-none ${
+          className={`shrink-0 text-xs font-semibold px-3.5 py-1.5 rounded-full transition-all select-none ${
             isFollowed
-              ? "bg-surface-secondary text-text-secondary hover:bg-surface-hover border border-border-subtle"
-              : "bg-brand text-white hover:bg-brand-hover shadow-xs shadow-brand/20"
+              ? "bg-primary/15 text-primary border border-primary/30 hover:bg-primary/25"
+              : "glass-pill text-text-secondary hover:text-primary hover:border-primary/40"
           }`}
           aria-label={isFollowed ? `Unfollow ${writer.display_name}` : `Follow ${writer.display_name}`}
         >
