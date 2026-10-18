@@ -92,86 +92,120 @@ export default function ActivityPanel() {
   };
 
   return (
-    <div className="sidebar-section">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="sidebar-section-title mb-0">Community Activity</h3>
-        {user && notifications.length > 0 && (
+    <div className="space-y-6">
+      {/* Live Salon Acoustic Banner from Stitch */}
+      <section className="glass-surface rounded-2xl p-5 relative overflow-hidden border border-secondary/30">
+        <div className="flex items-center gap-2 text-secondary mb-2">
+          <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
+          <span className="text-[10px] font-bold uppercase tracking-wider font-mono text-secondary">
+            Community Salon
+          </span>
+        </div>
+        <h4 className="font-display text-lg text-text-primary font-light leading-snug">
+          Midnight Acoustics: Verse &amp; Cello
+        </h4>
+        <p className="text-xs text-text-tertiary mt-1.5 line-clamp-2">
+          Live reading session hosted in the salon. Bring a draft or quiet ears.
+        </p>
+        <div className="flex items-center justify-between mt-4 pt-3 border-t border-border-subtle/40">
+          <div className="flex -space-x-2 overflow-hidden">
+            <span className="inline-flex h-6 w-6 rounded-full ring-2 ring-background bg-primary/40 items-center justify-center text-[10px] text-white">LV</span>
+            <span className="inline-flex h-6 w-6 rounded-full ring-2 ring-background bg-tertiary/40 items-center justify-center text-[10px] text-white">MK</span>
+            <span className="inline-flex h-6 w-6 rounded-full ring-2 ring-background bg-secondary/40 items-center justify-center text-[10px] text-white">+32</span>
+          </div>
           <Link
-            href="/notifications"
-            className="text-xs text-brand hover:text-brand-hover transition-colors"
+            href="/explore"
+            className="px-3 py-1 rounded-full bg-secondary/15 text-secondary border border-secondary/30 text-xs font-semibold hover:bg-secondary/25 transition-colors"
           >
-            See all
+            Join Salon
           </Link>
-        )}
-      </div>
+        </div>
+      </section>
 
-      {loading ? (
-        <div className="space-y-3">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full skeleton" />
-              <div className="flex-1 space-y-1">
-                <div className="w-24 h-3 skeleton rounded" />
-                <div className="w-16 h-2 skeleton rounded" />
-              </div>
-            </div>
-          ))}
+      {/* Community Activity Card */}
+      <section className="glass-surface rounded-2xl p-5 space-y-4">
+        <div className="flex items-center justify-between">
+          <h3 className="font-display text-lg text-text-primary font-semibold tracking-tight">
+            Recent Echoes
+          </h3>
+          {user && notifications.length > 0 && (
+            <Link
+              href="/notifications"
+              className="text-xs text-primary hover:underline font-medium"
+            >
+              See all
+            </Link>
+          )}
         </div>
-      ) : notifications.length > 0 ? (
-        <div className="space-y-2">
-          {notifications.map((n) => (
-            <div key={n.id} className="activity-item">
-              <div className="activity-avatar overflow-hidden">
-                {n.profiles?.profile_image ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={n.profiles.profile_image} alt="" className="w-full h-full object-cover" />
-                ) : (
-                  <span>{n.profiles?.display_name?.[0] || "?"}</span>
-                )}
+
+        {loading ? (
+          <div className="space-y-3">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full skeleton shrink-0" />
+                <div className="flex-1 space-y-1">
+                  <div className="w-24 h-3 skeleton rounded" />
+                  <div className="w-16 h-2 skeleton rounded" />
+                </div>
               </div>
-              <div className="activity-content min-w-0">
-                <p className="activity-text">
-                  <Link href={`/profile/${n.profiles?.username}`} className="font-medium hover:text-brand">
-                    {n.profiles?.display_name || "Someone"}
-                  </Link>{" "}
-                  {getActionText(n)}
-                </p>
-                <p className="activity-time">{getTimeAgo(n.created_at)}</p>
+            ))}
+          </div>
+        ) : notifications.length > 0 ? (
+          <div className="space-y-3">
+            {notifications.map((n) => (
+              <div key={n.id} className="flex items-center gap-2.5 text-xs">
+                <div className="w-8 h-8 rounded-full overflow-hidden shrink-0 ring-1 ring-border-subtle/40 bg-surface-secondary flex items-center justify-center">
+                  {n.profiles?.profile_image ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={n.profiles.profile_image} alt="" className="w-full h-full object-cover" />
+                  ) : (
+                    <span className="font-display text-xs text-text-secondary">{n.profiles?.display_name?.[0] || "?"}</span>
+                  )}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="text-text-secondary truncate">
+                    <Link href={`/profile/${n.profiles?.username}`} className="font-medium text-text-primary hover:text-primary">
+                      {n.profiles?.display_name || "Someone"}
+                    </Link>{" "}
+                    {getActionText(n)}
+                  </p>
+                  <p className="text-[10px] text-text-tertiary mt-0.5">{getTimeAgo(n.created_at)}</p>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-      ) : recentPoems.length > 0 ? (
-        <div className="space-y-2">
-          {recentPoems.map((p) => (
-            <div key={p.id} className="activity-item">
-              <div className="activity-avatar overflow-hidden">
-                {p.profiles?.profile_image ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={p.profiles.profile_image} alt="" className="w-full h-full object-cover" />
-                ) : (
-                  <span>{p.profiles?.display_name?.[0] || "P"}</span>
-                )}
+            ))}
+          </div>
+        ) : recentPoems.length > 0 ? (
+          <div className="space-y-3">
+            {recentPoems.map((p) => (
+              <div key={p.id} className="flex items-center gap-2.5 text-xs">
+                <div className="w-8 h-8 rounded-full overflow-hidden shrink-0 ring-1 ring-border-subtle/40 bg-surface-secondary flex items-center justify-center">
+                  {p.profiles?.profile_image ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={p.profiles.profile_image} alt="" className="w-full h-full object-cover" />
+                  ) : (
+                    <span className="font-display text-xs text-text-secondary">{p.profiles?.display_name?.[0] || "P"}</span>
+                  )}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="text-text-secondary truncate">
+                    <Link href={`/profile/${p.profiles?.username}`} className="font-medium text-text-primary hover:text-primary">
+                      {p.profiles?.display_name}
+                    </Link>{" "}
+                    penned{" "}
+                    <Link href={`/poem/${p.id}`} className="hover:text-primary font-verse italic text-text-primary font-medium">
+                      &ldquo;{p.title}&rdquo;
+                    </Link>
+                  </p>
+                  <p className="text-[10px] text-text-tertiary mt-0.5">{getTimeAgo(p.created_at)}</p>
+                </div>
               </div>
-              <div className="activity-content min-w-0">
-                <p className="activity-text">
-                  <Link href={`/profile/${p.profiles?.username}`} className="font-medium hover:text-brand">
-                    {p.profiles?.display_name}
-                  </Link>{" "}
-                  published &ldquo;
-                  <Link href={`/poem/${p.id}`} className="hover:text-brand font-poem italic">
-                    {p.title}
-                  </Link>
-                  &rdquo;
-                </p>
-                <p className="activity-time">{getTimeAgo(p.created_at)}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <p className="text-xs text-text-tertiary py-3">Quiet in the community today.</p>
-      )}
+            ))}
+          </div>
+        ) : (
+          <p className="text-xs text-text-tertiary py-1 font-verse italic">Quiet in the salon today.</p>
+        )}
+      </section>
     </div>
   );
 }
+

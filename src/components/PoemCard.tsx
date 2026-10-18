@@ -16,7 +16,6 @@ import { PoemWithAuthor } from "@/lib/types";
 import { supabase } from "@/lib/supabase/client";
 import { useAuth } from "@/components/AuthProvider";
 import Avatar from "@/components/ui/Avatar";
-import Tag from "@/components/ui/Tag";
 
 export interface PoemCardProps {
   poem: PoemWithAuthor;
@@ -286,31 +285,37 @@ export default function PoemCard({
 
   return (
     <article
-      className={`py-6 border-b border-border-subtle last:border-b-0 animate-fade-in ${className}`}
+      className={`glass-surface rounded-2xl p-6 sm:p-7 space-y-4 sm:space-y-5 specular-top-border hover:border-border-default/60 transition-all duration-300 mb-6 ${className}`}
     >
-      {/* Header: Author + Meta + Actions */}
-      <div className="flex items-center justify-between mb-3.5">
+      {/* Header: Author + Meta + Overflow Actions */}
+      <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <Link
             href={`/profile/${authorUsername}`}
-            className="shrink-0 rounded-full focus-visible:outline-none"
+            className="shrink-0 rounded-full focus-visible:outline-none ring-1 ring-primary/30"
           >
             <Avatar
               src={author?.profile_image}
               name={authorName}
-              size="sm"
+              size="md"
             />
           </Link>
 
           <div className="min-w-0">
-            <Link
-              href={`/profile/${authorUsername}`}
-              className="text-xs sm:text-sm font-medium text-text-primary hover:text-brand transition-colors truncate block"
-            >
-              {authorName}
-            </Link>
-            <p className="text-[11px] text-text-tertiary truncate">
-              @{authorUsername} · {timeAgo}
+            <div className="flex items-center gap-2">
+              <Link
+                href={`/profile/${authorUsername}`}
+                className="text-xs sm:text-sm font-semibold text-text-primary hover:text-primary transition-colors truncate block"
+              >
+                {authorName}
+              </Link>
+              <span className="w-1 h-1 rounded-full bg-text-tertiary" />
+              <span className="text-xs text-text-tertiary truncate">
+                @{authorUsername}
+              </span>
+            </div>
+            <p className="text-[11px] text-text-tertiary truncate mt-0.5">
+              {timeAgo}
             </p>
           </div>
         </div>
@@ -320,11 +325,11 @@ export default function PoemCard({
           <button
             type="button"
             onClick={() => setShowActions((prev) => !prev)}
-            className="p-1.5 rounded-[var(--radius-sm)] text-text-tertiary hover:text-text-primary hover:bg-surface-hover transition-colors"
+            className="p-1.5 rounded-full text-text-tertiary hover:text-text-primary hover:bg-surface-hover/60 transition-colors"
             aria-label="More poem actions"
             aria-expanded={showActions}
           >
-            <MoreHorizontal size={16} />
+            <MoreHorizontal size={17} />
           </button>
 
           {showActions && (
@@ -334,13 +339,13 @@ export default function PoemCard({
                 onClick={() => setShowActions(false)}
                 aria-hidden="true"
               />
-              <div className="absolute right-0 top-full mt-1 w-44 bg-surface border border-border-subtle rounded-[var(--radius-md)] shadow-xl z-30 py-1 text-xs animate-scale-in">
+              <div className="absolute right-0 top-full mt-1 w-48 glass-panel-elevated rounded-xl shadow-xl z-30 py-1.5 text-xs animate-scale-in">
                 <Link
                   href={`/poem/${poem.id}/canvas`}
                   onClick={() => setShowActions(false)}
-                  className="w-full px-3.5 py-2 text-left text-text-secondary hover:bg-surface-hover hover:text-text-primary flex items-center gap-2 transition-colors"
+                  className="w-full px-3.5 py-2 text-left text-text-secondary hover:bg-surface-hover hover:text-primary flex items-center gap-2 transition-colors"
                 >
-                  <Sparkles size={14} className="text-brand" />
+                  <Sparkles size={14} className="text-primary" />
                   <span>Poetry Canvas card</span>
                 </Link>
 
@@ -364,15 +369,15 @@ export default function PoemCard({
       </div>
 
       {/* Title */}
-      <Link href={`/poem/${poem.id}`} className="group block mb-2.5">
-        <h2 className="font-poem-title text-xl sm:text-2xl text-text-primary group-hover:text-brand transition-colors">
+      <Link href={`/poem/${poem.id}`} className="group block pt-1">
+        <h2 className="font-display italic text-2xl sm:text-3xl text-text-primary font-light group-hover:text-primary transition-colors tracking-tight">
           {poem.title}
         </h2>
       </Link>
 
-      {/* Content excerpt */}
-      <Link href={`/poem/${poem.id}`} className="group block mb-3.5">
-        <div className="poem-content text-text-primary/85 leading-relaxed font-poem text-[0.98rem]">
+      {/* Content excerpt with literary leading */}
+      <Link href={`/poem/${poem.id}`} className="group block">
+        <div className="font-verse text-base sm:text-lg text-text-primary/90 font-light leading-relaxed whitespace-pre-line space-y-2">
           {preview}
           {lines.length > previewMaxLines && (
             <span className="text-text-tertiary block mt-1">...</span>
@@ -380,71 +385,84 @@ export default function PoemCard({
         </div>
       </Link>
 
-      {/* Mood and Tags */}
+      {/* Mood and Tags in Stitch frosted pills */}
       {(poem.mood || (poem.tags && poem.tags.length > 0)) && (
-        <div className="flex flex-wrap gap-1.5 mb-4">
-          {poem.mood && <Tag label={poem.mood} />}
-          {(poem.tags || []).slice(0, 3).map((tag) => (
-            <Tag key={tag} label={tag} />
+        <div className="flex flex-wrap items-center gap-2 pt-1">
+          {poem.mood && (
+            <span className="px-2.5 py-0.5 rounded-full bg-surface-secondary/70 text-secondary border border-border-subtle/50 text-[11px] font-medium tracking-wide">
+              #{poem.mood.toLowerCase()}
+            </span>
+          )}
+          {(poem.tags || []).slice(0, 4).map((tag) => (
+            <span
+              key={tag}
+              className="px-2.5 py-0.5 rounded-full bg-surface-secondary/70 text-primary/90 border border-border-subtle/50 text-[11px] font-medium tracking-wide"
+            >
+              #{tag.replace(/^#/, "")}
+            </span>
           ))}
         </div>
       )}
 
-      {/* Interactive Action Bar */}
-      <div className="flex items-center gap-5 sm:gap-6 pt-1 text-xs text-text-secondary select-none">
-        {/* Like */}
-        <button
-          type="button"
-          onClick={handleLike}
-          className={`flex items-center gap-1.5 transition-colors ${
-            isLiked ? "text-brand" : "hover:text-brand"
-          }`}
-          aria-label={isLiked ? "Unlike poem" : "Like poem"}
-        >
-          <Heart
-            size={17}
-            strokeWidth={1.6}
-            fill={isLiked ? "currentColor" : "none"}
-            className={isLiked ? "animate-like-pop" : ""}
-          />
-          <span>{likeCount}</span>
-        </button>
+      {/* Stitch Micro-interactions Footer Toolbar */}
+      <div className="flex items-center justify-between pt-4 border-t border-border-subtle/50 text-text-tertiary select-none">
+        <div className="flex items-center gap-6">
+          {/* Like */}
+          <button
+            type="button"
+            onClick={handleLike}
+            className={`flex items-center gap-1.5 transition-colors group ${
+              isLiked ? "text-primary font-semibold" : "hover:text-primary"
+            }`}
+            aria-label={isLiked ? "Unlike poem" : "Like poem"}
+          >
+            <Heart
+              size={18}
+              strokeWidth={1.8}
+              fill={isLiked ? "currentColor" : "none"}
+              className={`group-hover:scale-110 transition-transform ${isLiked ? "animate-like-pop text-primary" : ""}`}
+            />
+            <span className="text-xs font-medium">{likeCount}</span>
+          </button>
 
-        {/* Comments */}
-        <Link
-          href={`/poem/${poem.id}#comments`}
-          className="flex items-center gap-1.5 hover:text-brand transition-colors"
-          aria-label="View comments"
-        >
-          <MessageCircle size={17} strokeWidth={1.6} />
-          <span>{commentCount}</span>
-        </Link>
+          {/* Comments */}
+          <Link
+            href={`/poem/${poem.id}#comments`}
+            className="flex items-center gap-1.5 hover:text-tertiary transition-colors group"
+            aria-label="View comments"
+          >
+            <MessageCircle size={18} strokeWidth={1.8} className="group-hover:scale-110 transition-transform" />
+            <span className="text-xs font-medium">{commentCount}</span>
+          </Link>
+        </div>
 
-        {/* Share */}
-        <button
-          type="button"
-          onClick={handleShare}
-          className="flex items-center gap-1.5 hover:text-brand transition-colors"
-          aria-label="Share poem"
-        >
-          <Share2 size={17} strokeWidth={1.6} />
-        </button>
+        <div className="flex items-center gap-3">
+          {/* Save Bookmark */}
+          <button
+            type="button"
+            onClick={handleSave}
+            className={`transition-colors p-1 rounded-full hover:bg-surface-hover/50 ${
+              isSaved ? "text-primary" : "hover:text-primary"
+            }`}
+            aria-label={isSaved ? "Unsave poem" : "Save poem"}
+          >
+            <Bookmark
+              size={18}
+              strokeWidth={1.8}
+              fill={isSaved ? "currentColor" : "none"}
+            />
+          </button>
 
-        {/* Save Bookmark */}
-        <button
-          type="button"
-          onClick={handleSave}
-          className={`flex items-center gap-1.5 ml-auto transition-colors ${
-            isSaved ? "text-brand" : "hover:text-brand"
-          }`}
-          aria-label={isSaved ? "Unsave poem" : "Save poem"}
-        >
-          <Bookmark
-            size={17}
-            strokeWidth={1.6}
-            fill={isSaved ? "currentColor" : "none"}
-          />
-        </button>
+          {/* Share */}
+          <button
+            type="button"
+            onClick={handleShare}
+            className="hover:text-primary transition-colors p-1 rounded-full hover:bg-surface-hover/50"
+            aria-label="Share poem"
+          >
+            <Share2 size={18} strokeWidth={1.8} />
+          </button>
+        </div>
       </div>
     </article>
   );

@@ -40,28 +40,30 @@ export function DailyMomentSkeleton() {
 
 export function PoemCardSkeleton() {
   return (
-    <div className="py-6 border-b border-border-subtle">
-      <div className="flex items-center gap-3 mb-4">
-        <div className="skeleton-avatar" style={{ width: "40px", height: "40px" }} />
-        <div className="space-y-2">
-          <div className="skeleton-line" style={{ width: "120px" }} />
-          <div className="skeleton-line" style={{ width: "80px" }} />
+    <div className="glass-surface rounded-2xl p-6 sm:p-7 space-y-5 specular-top-border">
+      <div className="flex items-center gap-3">
+        <div className="w-10 h-10 rounded-full skeleton shrink-0" />
+        <div className="space-y-1.5 flex-1">
+          <div className="w-32 h-3.5 skeleton rounded" />
+          <div className="w-20 h-2.5 skeleton rounded" />
         </div>
       </div>
-      <div className="space-y-2 mb-4">
-        <div className="skeleton-line" style={{ width: "60%" }} />
-        <div className="skeleton-line long" />
-        <div className="skeleton-line medium" />
-        <div className="skeleton-line short" />
+      <div className="space-y-3">
+        <div className="w-2/3 h-7 skeleton rounded" />
+        <div className="w-full h-4 skeleton rounded" />
+        <div className="w-5/6 h-4 skeleton rounded" />
+        <div className="w-1/2 h-4 skeleton rounded" />
       </div>
-      <div className="flex gap-2 mb-4">
-        <div className="skeleton-line" style={{ width: "60px", height: "24px", borderRadius: "9999px" }} />
-        <div className="skeleton-line" style={{ width: "50px", height: "24px", borderRadius: "9999px" }} />
+      <div className="flex gap-2">
+        <div className="w-16 h-5 rounded-full skeleton" />
+        <div className="w-14 h-5 rounded-full skeleton" />
       </div>
-      <div className="flex items-center gap-6">
-        <div className="skeleton-line" style={{ width: "40px" }} />
-        <div className="skeleton-line" style={{ width: "40px" }} />
-        <div className="skeleton-line" style={{ width: "40px" }} />
+      <div className="flex items-center justify-between pt-4 border-t border-border-subtle/40">
+        <div className="flex gap-6">
+          <div className="w-12 h-4 skeleton rounded" />
+          <div className="w-12 h-4 skeleton rounded" />
+        </div>
+        <div className="w-6 h-4 skeleton rounded" />
       </div>
     </div>
   );

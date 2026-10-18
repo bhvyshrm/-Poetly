@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase/client";
 import { useAuth } from "@/components/AuthProvider";
 import { Profile } from "@/lib/types";
-import Avatar from "@/components/ui/Avatar";
 
 interface SuggestedWriter extends Profile {
   isFollowed: boolean;
@@ -106,16 +105,22 @@ export default function SuggestedWriters() {
 
   if (loading) {
     return (
-      <div className="sidebar-section">
-        <h3 className="sidebar-section-title mb-3">Suggested Writers</h3>
-        <div className="space-y-3">
+      <div className="glass-surface rounded-2xl p-5 space-y-4">
+        <div className="flex items-center justify-between">
+          <div className="w-28 h-5 skeleton rounded" />
+          <div className="w-12 h-3 skeleton rounded" />
+        </div>
+        <div className="space-y-3.5">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-[var(--radius-sm)] skeleton" />
-              <div className="flex-1 space-y-1">
-                <div className="w-20 h-3 skeleton rounded" />
-                <div className="w-14 h-2 skeleton rounded" />
+            <div key={i} className="flex items-center justify-between gap-2.5">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-full skeleton shrink-0" />
+                <div className="space-y-1">
+                  <div className="w-24 h-3 skeleton rounded" />
+                  <div className="w-16 h-2 skeleton rounded" />
+                </div>
               </div>
+              <div className="w-16 h-7 skeleton rounded-full" />
             </div>
           ))}
         </div>
@@ -128,47 +133,70 @@ export default function SuggestedWriters() {
   }
 
   return (
-    <div className="sidebar-section">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="sidebar-section-title mb-0">Suggested Writers</h3>
+    <section className="glass-surface rounded-2xl p-5 space-y-4">
+      <div className="flex items-center justify-between">
+        <h3 className="font-display text-lg text-text-primary font-semibold tracking-tight">
+          Suggested Poets
+        </h3>
         <Link
           href="/writers"
-          className="text-xs text-brand hover:text-brand-hover transition-colors"
+          className="text-xs text-primary hover:underline font-medium"
         >
-          See all
+          View all
         </Link>
       </div>
-      <div className="space-y-3">
+
+      <div className="space-y-3.5">
         {writers.map((writer) => (
-          <div key={writer.id} className="writer-card">
-            <Link
-              href={`/profile/${writer.username}`}
-              className="shrink-0 focus-visible:outline-none"
-            >
-              <Avatar
-                src={writer.profile_image}
-                name={writer.display_name}
-                size="sm"
-              />
-            </Link>
-            <div className="writer-info min-w-0 flex-1">
+          <div key={writer.id} className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2.5 min-w-0">
               <Link
                 href={`/profile/${writer.username}`}
-                className="writer-name hover:text-brand transition-colors block truncate"
+                className="shrink-0 focus-visible:outline-none"
               >
-                {writer.display_name}
+                <div className="w-9 h-9 rounded-full overflow-hidden ring-1 ring-border-subtle/50 shrink-0 bg-surface-secondary flex items-center justify-center">
+                  {writer.profile_image ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={writer.profile_image}
+                      alt={writer.display_name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span className="font-display text-xs text-text-secondary">
+                      {writer.display_name?.[0]?.toUpperCase() || "P"}
+                    </span>
+                  )}
+                </div>
               </Link>
-              <p className="writer-username truncate">@{writer.username}</p>
+              <div className="min-w-0 flex-1">
+                <Link
+                  href={`/profile/${writer.username}`}
+                  className="font-semibold text-xs text-text-primary hover:text-primary transition-colors block truncate"
+                >
+                  {writer.display_name}
+                </Link>
+                <p className="text-[11px] text-text-tertiary truncate">
+                  {writer.bio ? writer.bio : `@${writer.username}`}
+                </p>
+              </div>
             </div>
+
             <button
+              type="button"
               onClick={() => toggleFollow(writer.id, writer.isFollowed)}
-              className={`follow-btn ${writer.isFollowed ? "following" : ""}`}
+              className={`px-3 py-1 rounded-full text-xs font-semibold shrink-0 transition-all ${
+                writer.isFollowed
+                  ? "bg-primary/15 text-primary border border-primary/30 hover:bg-primary/25"
+                  : "glass-pill text-text-secondary hover:text-primary hover:border-primary/40"
+              }`}
             >
               {writer.isFollowed ? "Following" : "Follow"}
             </button>
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 }
+
