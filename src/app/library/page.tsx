@@ -1,18 +1,20 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
+import Link from "next/link";
+import { Bookmark, Sparkles, BookOpen, ArrowRight, Search } from "lucide-react";
 import { useAuth } from "@/components/AuthProvider";
 import { supabase } from "@/lib/supabase/client";
 import { PoemWithAuthor } from "@/lib/types";
 import PoemCard from "@/components/PoemCard";
 import AppShell from "@/components/layout/AppShell";
-import PageHeader from "@/components/layout/PageHeader";
-import Link from "next/link";
+import SuggestedWriters from "@/components/home/SuggestedWriters";
 
 export default function LibraryPage() {
   const { user, loading: authLoading } = useAuth();
   const [savedPoems, setSavedPoems] = useState<PoemWithAuthor[]>([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const fetchSaved = useCallback(async () => {
     if (!user) {
@@ -48,57 +50,160 @@ export default function LibraryPage() {
     }
   }, [authLoading, fetchSaved]);
 
-  return (
-    <AppShell maxWidth="feed">
-      {/* Consistent Page Header */}
-      <PageHeader
-        title="Saved Poems"
-        subtitle="Keep the words that stay with you."
-      />
+  const filteredPoems = useMemo(() => {
+    if (!searchQuery.trim()) return savedPoems;
+    const q = searchQuery.toLowerCase();
+    return savedPoems.filter(
+      (p) =>
+        p.title.toLowerCase().includes(q) ||
+        p.content.toLowerCase().includes(q) ||
+        p.profiles?.display_name?.toLowerCase().includes(q) ||
+        p.profiles?.username?.toLowerCase().includes(q)
+    );
+  }, [savedPoems, searchQuery]);
 
-      {authLoading || loading ? (
-        <div className="space-y-4">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="h-32 skeleton rounded-[var(--radius-md)]" />
-          ))}
+  const rightRailContent = (
+    <div className="space-y-6">
+      {/* Sanctuary Bookmarks Card */}
+      <section className="glass-surface rounded-2xl p-5 space-y-4">
+        <div className="flex items-center gap-2 text-primary font-mono text-xs font-semibold">
+          <Bookmark size={14} className="text-primary fill-primary/20" />
+          <span>Sanctuary Keepsakes</span>
         </div>
-      ) : !user ? (
-        <div className="text-center py-16 bg-surface-secondary rounded-[var(--radius-lg)] p-8 border border-border-subtle">
-          <p className="font-poem text-xl text-text-tertiary italic mb-2">
-            Sign in to access your saved poems.
-          </p>
-          <p className="text-sm text-text-secondary mb-4">
-            Bookmark poems you love across Poetly to revisit them anytime.
-          </p>
-          <Link
-            href="/login"
-            className="inline-block px-5 py-2 text-xs sm:text-sm font-medium text-white bg-brand hover:bg-brand-hover rounded-full transition-colors shadow-xs"
-          >
-            Sign In
-          </Link>
+        <h4 className="font-display text-lg text-text-primary font-light">
+          Preserved Stanzas
+        </h4>
+        <div className="space-y-3 pt-1 text-xs">
+          <div className="flex items-center justify-between pb-2 border-b border-border-subtle/30">
+            <span className="text-text-tertiary">Verses Bookmarked</span>
+            <span className="font-mono font-semibold text-text-primary">{savedPoems.length}</span>
+          </div>
+          <div className="flex items-center justify-between pb-2 border-b border-border-subtle/30">
+            <span className="text-text-tertiary">Collections Access</span>
+            <Link
+              href="/collections"
+              className="text-primary font-mono text-xs hover:underline flex items-center gap-1"
+            >
+              <span>View Bindings</span>
+              <ArrowRight size={11} />
+            </Link>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-text-tertiary">Atmosphere</span>
+            <span className="font-mono text-secondary flex items-center gap-1">
+              <Sparkles size={12} />
+              Liquid Glass
+            </span>
+          </div>
         </div>
-      ) : savedPoems.length > 0 ? (
-        <div className="space-y-0">
-          {savedPoems.map((poem) => (
-            <PoemCard key={poem.id} poem={poem} />
-          ))}
-        </div>
-      ) : (
-        <div className="text-center py-16 bg-surface-secondary rounded-[var(--radius-lg)] p-8 border border-border-subtle">
-          <p className="font-poem text-xl text-text-tertiary italic mb-2">
-            Nothing saved yet.
-          </p>
-          <p className="text-sm text-text-secondary mb-4">
-            Save poems you love while browsing to read them later.
-          </p>
-          <Link
-            href="/explore"
-            className="inline-flex items-center px-4 py-2 text-xs font-medium text-white gradient-brand rounded-full hover:opacity-90 shadow-xs"
-          >
-            Explore poems →
-          </Link>
-        </div>
-      )}
+      </section>
+
+      {/* Suggested Poets */}
+      <SuggestedWriters />
+    </div>
+  );
+
+  return (
+    <AppShell maxWidth="wide" rightRail={rightRailContent}>
+      <div className="space-y-6">
+        {/* Header */}
+        <section className="space-y-2 pt-1">
+          <div className="flex items-center gap-2 text-primary font-mono text-xs font-medium">
+            <Bookmark size={14} className="text-primary fill-primary/20" />
+            <span className="uppercase tracking-widest text-[11px]">Sanctuary Reliquary</span>
+            <span className="text-text-tertiary">/</span>
+            <span className="text-text-secondary">Saved Stanzas</span>
+          </div>
+
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+            <div>
+              <h1 className="font-display text-3xl sm:text-4xl text-text-primary font-light tracking-tight">
+                Saved Verses &amp; Marginalia
+              </h1>
+              <p className="text-xs sm:text-sm text-text-secondary font-light mt-1">
+                Words gathered along your path, preserved for quiet contemplation.
+              </p>
+            </div>
+
+            {savedPoems.length > 3 && (
+              <div className="relative sm:w-64">
+                <Search
+                  size={14}
+                  className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-tertiary pointer-events-none"
+                />
+                <input
+                  type="text"
+                  placeholder="Filter saved poems..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-9 pr-4 py-2 glass-surface border border-border-subtle/50 rounded-full text-xs text-text-primary placeholder:text-text-tertiary outline-none focus:border-primary transition-colors font-sans"
+                />
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* Content */}
+        {authLoading || loading ? (
+          <div className="space-y-4">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="h-44 skeleton rounded-2xl" />
+            ))}
+          </div>
+        ) : !user ? (
+          <div className="text-center py-16 glass-surface rounded-2xl p-8 border border-border-subtle/40 space-y-4">
+            <p className="font-display text-2xl text-text-primary font-light">
+              Sign In to Access Your Saved Verses
+            </p>
+            <p className="font-verse italic text-text-tertiary max-w-md mx-auto text-sm">
+              Bookmark poetry you resonate with across Poetly to revisit them in your personal sanctuary anytime.
+            </p>
+            <div className="pt-2">
+              <Link
+                href="/login"
+                className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold text-white gradient-brand rounded-full hover:opacity-95 shadow-md shadow-primary/20 transition-all"
+              >
+                <span>Sign In to Poetly</span>
+                <ArrowRight size={13} />
+              </Link>
+            </div>
+          </div>
+        ) : filteredPoems.length > 0 ? (
+          <div className="space-y-4">
+            {filteredPoems.map((poem) => (
+              <PoemCard key={poem.id} poem={poem} />
+            ))}
+          </div>
+        ) : savedPoems.length > 0 ? (
+          <div className="text-center py-16 glass-surface rounded-2xl p-8 border border-border-subtle/40 space-y-3">
+            <p className="font-display text-xl text-text-primary">No Matching Verses</p>
+            <p className="font-verse italic text-xs sm:text-sm text-text-tertiary max-w-sm mx-auto">
+              No saved poems matched &ldquo;{searchQuery}&rdquo;.
+            </p>
+          </div>
+        ) : (
+          <div className="text-center py-16 glass-surface rounded-2xl p-8 border border-border-subtle/40 space-y-4">
+            <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto text-primary">
+              <BookOpen size={22} />
+            </div>
+            <p className="font-display text-2xl text-text-primary font-light">
+              Your Sanctuary Shelf is Empty
+            </p>
+            <p className="font-verse italic text-text-tertiary max-w-md mx-auto text-sm">
+              When a stanza stirs something within you, tap the bookmark icon to bind it here.
+            </p>
+            <div className="pt-2">
+              <Link
+                href="/explore"
+                className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold text-white gradient-brand rounded-full hover:opacity-95 shadow-md shadow-primary/20 transition-all"
+              >
+                <span>Explore the Salon</span>
+                <ArrowRight size={13} />
+              </Link>
+            </div>
+          </div>
+        )}
+      </div>
     </AppShell>
   );
 }
