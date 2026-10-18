@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useCallback } from "react";
 import AdminCard from "@/components/admin/AdminCard";
-import AdminSkeleton from "@/components/admin/AdminSkeleton";
 import AdminEmptyState from "@/components/admin/EmptyState";
 
 interface ActivityEntry {
@@ -53,59 +52,95 @@ export default function AdminDashboardPage() {
 
   if (loading) {
     return (
-      <div>
-        <div className="mb-8">
-          <h1 className="text-xl font-medium text-text-primary mb-1">Dashboard</h1>
-          <p className="text-sm text-text-secondary">Overview of Poetly community.</p>
+      <div className="space-y-8 animate-fade-in">
+        <div className="space-y-1">
+          <div className="w-32 h-4 skeleton rounded" />
+          <div className="w-64 h-8 skeleton rounded-xl" />
         </div>
-        <AdminSkeleton rows={3} />
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="h-28 skeleton rounded-2xl" />
+          ))}
+        </div>
+        <div className="h-64 skeleton rounded-2xl" />
       </div>
     );
   }
 
   if (error) {
     return (
-      <div>
-        <div className="mb-8">
-          <h1 className="text-xl font-medium text-text-primary mb-1">Dashboard</h1>
-          <p className="text-sm text-text-secondary">Overview of Poetly community.</p>
+      <div className="space-y-6">
+        <div>
+          <h1 className="font-display text-2xl sm:text-3xl font-light text-text-primary tracking-tight">
+            Curator Dashboard
+          </h1>
+          <p className="text-xs sm:text-sm text-text-secondary mt-1">Overview of the Poetly literary salon.</p>
         </div>
-        <div className="bg-error-subtle border border-error/20 rounded-[var(--radius-md)] p-4">
-          <p className="text-sm text-error">{error}</p>
+        <div className="glass-surface border border-red-500/30 rounded-2xl p-5 text-red-400 text-xs">
+          <p>{error}</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div>
-      <div className="mb-8">
-        <h1 className="text-xl font-medium text-text-primary mb-1">Dashboard</h1>
-        <p className="text-sm text-text-secondary">Overview of Poetly community.</p>
+    <div className="space-y-8 animate-fade-in max-w-7xl">
+      {/* Header */}
+      <section className="space-y-1.5 pb-2 border-b border-border-subtle/30">
+        <div className="flex items-center gap-2 text-primary font-mono text-xs font-medium">
+          <span className="uppercase tracking-widest text-[11px]">Salon Moderation &amp; Telemetry</span>
+          <span className="text-text-tertiary">/</span>
+          <span className="text-text-secondary">Overview</span>
+        </div>
+        <h1 className="font-display text-2xl sm:text-3xl md:text-4xl font-light text-text-primary tracking-tight">
+          Curator Sanctuary Dashboard
+        </h1>
+        <p className="text-xs sm:text-sm text-text-secondary font-light">
+          Real-time community telemetry, moderation queues, and publication velocity.
+        </p>
+      </section>
+
+      {/* Primary KPI Grid */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 sm:gap-4">
+        <AdminCard label="Registered Poets" value={stats.users} sub="Active community members" />
+        <AdminCard
+          label="Total Stanzas"
+          value={stats.poems}
+          sub={`${stats.publishedPoems} published · ${stats.draftPoems} in desk`}
+        />
+        <AdminCard
+          label="Pending Reports"
+          value={stats.pendingReports}
+          sub={stats.pendingReports > 0 ? "Requires curatorial review" : "All reports cleared"}
+          className={stats.pendingReports > 0 ? "border-amber-400/40 bg-amber-400/5" : ""}
+        />
+        <AdminCard label="Marginalia Notes" value={stats.comments} sub="Reader discussions" />
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
-        <AdminCard label="Total Users" value={stats.users} />
-        <AdminCard label="Total Poems" value={stats.poems} sub={`${stats.publishedPoems} published, ${stats.draftPoems} drafts`} />
-        <AdminCard label="Pending Reports" value={stats.pendingReports} sub={stats.pendingReports > 0 ? "Needs attention" : "All clear"} />
-        <AdminCard label="Comments" value={stats.comments} />
+      {/* Secondary Metrics */}
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3.5 sm:gap-4">
+        <AdminCard label="Published Verses" value={stats.publishedPoems} sub="Public salon works" />
+        <AdminCard label="Private Drafts" value={stats.draftPoems} sub="Authors' working desks" />
+        <AdminCard label="Spotlight Works" value={stats.featured} sub="Curated on home salon" />
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
-        <AdminCard label="Published Poems" value={stats.publishedPoems} />
-        <AdminCard label="Draft Poems" value={stats.draftPoems} />
-        <AdminCard label="Featured Content" value={stats.featured} />
-      </div>
+      {/* Recent Activity Section */}
+      <div className="glass-surface border border-border-subtle/40 rounded-2xl p-6 specular-top-border space-y-4">
+        <div className="flex items-center justify-between pb-3 border-b border-border-subtle/30">
+          <h2 className="font-display text-lg text-text-primary font-light">Recent Curatorial Stream</h2>
+          <span className="font-mono text-xs text-text-tertiary">Live Logs</span>
+        </div>
 
-      <div className="bg-surface border border-border-subtle rounded-[var(--radius-md)] p-5">
-        <h2 className="text-sm font-medium text-text-primary mb-4">Recent Activity</h2>
         {activity.length > 0 ? (
           <div className="space-y-3">
             {activity.map((entry) => (
-              <div key={entry.id} className="flex items-start gap-3 text-sm">
-                <div className="w-1.5 h-1.5 rounded-full bg-brand mt-2 shrink-0" />
+              <div
+                key={entry.id}
+                className="flex items-start gap-3.5 p-3 rounded-xl hover:bg-surface-secondary/40 transition-colors border border-transparent hover:border-border-subtle/30"
+              >
+                <div className="w-2 h-2 rounded-full bg-primary mt-1.5 shrink-0 shadow-xs shadow-primary" />
                 <div className="flex-1 min-w-0">
-                  <p className="text-text-secondary">
+                  <p className="text-xs sm:text-sm text-text-secondary">
                     <span className="text-text-primary font-medium">{entry.action}</span>
                     {entry.target_type && (
                       <span className="text-text-tertiary"> on {entry.target_type}</span>
@@ -114,7 +149,7 @@ export default function AdminDashboardPage() {
                       <span className="text-text-tertiary"> — {entry.details}</span>
                     )}
                   </p>
-                  <p className="text-xs text-text-tertiary mt-0.5">
+                  <p className="font-mono text-[10px] text-text-tertiary mt-1">
                     {new Date(entry.created_at).toLocaleString()}
                   </p>
                 </div>
@@ -122,7 +157,7 @@ export default function AdminDashboardPage() {
             ))}
           </div>
         ) : (
-          <AdminEmptyState title="No activity yet" description="Admin actions will appear here." />
+          <AdminEmptyState title="No activity recorded" description="Curatorial and administrative actions will gather here." />
         )}
       </div>
     </div>
