@@ -3,15 +3,26 @@
 import { useState, useEffect, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import { Settings, ArrowLeft } from "lucide-react";
+import {
+  ArrowLeft,
+  Sparkles,
+  Edit3,
+  Share2,
+  Calendar,
+  Globe,
+  MapPin,
+  BookOpen,
+  Pin,
+  Users,
+} from "lucide-react";
 import { supabase } from "@/lib/supabase/client";
 import { useAuth } from "@/components/AuthProvider";
-import { Profile, PoemWithAuthor } from "@/lib/types";
+import { Profile, PoemWithAuthor, Collection } from "@/lib/types";
 import PoemCard from "@/components/PoemCard";
 import AppShell from "@/components/layout/AppShell";
 import Toast from "@/components/Toast";
-import Avatar from "@/components/ui/Avatar";
 import SuggestedWriters from "@/components/home/SuggestedWriters";
+import { PoemCardSkeleton } from "@/components/home/Skeletons";
 
 export default function ProfileByUsernamePage() {
   const params = useParams();
@@ -21,10 +32,11 @@ export default function ProfileByUsernamePage() {
 
   const [profile, setProfile] = useState<Profile | null>(null);
   const [poems, setPoems] = useState<PoemWithAuthor[]>([]);
+  const [collections, setCollections] = useState<Collection[]>([]);
   const [followerCount, setFollowerCount] = useState(0);
   const [followingCount, setFollowingCount] = useState(0);
   const [isFollowing, setIsFollowing] = useState(false);
-  const [activeTab, setActiveTab] = useState<"poems" | "about">("poems");
+  const [activeTab, setActiveTab] = useState<"poems" | "collections" | "about">("poems");
   const [loading, setLoading] = useState(true);
   const [toast, setToast] = useState<string | null>(null);
 
@@ -34,6 +46,7 @@ export default function ProfileByUsernamePage() {
     setProfile(p);
 
     try {
+      // Load user poems
       const { data: poemData } = await supabase
         .from("poems")
         .select("*, profiles!inner(*)")
@@ -44,10 +57,26 @@ export default function ProfileByUsernamePage() {
 
       setPoems((poemData as PoemWithAuthor[]) || []);
 
-      const { count: fc } = await supabase.from("follows").select("*", { count: "exact", head: true }).eq("following_id", p.id);
+      // Load user collections
+      const { data: colData } = await supabase
+        .from("collections")
+        .select("*")
+        .eq("user_id", p.id)
+        .order("created_at", { ascending: false });
+
+      setCollections((colData as Collection[]) || []);
+
+      // Load follower / following counts
+      const { count: fc } = await supabase
+        .from("follows")
+        .select("*", { count: "exact", head: true })
+        .eq("following_id", p.id);
       setFollowerCount(fc || 0);
 
-      const { count: fgc } = await supabase.from("follows").select("*", { count: "exact", head: true }).eq("follower_id", p.id);
+      const { count: fgc } = await supabase
+        .from("follows")
+        .select("*", { count: "exact", head: true })
+        .eq("follower_id", p.id);
       setFollowingCount(fgc || 0);
 
       if (user && user.id !== p.id) {
@@ -60,7 +89,7 @@ export default function ProfileByUsernamePage() {
         setIsFollowing(!!followData);
       }
     } catch {
-      setToast("Failed to load profile");
+      setToast("Failed to load profile details");
     }
 
     setLoading(false);
@@ -68,13 +97,18 @@ export default function ProfileByUsernamePage() {
 
   useEffect(() => {
     if (username) {
-      supabase.from("profiles").select("*").eq("username", username).maybeSingle().then(({ data, error }) => {
-        if (data) {
-          loadProfile(data as Profile);
-        } else if (error) {
-          setLoading(false);
-        }
-      });
+      supabase
+        .from("profiles")
+        .select("*")
+        .eq("username", username)
+        .maybeSingle()
+        .then(({ data, error }) => {
+          if (data) {
+            loadProfile(data as Profile);
+          } else if (error) {
+            setLoading(false);
+          }
+        });
     } else {
       setLoading(false);
     }
@@ -120,23 +154,70 @@ export default function ProfileByUsernamePage() {
         });
       }
     } catch {
-      // Revert on error
       setIsFollowing(previousFollow);
       setFollowerCount(previousCount);
       setToast("Failed to update follow");
     }
   };
 
+  const handleShare = () => {
+    if (typeof window !== "undefined") {
+      navigator.clipboard?.writeText(window.location.href);
+      setToast("Profile link copied to clipboard");
+    }
+  };
+
+  const rightRailContent = (
+    <div className="space-y-6">
+      {/* Curated Anthologies by this Creator */}
+      {collections.length > 0 && (
+        <section className="glass-surface rounded-2xl p-5 space-y-4">
+          <div className="flex items-center justify-between">
+            <h3 className="font-display text-lg text-text-primary font-semibold tracking-tight flex items-center gap-2">
+              <BookOpen size={16} className="text-primary" />
+              <span>Bound Anthologies</span>
+            </h3>
+            <span className="text-xs text-text-tertiary font-mono">({collections.length})</span>
+          </div>
+          <div className="space-y-2.5">
+            {collections.slice(0, 4).map((col) => (
+              <Link
+                key={col.id}
+                href="/collections"
+                className="glass-pill p-3 rounded-xl flex items-center justify-between hover:border-primary/40 transition-all group block"
+              >
+                <div className="min-w-0 flex-1">
+                  <h4 className="font-display text-sm text-text-primary group-hover:text-primary transition-colors truncate">
+                    {col.title}
+                  </h4>
+                  {col.description && (
+                    <p className="text-[11px] text-text-tertiary line-clamp-1 mt-0.5 font-light">
+                      {col.description}
+                    </p>
+                  )}
+                </div>
+                <span className="text-[10px] text-secondary font-mono ml-2 shrink-0">
+                  Folio
+                </span>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Suggested Poets */}
+      <SuggestedWriters />
+    </div>
+  );
+
   if (loading) {
     return (
-      <AppShell>
-        <div className="max-w-[var(--content-width)] mx-auto px-5 py-8">
-          <div className="flex items-center gap-4 mb-8">
-            <div className="w-20 h-20 skeleton rounded-[var(--radius-md)]" />
-            <div className="space-y-2">
-              <div className="w-40 h-6 skeleton rounded" />
-              <div className="w-24 h-4 skeleton rounded" />
-            </div>
+      <AppShell maxWidth="feed">
+        <div className="space-y-6 animate-pulse">
+          <div className="h-44 sm:h-52 w-full skeleton rounded-2xl" />
+          <div className="space-y-4">
+            <PoemCardSkeleton />
+            <PoemCardSkeleton />
           </div>
         </div>
       </AppShell>
@@ -145,141 +226,398 @@ export default function ProfileByUsernamePage() {
 
   if (!profile) {
     return (
-      <AppShell>
-        <div className="max-w-[var(--content-width)] mx-auto px-5 py-16 text-center">
-          <p className="font-poem text-xl text-text-tertiary italic">Profile not found.</p>
-          <Link href="/home" className="text-sm text-brand hover:text-brand-hover mt-4 inline-block">Return home</Link>
+      <AppShell maxWidth="feed">
+        <div className="py-16 text-center glass-surface rounded-2xl p-8 max-w-md mx-auto space-y-3">
+          <p className="font-verse text-xl text-text-tertiary italic">
+            Poet not found in the salon.
+          </p>
+          <Link
+            href="/home"
+            className="text-xs text-primary hover:underline font-semibold inline-block pt-2"
+          >
+            ← Return to Sanctuary
+          </Link>
         </div>
       </AppShell>
     );
   }
 
+  const pinnedPoem = poems[0];
+  const remainingPoems = poems.slice(1);
+
   return (
-    <AppShell maxWidth="feed" rightRail={<SuggestedWriters />}>
-      <button
-        type="button"
-        onClick={() => router.back()}
-        className="flex items-center gap-1.5 text-xs text-text-tertiary hover:text-text-primary transition-colors mb-6"
-      >
-        <ArrowLeft size={14} strokeWidth={1.5} /> Back
-      </button>
+    <AppShell maxWidth="feed" rightRail={rightRailContent}>
+      <div className="space-y-6">
+        {/* Back Link */}
+        <button
+          type="button"
+          onClick={() => router.back()}
+          className="flex items-center gap-1.5 text-xs text-text-tertiary hover:text-primary transition-colors cursor-pointer group"
+        >
+          <ArrowLeft size={14} className="group-hover:-translate-x-0.5 transition-transform" />
+          <span>Back</span>
+        </button>
 
-      <div className="animate-fade-in mb-8">
-        <div className="flex items-start gap-4 mb-5">
-          <Avatar
-            src={profile.profile_image}
-            name={profile.display_name}
-            size="xl"
-            className="shrink-0"
-          />
-
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-3 mb-1">
-              <h1 className="font-poem text-xl sm:text-2xl font-semibold text-text-primary">
-                {profile.display_name}
-              </h1>
-              {isOwnProfile && (
-                <Link
-                  href="/profile/setup"
-                  className="p-1 rounded-[var(--radius-sm)] text-text-tertiary hover:text-text-primary hover:bg-surface-hover transition-colors"
-                  aria-label="Edit profile settings"
-                >
-                  <Settings size={15} strokeWidth={1.5} />
-                </Link>
-              )}
+        {/* 1. PROFILE HEADER / WRITER BANNER & RELIQUARY IDENTITY */}
+        <section className="glass-surface rounded-2xl overflow-hidden border border-border-subtle/40 relative">
+          {/* Atmospheric Literary Banner with Ambient Mist & Gradient */}
+          <div className="h-44 sm:h-52 w-full relative overflow-hidden bg-gradient-to-br from-surface-secondary via-surface to-background">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-secondary/5 to-transparent pointer-events-none" />
+            <div className="absolute top-4 right-4 flex items-center gap-2">
+              <span className="glass-pill px-3 py-1 rounded-full text-xs font-mono text-secondary flex items-center gap-1.5 shadow-md">
+                <Sparkles size={13} className="text-primary" />
+                <span>Fellow in Residence</span>
+              </span>
             </div>
-            <p className="text-xs sm:text-sm text-text-tertiary">@{profile.username}</p>
           </div>
 
-          {!isOwnProfile && user && (
-            <button
-              type="button"
-              onClick={handleFollow}
-              className={`px-4 py-1.5 text-xs font-medium rounded-full transition-all select-none ${
-                isFollowing
-                  ? "border border-border-default text-text-secondary hover:border-error hover:text-error"
-                  : "bg-brand text-white hover:bg-brand-hover shadow-xs"
-              }`}
-            >
-              {isFollowing ? "Following" : "Follow"}
-            </button>
-          )}
-        </div>
+          {/* Reliquary Identity Content */}
+          <div className="px-5 sm:px-8 pb-6 pt-0 relative">
+            {/* Avatar & Action Buttons Row */}
+            <div className="flex flex-wrap items-end justify-between -mt-14 sm:-mt-16 gap-4 mb-4">
+              {/* Profile Avatar */}
+              <div className="relative">
+                <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl glass-panel-elevated p-1 ring-2 ring-primary/40 glow-orchid relative overflow-hidden bg-surface-secondary shrink-0">
+                  {profile.profile_image ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={profile.profile_image}
+                      alt={profile.display_name}
+                      className="w-full h-full object-cover rounded-xl"
+                    />
+                  ) : (
+                    <div className="w-full h-full rounded-xl bg-surface-secondary flex items-center justify-center font-display text-2xl sm:text-3xl font-medium text-primary">
+                      {profile.display_name?.[0]?.toUpperCase() || "P"}
+                    </div>
+                  )}
+                </div>
+              </div>
 
-        {profile.bio && (
-          <p className="text-xs sm:text-sm text-text-secondary italic mb-4 max-w-lg font-serif">
-            &ldquo;{profile.bio}&rdquo;
-          </p>
-        )}
+              {/* Action Buttons */}
+              <div className="flex items-center gap-2.5">
+                {isOwnProfile ? (
+                  <Link
+                    href="/profile/setup"
+                    className="glass-panel-elevated hover:border-primary/50 transition-all px-4 py-2 rounded-xl text-text-primary text-xs font-semibold flex items-center gap-1.5 active:scale-95 cursor-pointer shadow-sm"
+                  >
+                    <Edit3 size={14} className="text-primary" />
+                    <span>Edit Salon Profile</span>
+                  </Link>
+                ) : user ? (
+                  <button
+                    type="button"
+                    onClick={handleFollow}
+                    className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all select-none cursor-pointer flex items-center gap-1.5 ${
+                      isFollowing
+                        ? "glass-pill text-text-secondary hover:text-error hover:border-error/40"
+                        : "bg-gradient-to-r from-primary-container to-secondary text-white glowing-btn-aura hover:opacity-95"
+                    }`}
+                  >
+                    <span>{isFollowing ? "Following" : "Follow Poet"}</span>
+                  </button>
+                ) : (
+                  <Link
+                    href="/login"
+                    className="bg-gradient-to-r from-primary-container to-secondary text-white glowing-btn-aura px-4 py-2 rounded-xl text-xs font-semibold hover:opacity-95"
+                  >
+                    Follow
+                  </Link>
+                )}
 
-        <div className="flex gap-6 text-xs sm:text-sm pt-2 border-t border-border-subtle/50">
-          <div>
-            <span className="font-semibold text-text-primary">{poems.length}</span>{" "}
-            <span className="text-text-tertiary">{poems.length === 1 ? "Poem" : "Poems"}</span>
-          </div>
-          <div>
-            <span className="font-semibold text-text-primary">{followerCount}</span>{" "}
-            <span className="text-text-tertiary">Followers</span>
-          </div>
-          <div>
-            <span className="font-semibold text-text-primary">{followingCount}</span>{" "}
-            <span className="text-text-tertiary">Following</span>
-          </div>
-        </div>
-      </div>
+                <button
+                  type="button"
+                  onClick={handleShare}
+                  className="glass-pill p-2 rounded-xl text-text-secondary hover:text-text-primary active:scale-95 transition-all cursor-pointer"
+                  title="Share Profile"
+                >
+                  <Share2 size={16} />
+                </button>
+              </div>
+            </div>
 
-      <div className="flex gap-1 mb-6 bg-surface-secondary rounded-[var(--radius-full)] p-1 border border-border-subtle/50">
-        {(["poems", "about"] as const).map((tab) => (
+            {/* Identity Headings */}
+            <div className="mb-3 space-y-0.5">
+              <div className="flex items-center gap-2">
+                <h1 className="font-display italic text-2xl sm:text-3xl text-text-primary font-normal tracking-tight">
+                  {profile.display_name}
+                </h1>
+                <Sparkles size={16} className="text-primary" />
+              </div>
+              <p className="text-xs text-text-tertiary font-mono">
+                @{profile.username}
+                {profile.location && ` · ${profile.location}`}
+              </p>
+            </div>
+
+            {/* Literary Bio */}
+            {profile.bio && (
+              <p className="font-verse italic text-base sm:text-lg text-text-primary/90 leading-relaxed max-w-2xl mb-4 font-light">
+                &ldquo;{profile.bio}&rdquo;
+              </p>
+            )}
+
+            {/* Metadata Badges */}
+            <div className="flex flex-wrap items-center gap-3 text-xs text-text-tertiary mb-5">
+              {profile.website && (
+                <a
+                  href={profile.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-primary hover:underline"
+                >
+                  <Globe size={13} />
+                  <span>{profile.website.replace(/^https?:\/\//, "")}</span>
+                </a>
+              )}
+              {profile.location && (
+                <span className="inline-flex items-center gap-1">
+                  <MapPin size={13} className="text-secondary" />
+                  <span>{profile.location}</span>
+                </span>
+              )}
+              <span className="inline-flex items-center gap-1">
+                <Calendar size={13} className="text-text-tertiary" />
+                <span>Member since {new Date(profile.created_at).toLocaleDateString(undefined, { month: "short", year: "numeric" })}</span>
+              </span>
+            </div>
+
+            {/* Follower & Literary Stats Row (Grid of 4) */}
+            <div className="grid grid-cols-4 gap-2 pt-4 border-t border-border-subtle/40">
+              <div className="glass-pill rounded-xl p-3 text-center">
+                <div className="font-display text-lg sm:text-xl text-primary font-semibold">
+                  {followerCount.toLocaleString()}
+                </div>
+                <div className="text-[10px] text-text-tertiary uppercase tracking-wider font-mono">
+                  Readers
+                </div>
+              </div>
+              <div className="glass-pill rounded-xl p-3 text-center">
+                <div className="font-display text-lg sm:text-xl text-text-primary font-semibold">
+                  {followingCount.toLocaleString()}
+                </div>
+                <div className="text-[10px] text-text-tertiary uppercase tracking-wider font-mono">
+                  Following
+                </div>
+              </div>
+              <div className="glass-pill rounded-xl p-3 text-center">
+                <div className="font-display text-lg sm:text-xl text-secondary font-semibold">
+                  {poems.length}
+                </div>
+                <div className="text-[10px] text-text-tertiary uppercase tracking-wider font-mono">
+                  Poems
+                </div>
+              </div>
+              <div className="glass-pill rounded-xl p-3 text-center">
+                <div className="font-display text-lg sm:text-xl text-tertiary font-semibold">
+                  {collections.length}
+                </div>
+                <div className="text-[10px] text-text-tertiary uppercase tracking-wider font-mono">
+                  Anthologies
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 2. PROFILE CONTENT NAVIGATION TABS */}
+        <div className="border-b border-border-subtle/40 flex items-center gap-6 sm:gap-8 text-sm overflow-x-auto no-scrollbar">
           <button
-            key={tab}
             type="button"
-            onClick={() => setActiveTab(tab)}
-            className={`flex-1 px-4 py-2 text-xs sm:text-sm font-medium rounded-full transition-all duration-150 capitalize select-none ${
-              activeTab === tab
-                ? "bg-surface text-text-primary shadow-xs"
-                : "text-text-secondary hover:text-text-primary"
+            onClick={() => setActiveTab("poems")}
+            className={`pb-3 relative font-semibold transition-colors whitespace-nowrap cursor-pointer flex items-center gap-2 ${
+              activeTab === "poems" ? "text-primary" : "text-text-tertiary hover:text-text-primary"
             }`}
           >
-            {tab}
+            <span>Published Poems</span>
+            <span className="px-2 py-0.5 rounded-full bg-primary/10 text-primary text-[11px] font-mono">
+              {poems.length}
+            </span>
+            {activeTab === "poems" && (
+              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary glow-orchid rounded-full" />
+            )}
           </button>
-        ))}
-      </div>
 
-      {activeTab === "poems" ? (
-        poems.length > 0 ? (
-          <div className="space-y-0">
-            {poems.map((poem) => (
-              <PoemCard key={poem.id} poem={poem} />
-            ))}
-          </div>
-        ) : (
-          <p className="text-sm text-text-tertiary py-12 text-center font-poem italic">
-            No poems published yet.
-          </p>
-        )
-      ) : (
-        <div className="py-4 space-y-3">
-          {profile.bio && (
-            <p className="font-poem text-lg text-text-primary italic mb-4">&ldquo;{profile.bio}&rdquo;</p>
-          )}
-          {profile.location && <p className="text-sm text-text-secondary">📍 {profile.location}</p>}
-          {profile.website && (
-            <a
-              href={profile.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-brand hover:text-brand-hover block underline underline-offset-4"
-            >
-              {profile.website}
-            </a>
-          )}
-          <p className="text-xs text-text-tertiary pt-2">
-            Member since {new Date(profile.created_at).toLocaleDateString()}
-          </p>
+          <button
+            type="button"
+            onClick={() => setActiveTab("collections")}
+            className={`pb-3 relative font-semibold transition-colors whitespace-nowrap cursor-pointer flex items-center gap-2 ${
+              activeTab === "collections" ? "text-primary" : "text-text-tertiary hover:text-text-primary"
+            }`}
+          >
+            <span>Collections &amp; Anthologies</span>
+            <span className="px-2 py-0.5 rounded-full bg-surface-secondary text-text-tertiary text-[11px] font-mono">
+              {collections.length}
+            </span>
+            {activeTab === "collections" && (
+              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary glow-orchid rounded-full" />
+            )}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setActiveTab("about")}
+            className={`pb-3 relative font-semibold transition-colors whitespace-nowrap cursor-pointer ${
+              activeTab === "about" ? "text-primary" : "text-text-tertiary hover:text-text-primary"
+            }`}
+          >
+            About Poet
+            {activeTab === "about" && (
+              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary glow-orchid rounded-full" />
+            )}
+          </button>
         </div>
-      )}
 
-      {toast && <Toast message={toast} onClose={() => setToast(null)} />}
+        {/* 3. PROFILE FEED CONTENT */}
+        <section className="space-y-6">
+          {activeTab === "poems" ? (
+            poems.length > 0 ? (
+              <div className="space-y-6">
+                {/* Pinned / Featured Stanza Ribbon if first poem */}
+                {pinnedPoem && (
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-1.5 text-primary text-xs font-mono font-semibold px-1">
+                      <Pin size={13} className="text-primary rotate-45" />
+                      <span>Featured Stanza</span>
+                    </div>
+                    <PoemCard poem={pinnedPoem} />
+                  </div>
+                )}
+
+                {/* Remaining Poems */}
+                {remainingPoems.map((poem) => (
+                  <PoemCard key={poem.id} poem={poem} />
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-14 px-6 glass-surface rounded-2xl border border-border-subtle/40">
+                <p className="font-verse text-lg text-text-tertiary italic mb-2">
+                  No poems published in the salon yet.
+                </p>
+                {isOwnProfile && (
+                  <Link
+                    href="/write"
+                    className="inline-flex items-center px-4 py-2 text-xs font-semibold text-white bg-gradient-to-r from-primary-container to-secondary rounded-full hover:opacity-95 shadow-md glowing-btn-aura mt-3"
+                  >
+                    Write your first poem →
+                  </Link>
+                )}
+              </div>
+            )
+          ) : activeTab === "collections" ? (
+            collections.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {collections.map((col) => (
+                  <div
+                    key={col.id}
+                    className="glass-surface rounded-2xl p-5 space-y-3 hover:border-primary/40 transition-all flex flex-col justify-between"
+                  >
+                    <div className="space-y-1.5">
+                      <div className="flex items-center justify-between text-xs text-text-tertiary font-mono">
+                        <span className="text-secondary bg-secondary/15 border border-secondary/30 px-2 py-0.5 rounded-md text-[10px]">
+                          Chapbook
+                        </span>
+                        <span>{new Date(col.created_at).toLocaleDateString()}</span>
+                      </div>
+                      <h3 className="font-display text-xl text-text-primary font-normal">
+                        {col.title}
+                      </h3>
+                      {col.description && (
+                        <p className="text-xs text-text-secondary font-light line-clamp-2">
+                          {col.description}
+                        </p>
+                      )}
+                    </div>
+                    <Link
+                      href="/collections"
+                      className="text-xs text-primary font-semibold hover:underline pt-2 border-t border-border-subtle/30 block"
+                    >
+                      Open Chapbook →
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-14 px-6 glass-surface rounded-2xl border border-border-subtle/40">
+                <p className="font-verse text-lg text-text-tertiary italic mb-2">
+                  No bound anthologies yet.
+                </p>
+                {isOwnProfile && (
+                  <Link
+                    href="/collections"
+                    className="inline-flex items-center px-4 py-2 text-xs font-semibold text-white bg-gradient-to-r from-primary-container to-secondary rounded-full hover:opacity-95 shadow-md glowing-btn-aura mt-3"
+                  >
+                    Create a collection →
+                  </Link>
+                )}
+              </div>
+            )
+          ) : (
+            <div className="glass-surface rounded-2xl p-6 sm:p-8 space-y-6">
+              <div>
+                <h3 className="font-display text-xl text-text-primary font-medium mb-3">
+                  Literary Statement
+                </h3>
+                {profile.bio ? (
+                  <p className="font-verse italic text-lg text-text-primary/90 leading-relaxed font-light">
+                    &ldquo;{profile.bio}&rdquo;
+                  </p>
+                ) : (
+                  <p className="text-sm text-text-tertiary italic">
+                    This poet has not written an extended statement yet.
+                  </p>
+                )}
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-border-subtle/40 text-xs">
+                {profile.location && (
+                  <div className="space-y-1">
+                    <span className="text-text-tertiary uppercase font-mono tracking-wider text-[10px]">
+                      Sanctuary Locale
+                    </span>
+                    <p className="text-text-primary font-medium flex items-center gap-1.5">
+                      <MapPin size={14} className="text-secondary" />
+                      <span>{profile.location}</span>
+                    </p>
+                  </div>
+                )}
+                {profile.website && (
+                  <div className="space-y-1">
+                    <span className="text-text-tertiary uppercase font-mono tracking-wider text-[10px]">
+                      Marginalia Press
+                    </span>
+                    <p className="text-primary font-medium">
+                      <a href={profile.website} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                        {profile.website}
+                      </a>
+                    </p>
+                  </div>
+                )}
+                <div className="space-y-1">
+                  <span className="text-text-tertiary uppercase font-mono tracking-wider text-[10px]">
+                    Salon Guild
+                  </span>
+                  <p className="text-text-primary font-medium flex items-center gap-1.5">
+                    <Users size={14} className="text-tertiary" />
+                    <span>Poetly Fellowship</span>
+                  </p>
+                </div>
+                <div className="space-y-1">
+                  <span className="text-text-tertiary uppercase font-mono tracking-wider text-[10px]">
+                    Fellow Since
+                  </span>
+                  <p className="text-text-primary font-medium flex items-center gap-1.5">
+                    <Calendar size={14} className="text-primary" />
+                    <span>{new Date(profile.created_at).toLocaleDateString(undefined, { month: "long", year: "numeric" })}</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+        </section>
+
+        {toast && <Toast message={toast} onClose={() => setToast(null)} />}
+      </div>
     </AppShell>
   );
 }
+
