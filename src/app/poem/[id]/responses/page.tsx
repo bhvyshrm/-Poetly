@@ -7,7 +7,7 @@ import { ArrowLeft, PenLine } from "lucide-react";
 import { supabase } from "@/lib/supabase/client";
 import { PoemWithAuthor } from "@/lib/types";
 import PoemCard from "@/components/PoemCard";
-import AppShell from "@/components/shell/AppShell";
+import AppShell from "@/components/layout/AppShell";
 
 export default function PoemResponsesPage() {
   const params = useParams();
@@ -61,59 +61,71 @@ export default function PoemResponsesPage() {
   }, [fetchData]);
 
   return (
-    <AppShell>
-      <main className="max-w-[var(--content-width)] mx-auto px-5 md:px-6 py-8 md:py-12 pb-24 md:pb-12">
+    <AppShell maxWidth="feed">
+      <div className="space-y-6 py-2 sm:py-4">
         <Link
           href={`/poem/${poemId}`}
-          className="inline-flex items-center gap-1.5 text-xs text-text-tertiary hover:text-text-primary transition-colors mb-6"
+          className="inline-flex items-center gap-1.5 text-xs text-text-tertiary hover:text-text-primary transition-colors group"
         >
-          <ArrowLeft size={14} strokeWidth={1.5} /> Back to original poem
+          <ArrowLeft size={14} className="group-hover:-translate-x-0.5 transition-transform" />
+          <span>Back to Original Poem</span>
         </Link>
 
-        <div className="mb-8 animate-fade-in flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <div>
-            <h1 className="font-poem text-2xl md:text-3xl text-text-primary mb-1">Poetic Conversation</h1>
+        <section className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-border-subtle/30">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2 text-primary font-mono text-xs font-medium">
+              <span className="uppercase tracking-widest text-[11px]">Resonance Stream</span>
+              <span className="text-text-tertiary">/</span>
+              <span className="text-text-secondary">Conversation</span>
+            </div>
+            <h1 className="font-display text-2xl sm:text-3xl text-text-primary font-light tracking-tight">
+              Poetic Dialogue
+            </h1>
             {parentPoem && (
-              <p className="text-sm text-text-secondary">
+              <p className="font-verse italic text-xs sm:text-sm text-text-secondary">
                 Responses to &ldquo;{parentPoem.title || "Untitled"}&rdquo; by {parentPoem.profiles.display_name}
               </p>
             )}
           </div>
           <Link
             href={`/poem/${poemId}/respond`}
-            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-medium text-white gradient-brand rounded-full hover:opacity-90 transition-opacity self-start sm:self-auto"
+            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-white gradient-brand rounded-full hover:opacity-95 shadow-md shadow-primary/20 transition-all self-start sm:self-auto shrink-0"
           >
-            <PenLine size={13} strokeWidth={2} /> Write a Response
+            <PenLine size={13} />
+            <span>Write Response</span>
           </Link>
-        </div>
+        </section>
 
         {loading ? (
-          <div className="space-y-5">
+          <div className="space-y-4">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="h-28 skeleton rounded-[var(--radius-md)]" />
+              <div key={i} className="h-44 skeleton rounded-2xl" />
             ))}
           </div>
         ) : responses.length > 0 ? (
-          <div className="space-y-2">
+          <div className="space-y-4">
             {responses.map((poem) => (
               <PoemCard key={poem.id} poem={poem} />
             ))}
           </div>
         ) : (
-          <div className="text-center py-16 bg-surface-secondary rounded-[var(--radius-lg)] p-8">
-            <p className="font-poem text-xl text-text-tertiary italic mb-2">No responses yet.</p>
-            <p className="text-sm text-text-secondary mb-6">
-              A response is not a comment. It is a poem written in conversation.
+          <div className="text-center py-16 glass-surface rounded-2xl p-8 border border-border-subtle/40 space-y-4">
+            <p className="font-display text-xl text-text-primary">No Resonant Responses Yet</p>
+            <p className="font-verse italic text-xs sm:text-sm text-text-tertiary max-w-sm mx-auto">
+              A response is not a comment. It is a poem written in poetic conversation.
             </p>
-            <Link
-              href={`/poem/${poemId}/respond`}
-              className="inline-flex items-center gap-2 px-5 py-2.5 gradient-brand text-white text-sm font-medium rounded-full hover:opacity-90 transition-opacity"
-            >
-              <PenLine size={14} /> Be the first to respond
-            </Link>
+            <div className="pt-2">
+              <Link
+                href={`/poem/${poemId}/respond`}
+                className="inline-flex items-center gap-2 px-5 py-2.5 gradient-brand text-white text-xs font-semibold rounded-full shadow-md shadow-primary/20 hover:opacity-95 transition-all"
+              >
+                <PenLine size={13} />
+                <span>Be the First to Respond</span>
+              </Link>
+            </div>
           </div>
         )}
-      </main>
+      </div>
     </AppShell>
   );
 }

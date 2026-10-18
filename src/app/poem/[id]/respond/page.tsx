@@ -2,12 +2,12 @@
 
 import { useParams, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { ArrowLeft, ArrowDown } from "lucide-react";
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import { supabase } from "@/lib/supabase/client";
 import { PoemWithAuthor } from "@/lib/types";
 import { useAuth } from "@/components/AuthProvider";
-import AppShell from "@/components/shell/AppShell";
+import AppShell from "@/components/layout/AppShell";
 import Toast from "@/components/Toast";
 
 export default function RespondPage() {
@@ -90,46 +90,82 @@ export default function RespondPage() {
   };
 
   if (loading || !originalPoem) {
-    return <AppShell><div className="max-w-4xl mx-auto px-5 py-8"><div className="w-40 h-4 skeleton rounded" /></div></AppShell>;
+    return (
+      <AppShell maxWidth="feed">
+        <div className="py-12 space-y-4">
+          <div className="w-32 h-4 skeleton rounded" />
+          <div className="w-3/4 h-10 skeleton rounded-xl" />
+        </div>
+      </AppShell>
+    );
   }
 
   return (
-    <AppShell>
-      <div className="max-w-4xl mx-auto px-5 md:px-6 py-6 md:py-10">
-        <div className="flex items-center justify-between mb-6">
-          <Link href={`/poem/${id}`} className="flex items-center gap-1.5 text-xs text-text-tertiary hover:text-text-primary transition-colors">
-            <ArrowLeft size={14} strokeWidth={1.5} /> Back to poem
-          </Link>
-        </div>
+    <AppShell maxWidth="wide">
+      <div className="space-y-6 py-2 sm:py-4">
+        <Link
+          href={`/poem/${id}`}
+          className="inline-flex items-center gap-1.5 text-xs text-text-tertiary hover:text-text-primary transition-colors group"
+        >
+          <ArrowLeft size={14} className="group-hover:-translate-x-0.5 transition-transform" />
+          <span>Back to Original Poem</span>
+        </Link>
 
-        <div className="mb-8 animate-fade-in">
-          <h1 className="font-poem text-2xl md:text-3xl text-text-primary mb-1">Respond with a poem</h1>
-          <p className="text-sm text-text-secondary">Not a comment. A poem.</p>
-        </div>
+        <section className="space-y-2">
+          <div className="flex items-center gap-2 text-primary font-mono text-xs font-medium">
+            <span className="uppercase tracking-widest text-[11px]">Poetic Dialogue</span>
+            <span className="text-text-tertiary">/</span>
+            <span className="text-text-secondary">Response Stanza</span>
+          </div>
+          <h1 className="font-display text-3xl sm:text-4xl text-text-primary font-light tracking-tight">
+            Inscribe a Response
+          </h1>
+          <p className="text-xs sm:text-sm text-text-secondary font-light">
+            Not a comment. A poem. Answer verse with verse.
+          </p>
+        </section>
 
-        <div className="flex flex-col md:flex-row gap-8 md:gap-10">
-          <div className="md:w-2/5">
-            <p className="text-[11px] font-medium text-text-tertiary tracking-widest uppercase mb-4">Original Poem</p>
-            <div className="py-5 border-l-2 border-brand/25 pl-5">
-              <h3 className="font-poem-title text-lg text-text-primary mb-2">{originalPoem.title}</h3>
-              <div className="poem-content text-sm text-text-primary/75 mb-2 leading-[1.9]">{originalPoem.content}</div>
-              <p className="text-xs text-text-tertiary">— {originalPoem.profiles.display_name}</p>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          {/* Original Poem Reference Card */}
+          <div className="lg:col-span-5 glass-surface rounded-2xl p-6 border border-border-subtle/50 space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-border-subtle/30">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-secondary">Original Verse</span>
+              <span className="text-xs text-text-tertiary">by {originalPoem.profiles.display_name}</span>
+            </div>
+            <h3 className="font-display text-xl text-text-primary font-medium">{originalPoem.title}</h3>
+            <div className="font-verse text-sm text-stone-700 dark:text-stone-300 leading-relaxed whitespace-pre-line font-light">
+              {originalPoem.content}
             </div>
           </div>
 
-          <div className="flex-1">
-            <div className="flex items-center justify-center mb-5">
-              <div className="w-px h-6 bg-border-subtle" />
-              <ArrowDown size={13} className="text-text-tertiary mx-2" />
-              <div className="w-px h-6 bg-border-subtle" />
+          {/* Response Composer Card */}
+          <div className="lg:col-span-7 glass-surface rounded-2xl p-6 border border-primary/30 specular-top-border space-y-5">
+            <div className="flex items-center justify-between pb-3 border-b border-border-subtle/30">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-primary">Your Resonant Stanza</span>
+              <span className="text-xs text-text-tertiary font-mono">Status: Composing</span>
             </div>
 
-            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title your response" className="w-full bg-transparent font-poem-title text-xl md:text-2xl text-text-primary placeholder:text-text-disabled outline-none mb-5" />
-            <textarea value={content} onChange={(e) => setContent(e.target.value)} placeholder="Write your response..." className="w-full bg-transparent font-poem text-lg text-text-primary placeholder:text-text-disabled outline-none resize-none min-h-[35vh] leading-relaxed" />
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Title your response poem..."
+              className="w-full bg-transparent font-display text-xl sm:text-2xl text-text-primary placeholder:text-text-tertiary/60 outline-none pb-2 border-b border-border-subtle/30 focus:border-primary transition-colors"
+            />
 
-            <div className="flex items-center gap-2 mt-8">
-              <button onClick={handlePublish} className="text-xs font-medium text-white bg-brand hover:bg-brand-hover px-5 py-2 rounded-full transition-colors">
-                Publish Response
+            <textarea
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              placeholder="Inscribe your stanzas in response..."
+              className="w-full bg-transparent font-verse text-base sm:text-lg text-text-primary placeholder:text-text-tertiary/60 outline-none resize-none min-h-[280px] leading-relaxed font-light"
+            />
+
+            <div className="flex items-center justify-end pt-3 border-t border-border-subtle/30">
+              <button
+                onClick={handlePublish}
+                className="px-6 py-2.5 rounded-full gradient-brand text-white text-xs font-semibold shadow-md shadow-primary/20 hover:opacity-95 transition-all cursor-pointer"
+              >
+                Publish Response Poem
               </button>
             </div>
           </div>

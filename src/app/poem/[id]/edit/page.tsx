@@ -7,7 +7,7 @@ import Link from "next/link";
 import { supabase } from "@/lib/supabase/client";
 import { Database } from "@/lib/database.types";
 import { useAuth } from "@/components/AuthProvider";
-import AppShell from "@/components/shell/AppShell";
+import AppShell from "@/components/layout/AppShell";
 import Toast from "@/components/Toast";
 
 type Poem = Database["public"]["Tables"]["poems"]["Row"];

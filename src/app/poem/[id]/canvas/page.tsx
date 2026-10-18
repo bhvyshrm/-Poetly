@@ -10,7 +10,7 @@ import { Database } from "@/lib/database.types";
 import { CanvasState, getDefaultCanvasState } from "@/lib/canvas-types";
 import CanvasPreview from "@/components/canvas/CanvasPreview";
 import CanvasControls from "@/components/canvas/CanvasControls";
-import AppShell from "@/components/shell/AppShell";
+import AppShell from "@/components/layout/AppShell";
 import Toast from "@/components/Toast";
 
 type PoemWithAuthor = Database["public"]["Tables"]["poems"]["Row"] & {
@@ -117,10 +117,10 @@ export default function CanvasPage() {
 
   if (loading || !state) {
     return (
-      <AppShell>
-        <div className="max-w-7xl mx-auto px-5 py-8">
-          <div className="w-32 h-4 skeleton rounded mb-8" />
-          <div className="h-[400px] skeleton rounded-[var(--radius-lg)]" />
+      <AppShell maxWidth="wide">
+        <div className="py-8 space-y-6">
+          <div className="w-32 h-4 skeleton rounded" />
+          <div className="h-[400px] skeleton rounded-2xl" />
         </div>
       </AppShell>
     );
@@ -128,42 +128,60 @@ export default function CanvasPage() {
 
   if (!poem) {
     return (
-      <AppShell>
-        <div className="max-w-[var(--content-width)] mx-auto px-5 py-16 text-center">
-          <p className="font-poem text-xl text-text-tertiary italic">Poem not found.</p>
+      <AppShell maxWidth="wide">
+        <div className="py-16 text-center glass-surface rounded-2xl p-8 border border-border-subtle/40">
+          <p className="font-display text-xl text-text-primary">Poem not found.</p>
         </div>
       </AppShell>
     );
   }
 
   return (
-    <AppShell>
-      <div className="max-w-7xl mx-auto px-4 md:px-6 py-5 md:py-8">
-        <div className="flex items-center justify-between mb-6">
-          <Link href={`/poem/${poemId}`} className="flex items-center gap-1.5 text-xs text-text-tertiary hover:text-text-primary transition-colors">
-            <ArrowLeft size={14} strokeWidth={1.5} /> Back
+    <AppShell maxWidth="wide">
+      <div className="space-y-6 py-2 sm:py-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <Link
+            href={`/poem/${poemId}`}
+            className="inline-flex items-center gap-1.5 text-xs text-text-tertiary hover:text-text-primary transition-colors group"
+          >
+            <ArrowLeft size={14} className="group-hover:-translate-x-0.5 transition-transform" />
+            <span>Return to Stanza</span>
           </Link>
-          <div className="flex items-center gap-2">
-            <button onClick={handleReset} className="flex items-center gap-1.5 text-xs text-text-tertiary hover:text-text-primary transition-colors px-3 py-1.5 rounded-full border border-border-subtle hover:border-border-default">
-              <RotateCcw size={12} strokeWidth={1.5} /> Reset
+
+          <div className="flex items-center gap-2 flex-wrap">
+            <button
+              onClick={handleReset}
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-text-tertiary hover:text-text-primary transition-colors px-3 py-1.5 rounded-full glass-surface border border-border-subtle/50 hover:border-primary/40"
+            >
+              <RotateCcw size={12} /> Reset
             </button>
-            <button onClick={handleSaveStyle} className="flex items-center gap-1.5 text-xs text-text-tertiary hover:text-text-primary transition-colors px-3 py-1.5 rounded-full border border-border-subtle hover:border-border-default">
-              <Save size={12} strokeWidth={1.5} /> Save Style
+            <button
+              onClick={handleSaveStyle}
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-text-tertiary hover:text-text-primary transition-colors px-3 py-1.5 rounded-full glass-surface border border-border-subtle/50 hover:border-primary/40"
+            >
+              <Save size={12} /> Save Style
             </button>
-            <button onClick={handleExport} disabled={exporting} className="flex items-center gap-1.5 text-xs font-medium text-white bg-brand hover:bg-brand-hover px-4 py-1.5 rounded-full transition-colors disabled:opacity-50">
-              <Download size={12} strokeWidth={1.5} /> {exporting ? "Exporting..." : "Download PNG"}
+            <button
+              onClick={handleExport}
+              disabled={exporting}
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-white gradient-brand px-4 py-1.5 rounded-full transition-all shadow-md shadow-primary/20 hover:opacity-95 disabled:opacity-50 cursor-pointer"
+            >
+              <Download size={12} /> {exporting ? "Exporting..." : "Download PNG"}
             </button>
           </div>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-6">
-          <div className="w-full lg:w-72 shrink-0 order-2 lg:order-1">
-            <div className="bg-surface border border-border-subtle rounded-[var(--radius-lg)] p-4 max-h-[calc(100vh-160px)] overflow-y-auto">
+          <div className="w-full lg:w-80 shrink-0 order-2 lg:order-1">
+            <div className="glass-surface border border-border-subtle/50 rounded-2xl p-5 max-h-[calc(100vh-160px)] overflow-y-auto">
               <CanvasControls state={state} onChange={updateState} />
             </div>
           </div>
 
-          <div id="canvas-preview-container" className="flex-1 order-1 lg:order-2 flex items-start justify-center bg-background-subtle rounded-[var(--radius-lg)] border border-border-subtle p-5 min-h-[400px] overflow-hidden">
+          <div
+            id="canvas-preview-container"
+            className="flex-1 order-1 lg:order-2 flex items-start justify-center glass-surface rounded-3xl border border-border-subtle/50 p-6 min-h-[460px] overflow-hidden specular-top-border"
+          >
             <div style={{ width: state.canvasWidth * scale, height: state.canvasHeight * scale, position: "relative" }}>
               <CanvasPreview state={state} scale={scale} previewRef={previewRef} />
             </div>
