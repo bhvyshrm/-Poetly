@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Collections &amp; Personal Poetry Library — Poetly</title>
+<!-- Fonts: Newsreader (Editorial Serif) & Plus Jakarta Sans (Modern Sans) -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 with Forms & Container Queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-fixed-dim": "#f8acff",
+            "on-error-container": "#ffdad6",
+            "on-primary": "#570067",
+            "on-secondary-container": "#c1acff",
+            "primary": "#f8acff",
+            "inverse-primary": "#972cab",
+            "on-secondary-fixed-variant": "#4d378c",
+            "surface-dim": "#131316",
+            "on-surface": "#e5e1e5",
+            "on-error": "#690005",
+            "outline-variant": "#504250",
+            "on-tertiary-fixed-variant": "#004d67",
+            "surface-tint": "#f8acff",
+            "surface-container-highest": "#353438",
+            "tertiary": "#90cff1",
+            "surface-variant": "#353438",
+            "on-primary-fixed-variant": "#7b0190",
+            "on-secondary": "#361e74",
+            "error": "#ffb4ab",
+            "on-primary-fixed": "#350040",
+            "on-primary-container": "#68007b",
+            "inverse-surface": "#e5e1e5",
+            "primary-container": "#e879f9",
+            "secondary-fixed-dim": "#cebdff",
+            "inverse-on-surface": "#313033",
+            "on-tertiary-container": "#004057",
+            "tertiary-fixed": "#c2e8ff",
+            "outline": "#9d8b9b",
+            "secondary-fixed": "#e8ddff",
+            "surface-bright": "#39393c",
+            "primary-fixed": "#ffd6ff",
+            "secondary": "#cebdff",
+            "error-container": "#93000a",
+            "on-secondary-fixed": "#21005e",
+            "on-tertiary-fixed": "#001e2b",
+            "tertiary-fixed-dim": "#90cff1",
+            "tertiary-container": "#6eadce",
+            "surface-container-low": "#1c1b1e",
+            "surface-container-lowest": "#0e0e11",
+            "on-surface-variant": "#d4c1d2",
+            "on-background": "#e5e1e5",
+            "surface": "#131316",
+            "on-tertiary": "#003548",
+            "surface-container": "#201f22",
+            "surface-container-high": "#2a2a2d",
+            "secondary-container": "#503a8f",
+            "background": "#131316"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-md": "1rem",
+            "space-lg": "1.75rem",
+            "space-xs": "0.25rem",
+            "gutter-mobile": "1rem",
+            "margin": "2.5rem",
+            "space-xl": "2.75rem",
+            "margin-mobile": "1.25rem",
+            "space-sm": "0.5rem",
+            "gutter": "1.5rem"
+          },
+          "fontFamily": {
+            "micro-tag": ["Plus Jakarta Sans"],
+            "display-lg": ["Newsreader"],
+            "verse-md": ["Newsreader"],
+            "nav-label": ["Plus Jakarta Sans"],
+            "body-ui": ["Plus Jakarta Sans"],
+            "meta-caption": ["Plus Jakarta Sans"],
+            "display-lg-mobile": ["Newsreader"],
+            "body-ui-bold": ["Plus Jakarta Sans"],
+            "headline-title-mobile": ["Newsreader"],
+            "headline-title": ["Newsreader"],
+            "verse-lg": ["Newsreader"]
+          },
+          "fontSize": {
+            "micro-tag": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "700" }],
+            "display-lg": ["44px", { "lineHeight": "54px", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+            "verse-md": ["17px", { "lineHeight": "32px", "letterSpacing": "0.015em", "fontWeight": "400" }],
+            "nav-label": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "body-ui": ["15px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" }],
+            "meta-caption": ["13px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "400" }],
+            "body-ui-bold": ["15px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "headline-title-mobile": ["22px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+            "headline-title": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+            "verse-lg": ["20px", { "lineHeight": "36px", "letterSpacing": "0.01em", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Optical Atmospheric Gradients */
+    body {
+      background-color: #050507;
+      background-image: 
+        radial-gradient(circle at 85% 12%, rgba(232, 121, 249, 0.05) 0%, transparent 45%),
+        radial-gradient(circle at 12% 88%, rgba(185, 162, 255, 0.045) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(144, 207, 241, 0.02) 0%, transparent 70%);
+      background-attachment: fixed;
+    }
+
+    /* Custom Glassmorphism Token Overrides for Liquid Literary Tactility */
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.035);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+    }
+
+    .glass-card-interactive {
+      background: rgba(255, 255, 255, 0.035);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card-interactive:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(232, 121, 249, 0.35);
+      box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.6), 0 0 24px -4px rgba(232, 121, 249, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .glass-input {
+      background: rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+    }
+    .glass-input:focus {
+      border-color: rgba(185, 162, 255, 0.5);
+      box-shadow: 0 0 18px rgba(185, 162, 255, 0.2);
+    }
+
+    /* Ambient glow button */
+    .glow-orchid-btn {
+      background: linear-gradient(135deg, #e879f9 0%, #b9a2ff 100%);
+      box-shadow: 0 4px 20px rgba(232, 121, 249, 0.35);
+      transition: all 0.25s ease;
+    }
+    .glow-orchid-btn:hover {
+      box-shadow: 0 6px 26px rgba(232, 121, 249, 0.55);
+      filter: brightness(1.08);
+    }
+
+    /* Subtle custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(232, 121, 249, 0.3);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen selection:bg-primary-container selection:text-on-primary-container">
+<!-- TOP APP BAR (Shared Components: TopNavBar Glass Header) -->
+<header class="bg-surface/80 dark:bg-surface/80 backdrop-blur-xl docked full-width top-0 sticky z-50 border-b border-outline-variant/30 dark:border-outline-variant/30 shadow-sm backdrop-blur-2xl">
+<div class="flex justify-between items-center w-full px-space-lg py-space-sm">
+<!-- Left: Logo & Search Bar -->
+<div class="flex items-center gap-space-lg flex-1 max-w-xl">
+<a class="font-headline-title text-headline-title italic text-primary dark:text-primary tracking-tight shrink-0 flex items-center gap-space-xs" href="#">
+<span>Poetly</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span>
+</a>
+<!-- Search Bar on Left -->
+<div class="relative w-full max-w-md hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg pointer-events-none" data-icon="search">search</span>
+<input class="glass-input w-full pl-9 pr-4 py-1.5 rounded-full font-body-ui text-body-ui text-on-surface placeholder:text-outline focus:outline-none transition-all duration-200" placeholder="Search verses, binders, marginalia, or poets..." type="text"/>
+</div>
+</div>
+<!-- Center Links (Desktop) -->
+<nav class="hidden md:flex items-center gap-space-lg">
+<a class="text-on-surface-variant dark:text-on-surface-variant font-body-ui text-body-ui hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Explore</a>
+<!-- Active Nav: Collections -->
+<a class="text-primary dark:text-primary font-body-ui-bold text-body-ui-bold relative py-1" href="#">
+          Collections
+          <span class="absolute bottom-0 left-0 w-full h-0.5 bg-primary rounded-full shadow-[0_0_8px_rgba(248,172,255,0.8)]"></span>
+</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-body-ui text-body-ui hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Anthologies</a>
+</nav>
+<!-- Right Trailing Primary Action & Icons -->
+<div class="flex items-center gap-space-md shrink-0">
+<!-- Write Action -->
+<button class="glow-orchid-btn text-on-primary-fixed font-body-ui-bold text-body-ui-bold px-4 py-1.5 rounded-full flex items-center gap-1.5 transition-all duration-200 active:scale-95">
+<span class="material-symbols-outlined text-base" data-icon="edit_note">edit_note</span>
+<span>Write</span>
+</button>
+<!-- Trailing Icon Actions -->
+<button class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-highest/40 transition-colors" title="Notifications">
+<span class="material-symbols-outlined text-xl" data-icon="notifications">notifications</span>
+</button>
+<button class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-highest/40 transition-colors" title="Toggle Theme">
+<span class="material-symbols-outlined text-xl" data-icon="dark_mode">dark_mode</span>
+</button>
+<!-- Profile Avatar with soft glass ring -->
+<div class="relative pl-1">
+<img alt="User profile avatar" class="w-8 h-8 rounded-full object-cover ring-1 ring-outline/40 hover:ring-primary transition-all duration-200 cursor-pointer" data-alt="Intimate artistic profile portrait of a contemporary poet in a moody candlelit library study surrounded by shadowed leather-bound books and soft plum hues. Fine grain, cinematic cinematic portraiture, delicate rim light on cheek, dark obsidian palette with faint orchid backlight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCketusFW7b_tLCge-LAn-nQ-iH1sNI3SirTDmT6QxdGa43zyDI9Q0QJz6I3ovYsNojkcJXDnm8om9_6ypcjO5m1q9kay7fAPK9-ssfiVWoUxdqBAnU3z5USn7nfdh3bicGTenvHNZgslBl_4Qpv9sJVZ4M6aq5Fa2pao65DBfR3bdWAx2bW9TJShvrPHaM2Mo3jVqrm9fQGlmLEQ2lTYbHS9aLnwSA81FXgqyIHQkFyo7Bzhn3OrPA"/>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-tertiary rounded-full ring-2 ring-surface"></span>
+</div>
+</div>
+</div>
+</header>
+<!-- MAIN WRAPPER (Persistent Side Rail + Dynamic Content Well + Right Context Discovery Shelf) -->
+<div class="flex min-h-[calc(100vh-61px)]">
+<!-- LEFT RAIL NAVIGATION (Shared Components: SideNavBar Persistent Rail) -->
+<aside class="w-64 shrink-0 hidden lg:block fixed top-[61px] left-0 h-[calc(100vh-61px)] z-40 bg-surface-container-low/60 dark:bg-surface-container-low/60 backdrop-blur-2xl border-r border-outline-variant/30 dark:border-outline-variant/30 shadow-lg flex flex-col justify-between p-space-md">
+<!-- Top Rail Cluster -->
+<div class="flex flex-col gap-space-md">
+<!-- Header Monogram Emblem & Salon Title -->
+<div class="flex items-center gap-3 px-space-sm py-2">
+<div class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary-container/30 to-secondary-container/40 border border-primary/20 flex items-center justify-center text-primary font-headline-title text-headline-title italic shadow-sm">
+            P
+          </div>
+<div class="flex flex-col">
+<span class="font-headline-title text-headline-title text-primary dark:text-primary leading-tight">Poetly</span>
+<span class="font-meta-caption text-meta-caption text-outline">Digital Salon</span>
+</div>
+</div>
+<!-- Quick Composer Rail CTA -->
+<button class="w-full py-2.5 px-space-md rounded-xl bg-surface-container-highest/50 border border-outline-variant/40 hover:border-primary/50 text-on-surface hover:text-primary font-nav-label text-nav-label flex items-center justify-center gap-2 transition-all duration-200 group active:scale-98">
+<span class="material-symbols-outlined text-lg text-primary group-hover:scale-110 transition-transform" data-icon="quill">edit</span>
+<span>Write Poem</span>
+</button>
+<!-- Main Rail Tabs -->
+<nav class="flex flex-col gap-1 mt-1">
+<!-- Home -->
+<a class="text-on-surface-variant dark:text-on-surface-variant font-nav-label text-nav-label rounded-xl px-space-md py-space-sm flex items-center gap-space-sm hover:bg-surface-container-highest/40 dark:hover:bg-surface-container-highest/40 hover:text-on-surface dark:hover:text-on-surface transition-all duration-200 active:scale-98" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="home">home</span>
+<span>Home</span>
+</a>
+<!-- Explore -->
+<a class="text-on-surface-variant dark:text-on-surface-variant font-nav-label text-nav-label rounded-xl px-space-md py-space-sm flex items-center gap-space-sm hover:bg-surface-container-highest/40 dark:hover:bg-surface-container-highest/40 hover:text-on-surface dark:hover:text-on-surface transition-all duration-200 active:scale-98" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="explore">explore</span>
+<span>Explore</span>
+</a>
+<!-- Write -->
+<a class="text-on-surface-variant dark:text-on-surface-variant font-nav-label text-nav-label rounded-xl px-space-md py-space-sm flex items-center gap-space-sm hover:bg-surface-container-highest/40 dark:hover:bg-surface-container-highest/40 hover:text-on-surface dark:hover:text-on-surface transition-all duration-200 active:scale-98" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="edit_note">edit_note</span>
+<span>Write</span>
+</a>
+<!-- Collections (CRITICAL ACTIVE SELECTION) -->
+<a class="bg-secondary-container/30 dark:bg-secondary-container/30 text-primary dark:text-primary font-nav-label text-nav-label rounded-xl px-space-md py-space-sm flex items-center gap-space-sm shadow-[0_0_16px_rgba(232,121,249,0.15)] border border-primary/20" href="#">
+<span class="material-symbols-outlined text-xl text-primary" data-icon="auto_stories" data-weight="fill" style="font-variation-settings: 'FILL' 1;">auto_stories</span>
+<span>Collections</span>
+<span class="ml-auto w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_6px_#f8acff]"></span>
+</a>
+<!-- Saved -->
+<a class="text-on-surface-variant dark:text-on-surface-variant font-nav-label text-nav-label rounded-xl px-space-md py-space-sm flex items-center gap-space-sm hover:bg-surface-container-highest/40 dark:hover:bg-surface-container-highest/40 hover:text-on-surface dark:hover:text-on-surface transition-all duration-200 active:scale-98" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="bookmark">bookmark</span>
+<span>Saved</span>
+</a>
+<!-- Notifications -->
+<a class="text-on-surface-variant dark:text-on-surface-variant font-nav-label text-nav-label rounded-xl px-space-md py-space-sm flex items-center gap-space-sm hover:bg-surface-container-highest/40 dark:hover:bg-surface-container-highest/40 hover:text-on-surface dark:hover:text-on-surface transition-all duration-200 active:scale-98" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="notifications">notifications</span>
+<span>Notifications</span>
+<span class="ml-auto font-micro-tag text-micro-tag px-1.5 py-0.5 rounded-full bg-primary/20 text-primary border border-primary/30">3</span>
+</a>
+<!-- Profile -->
+<a class="text-on-surface-variant dark:text-on-surface-variant font-nav-label text-nav-label rounded-xl px-space-md py-space-sm flex items-center gap-space-sm hover:bg-surface-container-highest/40 dark:hover:bg-surface-container-highest/40 hover:text-on-surface dark:hover:text-on-surface transition-all duration-200 active:scale-98" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="person">person</span>
+<span>Profile</span>
+</a>
+</nav>
+</div>
+<!-- Rail Footer (Settings + Sanctuary Status) -->
+<div class="pt-4 border-t border-outline-variant/30 flex flex-col gap-2">
+<a class="text-on-surface-variant dark:text-on-surface-variant font-nav-label text-nav-label rounded-xl px-space-md py-space-sm flex items-center gap-space-sm hover:bg-surface-container-highest/40 transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+<div class="px-space-md py-2 text-outline font-micro-tag text-micro-tag flex items-center justify-between">
+<span class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            Cloud Sanctuary Sync
+          </span>
+<span class="text-on-surface-variant">v2.4</span>
+</div>
+</div>
+</aside>
+<!-- CENTER CANVAS & RIGHT CONTEXT WRAPPER (Shifted for fixed left rail on desktop) -->
+<div class="lg:pl-64 flex-1 flex flex-col xl:flex-row w-full max-w-[1600px] mx-auto">
+<!-- CENTER WELL: Personal Poetry Library Feed -->
+<main class="flex-1 px-4 sm:px-6 md:px-8 py-8 max-w-4xl min-w-0">
+<!-- SECTION 1: HEADER SECTION -->
+<section class="mb-8">
+<!-- Subtle Breadcrumb / Category Label -->
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="local_library">local_library</span>
+<span class="font-micro-tag text-micro-tag uppercase tracking-widest text-primary">Personal Sanctuary &amp; Curations</span>
+<span class="text-outline text-xs">/</span>
+<span class="font-meta-caption text-meta-caption text-outline">Anthology Bindings</span>
+</div>
+<!-- Page Title & Poetic Subtitle -->
+<h1 class="font-display-lg text-display-lg text-on-surface tracking-tight mb-3">
+            Collections &amp; Personal Library
+          </h1>
+<p class="font-verse-md text-verse-md text-on-surface-variant max-w-2xl leading-relaxed italic mb-6">
+            “Your personal reliquary of verses, bindings, curated anthologies, and marginalia gathered across the salon.”
+          </p>
+<!-- Top Action Row: Search Filter & New Collection CTA -->
+<div class="flex flex-wrap items-center justify-between gap-4 pt-2 pb-4 border-b border-outline-variant/30">
+<!-- Filter Pills -->
+<div class="flex items-center gap-2 overflow-x-auto pb-1 max-w-full">
+<button class="px-3.5 py-1.5 rounded-full font-nav-label text-nav-label bg-primary/15 text-primary border border-primary/40 shadow-[0_0_12px_rgba(232,121,249,0.2)] shrink-0 transition-colors">
+                All Collections (8)
+              </button>
+<button class="px-3.5 py-1.5 rounded-full font-nav-label text-nav-label bg-white/[0.03] text-on-surface-variant border border-white/[0.08] hover:border-secondary hover:text-on-surface shrink-0 transition-colors">
+                Curated by Me (4)
+              </button>
+<button class="px-3.5 py-1.5 rounded-full font-nav-label text-nav-label bg-white/[0.03] text-on-surface-variant border border-white/[0.08] hover:border-secondary hover:text-on-surface shrink-0 transition-colors">
+                Subscribed Anthologies (3)
+              </button>
+<button class="px-3.5 py-1.5 rounded-full font-nav-label text-nav-label bg-white/[0.03] text-on-surface-variant border border-white/[0.08] hover:border-secondary hover:text-on-surface shrink-0 transition-colors">
+                Collaborative (1)
+              </button>
+<button class="px-3.5 py-1.5 rounded-full font-nav-label text-nav-label bg-white/[0.03] text-on-surface-variant border border-white/[0.08] hover:border-secondary hover:text-on-surface shrink-0 transition-colors">
+                Archived Margins
+              </button>
+</div>
+<!-- New Collection Primary Action -->
+<button class="glow-orchid-btn text-on-primary-fixed font-body-ui-bold text-body-ui-bold px-4 py-2 rounded-full flex items-center gap-2 transition-all duration-200 active:scale-95 shrink-0">
+<span class="material-symbols-outlined text-lg" data-icon="add">add</span>
+<span>+ New Collection</span>
+</button>
+</div>
+</section>
+<!-- SECTION 2: FEATURED / IN-PROGRESS SHOWCASE -->
+<section class="mb-10">
+<div class="flex items-center justify-between mb-3.5">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<h2 class="font-body-ui-bold text-body-ui-bold text-on-surface tracking-wide uppercase text-xs">
+                Current Reading Binder · Sanctuary Spotlight
+              </h2>
+</div>
+<span class="font-meta-caption text-meta-caption text-outline">Last read 40 mins ago</span>
+</div>
+<!-- Spotlight Card: Nocturnes & Ephemera -->
+<div class="glass-panel rounded-2xl p-6 sm:p-7 relative overflow-hidden group border border-primary/20 hover:border-primary/40 transition-all duration-300">
+<!-- Refractive Specular Top Highlight -->
+<div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
+<div class="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between relative z-10">
+<!-- Cover Image & Identity -->
+<div class="flex items-start sm:items-center gap-5 w-full md:w-auto">
+<div class="relative w-24 h-32 sm:w-28 sm:h-36 rounded-xl overflow-hidden shrink-0 shadow-2xl border border-white/10 group-hover:scale-[1.02] transition-transform duration-300">
+<img alt="Nocturnes &amp; Ephemera Cover" class="w-full h-full object-cover" data-alt="Dark misted nocturnal landscape bathed in deep indigo moonlight with ancient orchard trees silhouetted against a misty lilac fog. Poetic, atmospheric, soft ethereal luminescent glows reflecting off wet grasses in a melancholic digital painting style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdXpMk6wnL-w1Ijxrh8Vfcivu6Ki3adhTB8z9W9dfeDdl4P6-85_rgsFKiFJBuVtPtVd8b-q0ggMjIunOCnttHr5I-bshB419Z9-1CdGnd3n_nz-4bJO4Kxz-Bns2-IQOeR-g1VGB8tVRYwX8APKEQw8LcVERsUwqqReT4-MI2HcOj9s7zJfVB-J1afUfRGtwKLABkCo3fLRVM0qB4c80lu8yA9EqNCCDgNIWTQL9vi2SXDWHgKY15"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+<div class="absolute bottom-2 left-2 text-[10px] font-micro-tag text-primary-fixed uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="auto_stories">auto_stories</span>
+<span>Binder</span>
+</div>
+</div>
+<div class="flex flex-col gap-1.5 flex-1">
+<div class="flex items-center gap-2">
+<span class="font-micro-tag text-micro-tag px-2 py-0.5 rounded-full bg-secondary-container/40 text-secondary border border-secondary/30">
+                      Public Salon Collection
+                    </span>
+<span class="text-outline text-xs">•</span>
+<span class="font-meta-caption text-meta-caption text-on-surface-variant">24 stanzas</span>
+</div>
+<h3 class="font-headline-title text-headline-title text-on-surface group-hover:text-primary transition-colors">
+                    Nocturnes &amp; Ephemera
+                  </h3>
+<p class="font-verse-md text-verse-md text-on-surface-variant italic line-clamp-2 max-w-lg">
+                    “We left the lantern burning at the rim of the orchard, waiting for the dusk to remember its name...”
+                  </p>
+<div class="flex items-center gap-4 mt-2">
+<!-- Contributor Avatars -->
+<div class="flex items-center -space-x-2">
+<div class="w-6 h-6 rounded-full ring-2 ring-surface overflow-hidden">
+<img alt="Contributing Poet 1" class="w-full h-full object-cover" data-alt="Intimate portrait of an artist with contemplative eyes in dim ambient violet lighting, dark tones, fine grain editorial portrait." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLC-N58wsfAAVwuNoMUmgMfZ23s8DPJY6o1irse4cHfwLM6k1kmuK6-SWzEsXJhQLswinJcK9Ci_qaifh7chD4jFKAkBkwBlmx3OSpcqtTl3E-ByBcJGc6F5UcZCzJEWVohWR0q0uFdc7dln1uGIYkTQvgTLeGocVV3AFk9n5-qQFTmwizZCRGbVfpelgnLAeT9G2oOotf4MPCzWkg3dA7wpA2npQcA92uVNi9xaHI5KXhHUxjGC7q"/>
+</div>
+<div class="w-6 h-6 rounded-full ring-2 ring-surface overflow-hidden">
+<img alt="Contributing Poet 2" class="w-full h-full object-cover" data-alt="Portrait of an expressive writer looking down pensively, candle glow and dark plum shadows, fine art aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDMKMfKgeiiTXQ7rCpycuk0YFPz9U_-OezT17brAeMxV4avloLJcP25TDiFLdclM5njMEsXjTGMIf7GjC6VSsGlxHuxLIuOdAEr0xjxWro61-Yj3W_op3d8U-pXdGHLwOyPTTrKKXR6k4G4XRqAwmR4x6EGlxEjhRiXXaOk6OuNrdAQSipU3sR18GnKA7TtbC8cYasi_N9KAXQs9GCHs9f6AmY9tMV0FY6nNUjsIjzXO0AwR_V5yuu"/>
+</div>
+<div class="w-6 h-6 rounded-full ring-2 ring-surface overflow-hidden">
+<img alt="Contributing Poet 3" class="w-full h-full object-cover" data-alt="Close up portrait of a young essayist enveloped in nocturnal indigo mist with warm amber specular light on forehead." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSAqChVBcANU47oI4du0lNwmGw3IbV77WhrFjsWwscVMyUsztzWUjQcsHG84O7W0fq9hZIELt3W7Bsnbbpbb5443maoyiA8DZ8EstzS6H7dUMZTKZPdqTykMT4Tai6sAYy2lideJ_OzVaL2T99moxTgxnq3lf2jFGqIRaBSRZ4GGemQIavYED8LfmHCip7Dk5J_9Y6P8i6cUoN9aah6rR2JFTN_eCJvKHG3hLifNmf-jM9f2cAWj1i"/>
+</div>
+<span class="w-6 h-6 rounded-full bg-surface-container-high ring-2 ring-surface flex items-center justify-center text-[10px] font-micro-tag text-outline">
+                        +3
+                      </span>
+</div>
+<span class="font-meta-caption text-meta-caption text-outline">6 contributing poets</span>
+</div>
+</div>
+</div>
+<!-- Actions & Reading Progress -->
+<div class="flex flex-col sm:items-end justify-between w-full md:w-auto gap-4 shrink-0 pt-2 md:pt-0">
+<div class="flex flex-col sm:items-end gap-1 w-full sm:w-48">
+<div class="flex justify-between w-full font-meta-caption text-meta-caption">
+<span class="text-on-surface-variant">Stanza 17 of 24</span>
+<span class="text-primary font-semibold">71%</span>
+</div>
+<!-- Progress Bar -->
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-secondary to-primary rounded-full" style="width: 71%;"></div>
+</div>
+</div>
+<div class="flex items-center gap-2.5">
+<button class="px-4 py-2 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 text-on-surface font-nav-label text-nav-label flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-base" data-icon="bookmark_add">bookmark_add</span>
+<span>Pin Verse</span>
+</button>
+<button class="glow-orchid-btn text-on-primary-fixed font-body-ui-bold text-body-ui-bold px-5 py-2 rounded-xl flex items-center gap-2 active:scale-95 transition-all">
+<span>Continue Reading</span>
+<span class="material-symbols-outlined text-base" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: COLLECTIONS GRID (Editorial Rich Cards) -->
+<section>
+<div class="flex items-center justify-between mb-5">
+<h2 class="font-headline-title text-headline-title-mobile sm:text-headline-title text-on-surface">
+              All Curated Collections
+            </h2>
+<div class="flex items-center gap-2">
+<span class="font-meta-caption text-meta-caption text-outline">Sort by:</span>
+<button class="flex items-center gap-1 font-nav-label text-nav-label text-on-surface hover:text-primary transition-colors">
+<span>Recently Modified</span>
+<span class="material-symbols-outlined text-sm" data-icon="expand_more">expand_more</span>
+</button>
+</div>
+</div>
+<!-- Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<!-- Card 1: Petrichor & Wet Earth -->
+<article class="glass-card-interactive rounded-2xl p-5 flex flex-col justify-between group">
+<div>
+<!-- Top Meta Row -->
+<div class="flex items-start justify-between gap-3 mb-3">
+<div class="flex items-center gap-2">
+<span class="font-micro-tag text-micro-tag px-2 py-0.5 rounded-full bg-surface-container-highest text-outline flex items-center gap-1 border border-outline-variant/30">
+<span class="material-symbols-outlined text-xs" data-icon="lock">lock</span>
+<span>Private Sanctuary</span>
+</span>
+<span class="text-outline text-xs">•</span>
+<span class="font-meta-caption text-meta-caption text-on-surface-variant">18 poems</span>
+</div>
+<!-- Quick Action Menu -->
+<button class="text-outline hover:text-primary transition-colors p-1" title="Options">
+<span class="material-symbols-outlined text-lg" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+<!-- Cover Texture & Info -->
+<div class="flex gap-4 items-start mb-3">
+<div class="w-16 h-20 rounded-lg overflow-hidden shrink-0 border border-white/10 shadow-md">
+<img alt="Petrichor &amp; Wet Earth Cover thumbnail" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Moody macro photograph of dark rain-slick cobblestones reflecting faint lavender streetlights, autumn fallen leaf, wet reflections, dark brooding poetic visual aesthetic with delicate raindrops." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRDz-NCZ6A-DPJO85V7K7VFlmTOVMsh_NTDrh7bgNM1cVscbEXCGPjT2jS9t1-qSjzJI-TsuGiyO3hEmW_hw5JLkD-G1vMTYqz4DdyK53ZOLj5K24ALuFjzJqc6lpkdQYURvOZysEsLeq49wV9lIKpxZIKygkLB8QRbQ6rrqqPziYjVxHW3rCq89Htkfj4q1bish-O9FJr_El4jOVv5BGEo2CtEbi5gKMRyjJ-wyqshqOibnhP7SP6"/>
+</div>
+<div class="flex-1">
+<h3 class="font-headline-title text-headline-title-mobile text-on-surface group-hover:text-primary transition-colors">
+                      Petrichor &amp; Wet Earth
+                    </h3>
+<p class="font-meta-caption text-meta-caption text-outline mt-0.5">
+                      Curated by Julian Croft
+                    </p>
+<p class="font-verse-md text-sm text-on-surface-variant line-clamp-2 mt-1.5 italic">
+                      Verses celebrating rain falling through cedar branches and damp dawn silence.
+                    </p>
+</div>
+</div>
+<!-- Tags -->
+<div class="flex flex-wrap gap-1.5 my-3">
+<span class="font-micro-tag text-micro-tag px-2 py-0.5 rounded-md bg-white/[0.04] text-secondary border border-white/[0.06]">#pastoral</span>
+<span class="font-micro-tag text-micro-tag px-2 py-0.5 rounded-md bg-white/[0.04] text-secondary border border-white/[0.06]">#rain</span>
+<span class="font-micro-tag text-micro-tag px-2 py-0.5 rounded-md bg-white/[0.04] text-secondary border border-white/[0.06]">#solitude</span>
+</div>
+</div>
+<!-- Footer Toolbar -->
+<div class="pt-3 border-t border-outline-variant/30 flex items-center justify-between">
+<span class="font-meta-caption text-meta-caption text-outline">Updated yesterday</span>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded-lg text-outline hover:text-primary hover:bg-surface-container-highest/40 transition-colors" title="Export Anthology">
+<span class="material-symbols-outlined text-base" data-icon="file_download">file_download</span>
+</button>
+<button class="p-1.5 rounded-lg text-outline hover:text-primary hover:bg-surface-container-highest/40 transition-colors" title="Share Binder">
+<span class="material-symbols-outlined text-base" data-icon="share">share</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 2: Sonnets for the Vanishing Hour -->
+<article class="glass-card-interactive rounded-2xl p-5 flex flex-col justify-between group">
+<div>
+<div class="flex items-start justify-between gap-3 mb-3">
+<div class="flex items-center gap-2">
+<span class="font-micro-tag text-micro-tag px-2 py-0.5 rounded-full bg-tertiary-container/30 text-tertiary flex items-center gap-1 border border-tertiary/30">
+<span class="material-symbols-outlined text-xs" data-icon="public">public</span>
+<span>Public</span>
+</span>
+<span class="text-outline text-xs">•</span>
+<span class="font-meta-caption text-meta-caption text-on-surface-variant">32 poems</span>
+</div>
+<button class="text-outline hover:text-primary transition-colors p-1" title="Options">
+<span class="material-symbols-outlined text-lg" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+<div class="flex gap-4 items-start mb-3">
+<div class="w-16 h-20 rounded-lg overflow-hidden shrink-0 border border-white/10 shadow-md">
+<img alt="Sonnets for the Vanishing Hour Cover thumbnail" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Dusk twilight sky shifting from deep midnight indigo into warm amber and orchid horizons, lone bird soaring, poetic minimalism, fine grain cinematic texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOc2_2nrDBZXkCUeV-nb_85LOXp4hwxaE_ZHXdNBZ1y-2t0idrLpvyrdYYgo3ige7r_F-638Jmy1MeFVARTRLTnkU2chs892jkHOaZCMfQNvqdc-YHzsMPwUojG65fz3XWUYC8K3ZXQnFG8T72jVnXsTLzJUYvnRkjdgqV8nvZuJy8bczxGtPU_XBoyaXl9ytiOJeWQ_QML8Ll-x8EWi6Qed4n-Ekl1khAsN20HnvdZRs6m2tFLpNy"/>
+</div>
+<div class="flex-1">
+<h3 class="font-headline-title text-headline-title-mobile text-on-surface group-hover:text-primary transition-colors">
+                      Sonnets for the Vanishing Hour
+                    </h3>
+<p class="font-meta-caption text-meta-caption text-outline mt-0.5">
+                      4 Collaborators active
+                    </p>
+<p class="font-verse-md text-sm text-on-surface-variant line-clamp-2 mt-1.5 italic">
+                      Fourteen-line explorations of threshold moments, late light, and quiet farewells.
+                    </p>
+</div>
+</div>
+<div class="flex flex-wrap gap-1.5 my-3">
+<span class="font-micro-tag text-micro-tag px-2 py-0.5 rounded-md bg-white/[0.04] text-secondary border border-white/[0.06]">#sonnet</span>
+<span class="font-micro-tag text-micro-tag px-2 py-0.5 rounded-md bg-white/[0.04] text-secondary border border-white/[0.06]">#grief</span>
+<span class="font-micro-tag text-micro-tag px-2 py-0.5 rounded-md bg-white/[0.04] text-secondary border border-white/[0.06]">#twilight</span>
+</div>
+</div>
+<div class="pt-3 border-t border-outline-variant/30 flex items-center justify-between">
+<div class="flex items-center -space-x-1.5">
+<div class="w-5 h-5 rounded-full ring-1 ring-surface bg-primary/30 flex items-center justify-center text-[9px] font-bold text-primary">C</div>
+<div class="w-5 h-5 rounded-full ring-1 ring-surface bg-secondary/30 flex items-center justify-center text-[9px] font-bold text-secondary">M</div>
+<div class="w-5 h-5 rounded-full ring-1 ring-surface bg-tertiary/30 flex items-center justify-center text-[9px] font-bold text-tertiary">J</div>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded-lg text-outline hover:text-primary hover:bg-surface-container-highest/40 transition-colors" title="Export Anthology">
+<span class="material-symbols-outlined text-base" data-icon="file_download">file_download</span>
+</button>
+<button class="p-1.5 rounded-lg text-outline hover:text-primary hover:bg-surface-container-highest/40 transition-colors" title="Share Binder">
+<span class="material-symbols-outlined text-base" data-icon="share">share</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 3: Translations of Unspoken Grief -->
+<article class="glass-card-interactive rounded-2xl p-5 flex flex-col justify-between group">
+<div>
+<div class="flex items-start justify-between gap-3 mb-3">
+<div class="flex items-center gap-2">
+<span class="font-micro-tag text-micro-tag px-2 py-0.5 rounded-full bg-secondary-container/40 text-secondary-fixed flex items-center gap-1 border border-secondary/30">
+<span class="material-symbols-outlined text-xs" data-icon="stars">stars</span>
+<span>Subscribed Anthology</span>
+</span>
+<span class="text-outline text-xs">•</span>
+<span class="font-meta-caption text-meta-caption text-on-surface-variant">14 poems</span>
+</div>
+<button class="text-outline hover:text-primary transition-colors p-1" title="Options">
+<span class="material-symbols-outlined text-lg" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+<div class="flex gap-4 items-start mb-3">
+<div class="w-16 h-20 rounded-lg overflow-hidden shrink-0 border border-white/10 shadow-md">
+<img alt="Translations of Unspoken Grief Cover thumbnail" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Abstract literary glass art featuring translucent smoked amethyst shards reflecting candle light against charcoal darkness, exquisite editorial poetry book design aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAm6--nPW34Zk-BnD56iKLcq_Yr_2Bdwie67ptjPwnDQFUxt9mxSQubl_njQj3Z1WSCsIsXhiPWmPsfKmCIqQPmPLFGqKG5TRbcKcdrisKbC9HWPkGmPLhhnAwHD05w89jlBX-r811OpsH-upx6sO_GkdxEFH7lKeeDfUH1Zc9bZkGZwL7OmNpP_tzvyZjB03k43JJ6J2sqJbv2RzFUwr1HiruiOR29yYWSvmAa2f0lDU2PwwBDAqvP"/>
+</div>
+<div class="flex-1">
+<h3 class="font-headline-title text-headline-title-mobile text-on-surface group-hover:text-primary transition-colors">
+                      Translations of Unspoken Grief
+                    </h3>
+<p class="font-meta-caption text-meta-caption text-primary mt-0.5">
+                      By Clara Valmont
+                    </p>
+<p class="font-verse-md text-sm text-on-surface-variant line-clamp-2 mt-1.5 italic">
+                      Delicate fragments addressing the heavy unspoken words carried across generations.
+                    </p>
+</div>
+</div>
+<div class="flex flex-wrap gap-1.5 my-3">
+<span class="font-micro-tag text-micro-tag px-2 py-0.5 rounded-md bg-white/[0.04] text-secondary border border-white/[0.06]">#freeverse</span>
+<span class="font-micro-tag text-micro-tag px-2 py-0.5 rounded-md bg-white/[0.04] text-secondary border border-white/[0.06]">#yearning</span>
+</div>
+</div>
+<div class="pt-3 border-t border-outline-variant/30 flex items-center justify-between">
+<span class="font-meta-caption text-meta-caption text-outline">Updated 2 days ago</span>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded-lg text-outline hover:text-primary hover:bg-surface-container-highest/40 transition-colors" title="Export Anthology">
+<span class="material-symbols-outlined text-base" data-icon="file_download">file_download</span>
+</button>
+<button class="p-1.5 rounded-lg text-outline hover:text-primary hover:bg-surface-container-highest/40 transition-colors" title="Share Binder">
+<span class="material-symbols-outlined text-base" data-icon="share">share</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 4: Haiku & Micro-Stanzas -->
+<article class="glass-card-interactive rounded-2xl p-5 flex flex-col justify-between group">
+<div>
+<div class="flex items-start justify-between gap-3 mb-3">
+<div class="flex items-center gap-2">
+<span class="font-micro-tag text-micro-tag px-2 py-0.5 rounded-full bg-surface-container-highest text-outline flex items-center gap-1 border border-outline-variant/30">
+<span class="material-symbols-outlined text-xs" data-icon="lock">lock</span>
+<span>Private Sanctuary</span>
+</span>
+<span class="text-outline text-xs">•</span>
+<span class="font-meta-caption text-meta-caption text-on-surface-variant">45 micro-verses</span>
+</div>
+<button class="text-outline hover:text-primary transition-colors p-1" title="Options">
+<span class="material-symbols-outlined text-lg" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+<div class="flex gap-4 items-start mb-3">
+<div class="w-16 h-20 rounded-lg overflow-hidden shrink-0 border border-white/10 shadow-md">
+<img alt="Haiku &amp; Micro-Stanzas Cover thumbnail" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Minimalist Zen ink wash on handmade washi paper portraying a solitary pine branch and morning dew drops, charcoal and silver tones, quiet contemplative aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_uJsYBKHD0FNq7IXsLQTU5E4EtHYnS26R-VHpGRXl--oNOx32lmHbOP6w8orlP0iuGx2FCCb1tgOP_xKB6peBMFiVqO1cOOv1EvB3x36FVcqbDt2VXxtzYJEO-vZT8juYMDWyAYi7rqDrGdvjktIg6A11D8o1Y-tJWl4j0tAojyzDqRpFDWXuhOnaDUZ5La15aK5Dlyd46LQpJLkwLbgsPaXOhQngJX_4LZvsk1UDqV3gk62dpJr9"/>
+</div>
+<div class="flex-1">
+<h3 class="font-headline-title text-headline-title-mobile text-on-surface group-hover:text-primary transition-colors">
+                      Haiku &amp; Micro-Stanzas
+                    </h3>
+<p class="font-meta-caption text-meta-caption text-outline mt-0.5">
+                      Curated by Julian Croft
+                    </p>
+<p class="font-verse-md text-sm text-on-surface-variant line-clamp-2 mt-1.5 italic">
+                      Sudden illuminations captured in seventeen syllables or single breathe lines.
+                    </p>
+</div>
+</div>
+<div class="flex flex-wrap gap-1.5 my-3">
+<span class="font-micro-tag text-micro-tag px-2 py-0.5 rounded-md bg-white/[0.04] text-secondary border border-white/[0.06]">#haiku</span>
+<span class="font-micro-tag text-micro-tag px-2 py-0.5 rounded-md bg-white/[0.04] text-secondary border border-white/[0.06]">#nature</span>
+<span class="font-micro-tag text-micro-tag px-2 py-0.5 rounded-md bg-white/[0.04] text-secondary border border-white/[0.06]">#zen</span>
+</div>
+</div>
+<div class="pt-3 border-t border-outline-variant/30 flex items-center justify-between">
+<span class="font-meta-caption text-meta-caption text-outline">Updated 3 days ago</span>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded-lg text-outline hover:text-primary hover:bg-surface-container-highest/40 transition-colors" title="Export Anthology">
+<span class="material-symbols-outlined text-base" data-icon="file_download">file_download</span>
+</button>
+<button class="p-1.5 rounded-lg text-outline hover:text-primary hover:bg-surface-container-highest/40 transition-colors" title="Share Binder">
+<span class="material-symbols-outlined text-base" data-icon="share">share</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 5: Midnight Acoustics Recitations -->
+<article class="glass-card-interactive rounded-2xl p-5 flex flex-col justify-between group">
+<div>
+<div class="flex items-start justify-between gap-3 mb-3">
+<div class="flex items-center gap-2">
+<span class="font-micro-tag text-micro-tag px-2 py-0.5 rounded-full bg-primary/20 text-primary flex items-center gap-1 border border-primary/30">
+<span class="material-symbols-outlined text-xs" data-icon="graphic_eq">graphic_eq</span>
+<span>Audio Binder</span>
+</span>
+<span class="text-outline text-xs">•</span>
+<span class="font-meta-caption text-meta-caption text-on-surface-variant">9 recitations (42m)</span>
+</div>
+<button class="text-outline hover:text-primary transition-colors p-1" title="Options">
+<span class="material-symbols-outlined text-lg" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+<div class="flex gap-4 items-start mb-3">
+<div class="w-16 h-20 rounded-lg overflow-hidden shrink-0 border border-white/10 shadow-md relative group/play">
+<img alt="Midnight Acoustics Recitations Cover thumbnail" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Vintage acoustic studio microphone illuminated by soft warm golden backlighting in a shadowy dark velvet room with faint smoke haze, deep rich moody tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-8ouS0fLwDI6e5oLn75fDhxrYsu1qmngPeQNAASOyE5-DvuCBjH8x5AFe5cEWF-rspa5Of6PQZJdSMvUBYCRXMpQy5HPubbRAoNY08mZQUWlgJ-fQChYaslUihrDLmhF-AEPgU0NkHdw-y_eEzUGj3vLV17aunZ7Dov9bWJKwvEuTBAJNCwROYkyyTtHH-LqUypxFwhU118SHmTHvMONX26-N86TA1WrxDNq-hrEnyFkLBM5nKKdF"/>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-2xl drop-shadow-[0_0_8px_rgba(232,121,249,0.8)]" data-icon="play_circle">play_circle</span>
+</div>
+</div>
+<div class="flex-1">
+<h3 class="font-headline-title text-headline-title-mobile text-on-surface group-hover:text-primary transition-colors">
+                      Midnight Acoustics Recitations
+                    </h3>
+<p class="font-meta-caption text-meta-caption text-outline mt-0.5">
+                      Intimate spoken verse &amp; ambient field recordings
+                    </p>
+<!-- Audio Waveform Visualizer simulation -->
+<div class="flex items-center gap-1 mt-2 h-4">
+<span class="w-1 h-2 bg-primary/40 rounded-full animate-pulse"></span>
+<span class="w-1 h-3.5 bg-primary/80 rounded-full"></span>
+<span class="w-1 h-1.5 bg-primary/50 rounded-full"></span>
+<span class="w-1 h-4 bg-primary rounded-full"></span>
+<span class="w-1 h-2.5 bg-primary/70 rounded-full"></span>
+<span class="w-1 h-3 bg-secondary/80 rounded-full"></span>
+<span class="w-1 h-1 bg-secondary/40 rounded-full"></span>
+<span class="w-1 h-3.5 bg-secondary rounded-full"></span>
+<span class="font-meta-caption text-[11px] text-outline ml-2">48kHz Master Audio</span>
+</div>
+</div>
+</div>
+<div class="flex flex-wrap gap-1.5 my-3">
+<span class="font-micro-tag text-micro-tag px-2 py-0.5 rounded-md bg-white/[0.04] text-secondary border border-white/[0.06]">#audio</span>
+<span class="font-micro-tag text-micro-tag px-2 py-0.5 rounded-md bg-white/[0.04] text-secondary border border-white/[0.06]">#recital</span>
+<span class="font-micro-tag text-micro-tag px-2 py-0.5 rounded-md bg-white/[0.04] text-secondary border border-white/[0.06]">#night</span>
+</div>
+</div>
+<div class="pt-3 border-t border-outline-variant/30 flex items-center justify-between">
+<span class="font-meta-caption text-meta-caption text-outline">Updated 5 days ago</span>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded-lg text-outline hover:text-primary hover:bg-surface-container-highest/40 transition-colors" title="Export Audio Files">
+<span class="material-symbols-outlined text-base" data-icon="file_download">file_download</span>
+</button>
+<button class="p-1.5 rounded-lg text-outline hover:text-primary hover:bg-surface-container-highest/40 transition-colors" title="Share Binder">
+<span class="material-symbols-outlined text-base" data-icon="share">share</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 6: Marginalia & Stray Lines -->
+<article class="glass-card-interactive rounded-2xl p-5 flex flex-col justify-between group">
+<div>
+<div class="flex items-start justify-between gap-3 mb-3">
+<div class="flex items-center gap-2">
+<span class="font-micro-tag text-micro-tag px-2 py-0.5 rounded-full bg-surface-container-highest text-outline flex items-center gap-1 border border-outline-variant/30">
+<span class="material-symbols-outlined text-xs" data-icon="lock">lock</span>
+<span>Private Binder</span>
+</span>
+<span class="text-outline text-xs">•</span>
+<span class="font-meta-caption text-meta-caption text-on-surface-variant">57 highlights</span>
+</div>
+<button class="text-outline hover:text-primary transition-colors p-1" title="Options">
+<span class="material-symbols-outlined text-lg" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+<div class="flex gap-4 items-start mb-3">
+<div class="w-16 h-20 rounded-lg overflow-hidden shrink-0 border border-white/10 shadow-md">
+<img alt="Marginalia &amp; Stray Lines Cover thumbnail" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Aged parchment journal page with delicate handwritten cursive script, pencil marginalia annotations, faint pressed dried lavender flower, dim warm moody study lamp." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8zSEPPoSR0Jm1LPmTvd4wNEfRa3MnbuS_o2E-arRTivDTe2WsKEbEgamvjHizPChjKaw1Ivv1c0TvpG89VU68JJWVlO1iL4lox0nMZXBw70wfpNlaY-BmhjYo80xiYplk6Au0MxZypCVOA3FAUiPDwYBEt5m9vxejuMqt-4K71n3XAkT_U1E_8rSmeNnmkkR0rhWoV5Wthr-JYQeRohGltKxnihUqXSCCHdIHKj0kEUMawMnUe2wY"/>
+</div>
+<div class="flex-1">
+<h3 class="font-headline-title text-headline-title-mobile text-on-surface group-hover:text-primary transition-colors">
+                      Marginalia &amp; Stray Lines
+                    </h3>
+<p class="font-meta-caption text-meta-caption text-outline mt-0.5">
+                      Personal annotations &amp; highlighted excerpts
+                    </p>
+<p class="font-verse-md text-sm text-on-surface-variant line-clamp-2 mt-1.5 italic">
+                      Scribbled observations in the margins of readings across the salon timeline.
+                    </p>
+</div>
+</div>
+<div class="flex flex-wrap gap-1.5 my-3">
+<span class="font-micro-tag text-micro-tag px-2 py-0.5 rounded-md bg-white/[0.04] text-secondary border border-white/[0.06]">#marginalia</span>
+<span class="font-micro-tag text-micro-tag px-2 py-0.5 rounded-md bg-white/[0.04] text-secondary border border-white/[0.06]">#fragments</span>
+</div>
+</div>
+<div class="pt-3 border-t border-outline-variant/30 flex items-center justify-between">
+<span class="font-meta-caption text-meta-caption text-outline">Updated 1 hour ago</span>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded-lg text-outline hover:text-primary hover:bg-surface-container-highest/40 transition-colors" title="Export Binder">
+<span class="material-symbols-outlined text-base" data-icon="file_download">file_download</span>
+</button>
+<button class="p-1.5 rounded-lg text-outline hover:text-primary hover:bg-surface-container-highest/40 transition-colors" title="Settings">
+<span class="material-symbols-outlined text-base" data-icon="tune">tune</span>
+</button>
+</div>
+</div>
+</article>
+</div>
+</section>
+</main>
+<!-- RIGHT CONTEXT PANEL (Library & Literary Shelf - 340px fixed) -->
+<aside class="w-full xl:w-[340px] shrink-0 p-6 md:p-8 xl:border-l xl:border-outline-variant/30 flex flex-col gap-6">
+<!-- 1. Reading Statistics & Sanctuary Insights -->
+<div class="glass-panel rounded-2xl p-5 border border-white/10">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-headline-title text-headline-title-mobile text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="insights">insights</span>
+<span>Sanctuary Insights</span>
+</h3>
+<span class="font-micro-tag text-micro-tag px-2 py-0.5 rounded bg-primary/10 text-primary">This Month</span>
+</div>
+<div class="grid grid-cols-2 gap-3 mb-4">
+<div class="p-3 rounded-xl bg-surface-container-low/60 border border-white/[0.05]">
+<span class="font-meta-caption text-meta-caption text-outline block">Poems Read</span>
+<span class="font-headline-title text-2xl text-primary mt-1 block">42</span>
+<span class="font-micro-tag text-[10px] text-emerald-400 mt-0.5 block">+8 vs last month</span>
+</div>
+<div class="p-3 rounded-xl bg-surface-container-low/60 border border-white/[0.05]">
+<span class="font-meta-caption text-meta-caption text-outline block">Stanzas Pinned</span>
+<span class="font-headline-title text-2xl text-secondary mt-1 block">118</span>
+<span class="font-micro-tag text-[10px] text-on-surface-variant mt-0.5 block">Across 6 binders</span>
+</div>
+<div class="p-3 rounded-xl bg-surface-container-low/60 border border-white/[0.05]">
+<span class="font-meta-caption text-meta-caption text-outline block">Quiet Reading</span>
+<span class="font-headline-title text-2xl text-tertiary mt-1 block">14.2h</span>
+<span class="font-micro-tag text-[10px] text-outline mt-0.5 block">Late-night mode</span>
+</div>
+<div class="p-3 rounded-xl bg-surface-container-low/60 border border-white/[0.05]">
+<span class="font-meta-caption text-meta-caption text-outline block">Active Binders</span>
+<span class="font-headline-title text-2xl text-on-surface mt-1 block">8</span>
+<span class="font-micro-tag text-[10px] text-primary mt-0.5 block">3 shared publicly</span>
+</div>
+</div>
+<!-- Most Revisited Poet -->
+<div class="p-3 rounded-xl bg-secondary-container/20 border border-secondary/30 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden shrink-0 ring-1 ring-secondary">
+<img alt="Clara Valmont Avatar" class="w-full h-full object-cover" data-alt="Artistic monochrome portrait of a female poet bathed in soft rim light, serene expression, deep dark vignette background, elegant literary aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB50vutsx2VYCxZq98LpeOEQ0mBi5qr-aHwSF36CClBelyTxBOayGe6jhM0HKLr4wCJv4HMu9kQRZr44Jl-GB6BXO3lJdqZUV4i5GrjrW3b4xn_8SdXRZt-0uClEiSfNLY5jHThG1-lR3ycyY_-Vy_desH-CZfhg9Cs9ulqLmMHL70xgyZGZ5tVf2Mjap_agiLj5pMByQr3mmj5zsLTnTpRpxTwjFFMsHgSBinFy3ZVGZZxNtwXloUr"/>
+</div>
+<div class="flex-1 min-w-0">
+<span class="font-micro-tag text-[10px] text-secondary uppercase tracking-wider block">Most Revisited Voice</span>
+<span class="font-body-ui-bold text-body-ui text-on-surface truncate block">Clara Valmont</span>
+<span class="font-meta-caption text-meta-caption text-outline">19 stanzas revisited</span>
+</div>
+</div>
+</div>
+<!-- 2. Quick Stacks & Saved Stanzas -->
+<div class="glass-panel rounded-2xl p-5 border border-white/10">
+<div class="flex items-center justify-between mb-3">
+<h3 class="font-body-ui-bold text-body-ui-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-lg" data-icon="grade" data-weight="fill" style="font-variation-settings: 'FILL' 1;">grade</span>
+<span>Starred Stray Stanzas</span>
+</h3>
+<a class="font-meta-caption text-meta-caption text-primary hover:underline" href="#">View All</a>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Stanza 1 -->
+<div class="p-3 rounded-xl bg-surface-container-low/50 border border-white/[0.04] hover:border-primary/30 transition-all cursor-pointer group">
+<p class="font-verse-md text-sm text-on-surface-variant italic group-hover:text-on-surface transition-colors">
+                “Between the breath and the winter gate,<br/>
+                a quiet bird counts the falling stars.”
+              </p>
+<div class="flex items-center justify-between mt-2 pt-2 border-t border-white/[0.05]">
+<span class="font-meta-caption text-[11px] text-outline">Petrichor &amp; Wet Earth · v. IV</span>
+<span class="material-symbols-outlined text-xs text-outline group-hover:text-primary transition-transform group-hover:translate-x-0.5" data-icon="north_east">north_east</span>
+</div>
+</div>
+<!-- Stanza 2 -->
+<div class="p-3 rounded-xl bg-surface-container-low/50 border border-white/[0.04] hover:border-primary/30 transition-all cursor-pointer group">
+<p class="font-verse-md text-sm text-on-surface-variant italic group-hover:text-on-surface transition-colors">
+                “We give to ink what the tongue cannot bear to echo...”
+              </p>
+<div class="flex items-center justify-between mt-2 pt-2 border-t border-white/[0.05]">
+<span class="font-meta-caption text-[11px] text-outline">Translations of Grief · Clara Valmont</span>
+<span class="material-symbols-outlined text-xs text-outline group-hover:text-primary transition-transform group-hover:translate-x-0.5" data-icon="north_east">north_east</span>
+</div>
+</div>
+</div>
+</div>
+<!-- 3. Export & Bind Action Card -->
+<div class="glass-panel rounded-2xl p-5 border border-primary/25 relative overflow-hidden group">
+<div class="absolute -right-6 -bottom-6 w-24 h-24 bg-primary/10 rounded-full blur-2xl pointer-events-none"></div>
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="menu_book">menu_book</span>
+<span class="font-body-ui-bold text-body-ui-bold text-on-surface">Bind Digital Chapbook</span>
+</div>
+<p class="font-meta-caption text-meta-caption text-on-surface-variant mb-4">
+            Compile your private bindings or public collections into an exquisitely typeset PDF or ePub chapbook with custom margins and serif typography.
+          </p>
+<!-- Book Mockup Illustration -->
+<div class="w-full h-24 rounded-lg bg-surface-container-lowest border border-white/10 flex items-center justify-center relative overflow-hidden mb-4">
+<div class="w-28 h-20 rounded bg-gradient-to-r from-surface-container-high to-surface-container-highest border border-white/10 shadow-lg flex flex-col justify-between p-2 transform rotate-1 group-hover:rotate-0 transition-transform">
+<span class="font-headline-title text-[9px] text-primary italic">Nocturnes</span>
+<div class="space-y-1">
+<div class="w-full h-0.5 bg-outline-variant"></div>
+<div class="w-3/4 h-0.5 bg-outline-variant"></div>
+</div>
+<span class="font-micro-tag text-[7px] text-outline text-right">Poetly Edition</span>
+</div>
+</div>
+<button class="w-full py-2.5 rounded-xl bg-white/[0.06] hover:bg-primary hover:text-on-primary-fixed border border-white/10 hover:border-primary text-on-surface font-nav-label text-nav-label transition-all flex items-center justify-center gap-2 group/btn">
+<span class="material-symbols-outlined text-base" data-icon="print">print</span>
+<span>Bind &amp; Export Chapbook</span>
+</button>
+</div>
+<!-- Minimalist Literary Footer -->
+<footer class="pt-4 pb-2 text-center text-outline">
+<p class="font-display-lg text-lg italic text-primary/60 mb-1">Poetly</p>
+<p class="font-meta-caption text-[12px] text-outline">
+            Personal Library &amp; Collections Sanctuary<br/>
+            Crafted for quiet resonance &amp; lasting verse.
+          </p>
+</footer>
+</aside>
+</div>
+</div>
+</body></html>

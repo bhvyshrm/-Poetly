@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Poetly — The Digital Salon for Verse</title>
+<!-- Google Fonts: Newsreader & Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS Play CDN with Forms and Container Queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config verbatim mapping design tokens -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container-highest": "#353438",
+            "inverse-primary": "#972cab",
+            "on-secondary": "#361e74",
+            "secondary-fixed-dim": "#cebdff",
+            "on-error-container": "#ffdad6",
+            "outline": "#9d8b9b",
+            "surface-dim": "#131316",
+            "outline-variant": "#504250",
+            "surface-tint": "#f8acff",
+            "surface-container-lowest": "#0e0e11",
+            "on-tertiary-fixed": "#001e2b",
+            "surface-variant": "#353438",
+            "background": "#131316",
+            "on-tertiary-container": "#004057",
+            "on-primary-fixed": "#350040",
+            "surface": "#131316",
+            "surface-container-low": "#1c1b1e",
+            "on-secondary-fixed-variant": "#4d378c",
+            "inverse-surface": "#e5e1e5",
+            "surface-container-high": "#2a2a2d",
+            "surface-container": "#201f22",
+            "error": "#ffb4ab",
+            "on-tertiary-fixed-variant": "#004d67",
+            "on-primary-container": "#68007b",
+            "secondary-fixed": "#e8ddff",
+            "on-surface": "#e5e1e5",
+            "on-background": "#e5e1e5",
+            "on-error": "#690005",
+            "inverse-on-surface": "#313033",
+            "primary-fixed-dim": "#f8acff",
+            "secondary-container": "#503a8f",
+            "primary": "#f8acff",
+            "on-secondary-container": "#c1acff",
+            "tertiary-fixed-dim": "#90cff1",
+            "tertiary-container": "#6eadce",
+            "surface-bright": "#39393c",
+            "on-secondary-fixed": "#21005e",
+            "tertiary-fixed": "#c2e8ff",
+            "on-primary": "#570067",
+            "error-container": "#93000a",
+            "on-surface-variant": "#d4c1d2",
+            "on-tertiary": "#003548",
+            "primary-container": "#e879f9",
+            "tertiary": "#90cff1",
+            "on-primary-fixed-variant": "#7b0190",
+            "primary-fixed": "#ffd6ff",
+            "secondary": "#cebdff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xs": "0.25rem",
+            "space-xl": "2.75rem",
+            "margin": "2.5rem",
+            "space-sm": "0.5rem",
+            "gutter": "1.5rem",
+            "margin-mobile": "1.25rem",
+            "space-lg": "1.75rem",
+            "space-md": "1rem",
+            "gutter-mobile": "1rem"
+          },
+          "fontFamily": {
+            "headline-title": ["Newsreader", "serif"],
+            "verse-md": ["Newsreader", "serif"],
+            "headline-title-mobile": ["Newsreader", "serif"],
+            "micro-tag": ["Plus Jakarta Sans", "sans-serif"],
+            "display-lg-mobile": ["Newsreader", "serif"],
+            "meta-caption": ["Plus Jakarta Sans", "sans-serif"],
+            "display-lg": ["Newsreader", "serif"],
+            "nav-label": ["Plus Jakarta Sans", "sans-serif"],
+            "body-ui": ["Plus Jakarta Sans", "sans-serif"],
+            "body-ui-bold": ["Plus Jakarta Sans", "sans-serif"],
+            "verse-lg": ["Newsreader", "serif"]
+          },
+          "fontSize": {
+            "headline-title": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+            "verse-md": ["17px", { "lineHeight": "32px", "letterSpacing": "0.015em", "fontWeight": "400" }],
+            "headline-title-mobile": ["22px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+            "micro-tag": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "700" }],
+            "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "400" }],
+            "meta-caption": ["13px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "display-lg": ["44px", { "lineHeight": "54px", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+            "nav-label": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "body-ui": ["15px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" }],
+            "body-ui-bold": ["15px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "verse-lg": ["20px", { "lineHeight": "36px", "letterSpacing": "0.01em", "fontWeight": "400" }]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    /* Liquid Glassmorphic Specs */
+    .glass-surface {
+      background: rgba(255, 255, 255, 0.035);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
+    }
+
+    .glass-panel-elevated {
+      background: rgba(255, 255, 255, 0.055);
+      backdrop-filter: blur(32px) saturate(200%);
+      -webkit-backdrop-filter: blur(32px) saturate(200%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.6), inset 0 1px 1px 0 rgba(255, 255, 255, 0.12);
+    }
+
+    .glass-pill {
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+    }
+
+    .glass-pill:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(248, 172, 255, 0.3);
+    }
+
+    .glow-orchid {
+      box-shadow: 0 0 24px -2px rgba(232, 121, 249, 0.25);
+    }
+
+    .glowing-btn-aura {
+      box-shadow: 0 4px 20px rgba(232, 121, 249, 0.35);
+    }
+
+    .specular-top-border {
+      position: relative;
+    }
+    .specular-top-border::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+    }
+
+    /* Custom Scrollbar for ambient aesthetic */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0e0e11;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2a2a2d;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #504250;
+    }
+  </style>
+</head>
+<body class="bg-[#050507] text-on-surface antialiased min-h-screen relative selection:bg-primary-container selection:text-on-primary-container">
+<!-- Ambient Light Wells (Atmospheric Ground Layer) -->
+<div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+<div class="absolute -top-40 right-10 w-[680px] h-[680px] rounded-full bg-primary-container/5 blur-[140px]"></div>
+<div class="absolute top-[40%] -left-48 w-[600px] h-[600px] rounded-full bg-secondary-container/10 blur-[160px]"></div>
+<div class="absolute -bottom-40 right-1/3 w-[500px] h-[500px] rounded-full bg-tertiary-container/10 blur-[130px]"></div>
+</div>
+<!-- ========================================================================= -->
+<!-- 1. TOP GLASS HEADER (Shared Component: TopNavBar with exact JSON bindings) -->
+<!-- ========================================================================= -->
+<header class="docked full-width top-0 sticky z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30 dark:border-outline-variant/30 shadow-sm backdrop-blur-2xl">
+<div class="flex justify-between items-center w-full px-space-lg py-space-sm max-w-7xl mx-auto">
+<!-- Brand & Search cluster -->
+<div class="flex items-center gap-space-lg flex-1">
+<!-- Brand Logo -->
+<a class="font-headline-title text-headline-title italic text-primary dark:text-primary tracking-tight flex items-center gap-1.5 transition-all duration-200 active:scale-95 group" href="#">
+<span class="tracking-tighter">Poetly</span>
+<span class="material-symbols-outlined text-[19px] text-primary group-hover:rotate-12 transition-transform duration-300" data-icon="sparkles">auto_awesome</span>
+</a>
+<!-- Search Bar (on_left) -->
+<div class="relative w-80 hidden md:block">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[18px]" data-icon="search">search</span>
+<input class="w-full pl-10 pr-4 py-1.5 bg-surface-container-lowest/70 border border-outline-variant/30 rounded-full font-body-ui text-body-ui text-on-surface placeholder-outline focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/40 transition-all text-xs" placeholder="Search poems, poets, stanzas... ⌘K" type="text"/>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden lg:flex items-center gap-space-md">
+<a class="text-on-surface-variant dark:text-on-surface-variant font-body-ui text-body-ui px-3 py-1.5 rounded-full hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Explore</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-body-ui text-body-ui px-3 py-1.5 rounded-full hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Collections</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-body-ui text-body-ui px-3 py-1.5 rounded-full hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#">Anthologies</a>
+</nav>
+<!-- Trailing Action Cluster -->
+<div class="flex items-center gap-space-sm ml-space-lg">
+<!-- Write Action (CTA) -->
+<button class="flex items-center gap-1.5 bg-gradient-to-r from-primary-container to-secondary text-surface-container-lowest font-body-ui-bold text-body-ui px-4 py-1.5 rounded-full glowing-btn-aura hover:opacity-95 transition-all duration-200 active:scale-95 text-xs">
+<span class="material-symbols-outlined text-[16px]" data-icon="edit_note">edit_note</span>
+<span>Write</span>
+</button>
+<!-- Notification Bell Action -->
+<button class="relative p-2 rounded-full text-on-surface-variant hover:text-primary hover:bg-surface-container-highest/40 transition-colors duration-200" title="Notifications">
+<span class="material-symbols-outlined text-[20px]" data-icon="notifications">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary-container ring-2 ring-surface"></span>
+</button>
+<!-- Dark Mode Toggle Action -->
+<button class="p-2 rounded-full text-on-surface-variant hover:text-primary hover:bg-surface-container-highest/40 transition-colors duration-200" title="Toggle Theme">
+<span class="material-symbols-outlined text-[20px]" data-icon="dark_mode">dark_mode</span>
+</button>
+<!-- Profile Avatar Ring -->
+<div class="ml-1 pl-2 border-l border-outline-variant/30 flex items-center">
+<img alt="User profile avatar" class="w-8 h-8 rounded-full object-cover ring-1 ring-primary/40 hover:ring-primary transition-all duration-200 cursor-pointer" data-alt="An ethereal fine-art portrait of a modern literary writer with deep contemplative expression in low-key amber lighting and soft film grain against deep violet backdrop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCb3Nl1YlbqGT2mbIowcNYoZgFLZuQH9pzLPeR6bKFo5n9KIRvysQ3JL2DUz7S_EyTRlZSr5ZwLasR1x7GI-mPb4p396br67nDatHHRrbVh77pnF5auDauN4n5C9T47ZZi3JeA3fftZ5r5qIL_shRsf-ZMlxuV63sokHGNaBHIXxX2afPKztVEASTUeid2DssxYkJ_K43-D7_TFcshx1otNBCRSLCEnEW1MHZatel62FkHe80pszsWu"/>
+</div>
+</div>
+</div>
+</header>
+<!-- ========================================================================= -->
+<!-- MAIN APP CONTAINER (3-COLUMN DESKTOP LAYOUT) -->
+<!-- ========================================================================= -->
+<div class="max-w-7xl mx-auto px-4 md:px-6 pt-6 pb-20 relative z-10 flex gap-6">
+<!-- ======================================================================= -->
+<!-- 2. LEFT PERSISTENT SIDEBAR RAIL (Shared Component: SideNavBar) -->
+<!-- ======================================================================= -->
+<aside class="hidden xl:block w-64 shrink-0">
+<div class="sticky top-24 flex flex-col justify-between h-[calc(100vh-7rem)] glass-surface rounded-2xl p-space-md border border-outline-variant/30">
+<!-- Top Section: Monogram & Nav Items -->
+<div class="space-y-6">
+<!-- Monogram Header -->
+<div class="flex items-center gap-3 px-2 pt-1 pb-2 border-b border-outline-variant/20">
+<div class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary/30 to-secondary-container flex items-center justify-center border border-primary/20 shadow-inner">
+<span class="font-headline-title text-headline-title italic text-primary font-bold">P</span>
+</div>
+<div>
+<h2 class="font-headline-title text-[18px] leading-5 text-on-surface font-semibold">Poetly</h2>
+<p class="font-meta-caption text-meta-caption text-outline">Digital Salon</p>
+</div>
+</div>
+<!-- Navigation Nodes -->
+<nav class="space-y-1">
+<!-- Home (Active Item based on intent) -->
+<a class="bg-secondary-container/30 dark:bg-secondary-container/30 text-primary dark:text-primary font-nav-label text-nav-label rounded-xl px-space-md py-space-sm flex items-center justify-between border-l-2 border-primary transition-all duration-200 active:scale-98" href="#">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[20px]" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span>Home</span>
+</div>
+<span class="w-1.5 h-1.5 rounded-full bg-primary glow-orchid"></span>
+</a>
+<!-- Explore -->
+<a class="text-on-surface-variant dark:text-on-surface-variant font-nav-label text-nav-label rounded-xl px-space-md py-space-sm flex items-center gap-space-sm hover:bg-surface-container-highest/40 dark:hover:bg-surface-container-highest/40 hover:text-on-surface dark:hover:text-on-surface transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="explore">explore</span>
+<span>Explore</span>
+</a>
+<!-- Write -->
+<a class="text-on-surface-variant dark:text-on-surface-variant font-nav-label text-nav-label rounded-xl px-space-md py-space-sm flex items-center gap-space-sm hover:bg-surface-container-highest/40 dark:hover:bg-surface-container-highest/40 hover:text-on-surface dark:hover:text-on-surface transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="edit_note">edit_note</span>
+<span>Write</span>
+</a>
+<!-- Collections -->
+<a class="text-on-surface-variant dark:text-on-surface-variant font-nav-label text-nav-label rounded-xl px-space-md py-space-sm flex items-center gap-space-sm hover:bg-surface-container-highest/40 dark:hover:bg-surface-container-highest/40 hover:text-on-surface dark:hover:text-on-surface transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="auto_stories">auto_stories</span>
+<span>Collections</span>
+</a>
+<!-- Saved -->
+<a class="text-on-surface-variant dark:text-on-surface-variant font-nav-label text-nav-label rounded-xl px-space-md py-space-sm flex items-center gap-space-sm hover:bg-surface-container-highest/40 dark:hover:bg-surface-container-highest/40 hover:text-on-surface dark:hover:text-on-surface transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="bookmark">bookmark</span>
+<span>Saved</span>
+</a>
+<!-- Notifications (with badge '3') -->
+<a class="text-on-surface-variant dark:text-on-surface-variant font-nav-label text-nav-label rounded-xl px-space-md py-space-sm flex items-center justify-between hover:bg-surface-container-highest/40 dark:hover:bg-surface-container-highest/40 hover:text-on-surface dark:hover:text-on-surface transition-all duration-200" href="#">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[20px]" data-icon="notifications">notifications</span>
+<span>Notifications</span>
+</div>
+<span class="px-1.5 py-0.2 rounded-full bg-primary/20 text-primary font-micro-tag text-[10px] font-bold border border-primary/30">3</span>
+</a>
+<!-- Profile -->
+<a class="text-on-surface-variant dark:text-on-surface-variant font-nav-label text-nav-label rounded-xl px-space-md py-space-sm flex items-center gap-space-sm hover:bg-surface-container-highest/40 dark:hover:bg-surface-container-highest/40 hover:text-on-surface dark:hover:text-on-surface transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="person">person</span>
+<span>Profile</span>
+</a>
+</nav>
+<!-- Composer Rail Action (CTA: Write Poem) -->
+<div class="pt-2 px-1">
+<button class="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-gradient-to-r from-primary-container/20 to-secondary/20 hover:from-primary-container/30 hover:to-secondary/30 border border-primary/30 text-primary font-body-ui-bold text-body-ui tracking-wide transition-all duration-200 active:scale-95 group">
+<span class="material-symbols-outlined text-[18px] group-hover:rotate-45 transition-transform" data-icon="draw">draw</span>
+<span>Write Poem</span>
+</button>
+</div>
+</div>
+<!-- Footer Section: Settings & User Micro Profile -->
+<div class="space-y-3 pt-4 border-t border-outline-variant/20">
+<a class="text-on-surface-variant dark:text-on-surface-variant font-nav-label text-nav-label rounded-xl px-space-md py-space-sm flex items-center gap-space-sm hover:bg-surface-container-highest/40 dark:hover:bg-surface-container-highest/40 hover:text-on-surface dark:hover:text-on-surface transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+<!-- User Mini Profile Card -->
+<div class="flex items-center justify-between p-2 rounded-xl bg-surface-container-lowest/40 border border-outline-variant/20 hover:border-outline-variant/40 transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<img alt="Julian Croft avatar" class="w-9 h-9 rounded-full object-cover shrink-0 ring-1 ring-outline/40" data-alt="A portrait of an introspective male poet with subtle glasses and linen collar, cast in gentle dusk light with soft cinematic focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBW3wTtgMREhPDP-9noRK1zOPvn-DInUu9MSdsfserePlJ288CtqGY0Zj8FBkOvDeXLSD5vOOoeUoOzaxlOPVkTD03GzWwbpSySNaLuQG8j1Twh_BwWUEO4hM_J9zeOrylzegCC0UACDbUzznwpro23VO8DrS5hPK_rlUwNtZ_NceHVXHiPK83C3buZZojVUHo41vEfHde2yHjMq5hUYLErTzJemeZaG8aXOzM3n0znBQpw0Gc-2L_t"/>
+<div class="truncate">
+<p class="font-body-ui-bold text-xs text-on-surface truncate">Julian Croft</p>
+<p class="font-meta-caption text-[11px] text-outline truncate">@jcroft</p>
+</div>
+</div>
+<button class="text-outline hover:text-primary transition-colors p-1" title="Account Menu">
+<span class="material-symbols-outlined text-[18px]" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+</aside>
+<!-- ======================================================================= -->
+<!-- 3. CENTER FEED (Poetic Editorial Stream) -->
+<!-- ======================================================================= -->
+<main class="flex-1 max-w-2xl mx-auto space-y-6">
+<!-- Emotional Greeting & Literary Anchor -->
+<section class="glass-surface rounded-2xl p-6 relative overflow-hidden specular-top-border">
+<div class="flex items-start justify-between">
+<div class="space-y-1">
+<div class="flex items-center gap-2 text-primary font-meta-caption text-meta-caption">
+<span class="material-symbols-outlined text-[15px]" data-icon="nights_stay">nights_stay</span>
+<span>Sanctuary Hours</span>
+</div>
+<h1 class="font-headline-title text-headline-title text-on-surface tracking-tight font-light">
+              Good evening, Julian.
+            </h1>
+</div>
+<span class="material-symbols-outlined text-outline/30 text-4xl" data-icon="format_quote">format_quote</span>
+</div>
+<p class="font-verse-md text-verse-md italic text-on-surface-variant/90 mt-3 pt-3 border-t border-outline-variant/20 font-light">
+          “Some things are easier to write than to say.”
+        </p>
+</section>
+<!-- Level 2 Interactive: Daily Prompt Card -->
+<section class="glass-panel-elevated rounded-2xl p-6 relative border-t-2 border-t-tertiary">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+<span class="font-micro-tag text-micro-tag uppercase text-tertiary tracking-wider">Daily Prompt</span>
+</div>
+<span class="font-meta-caption text-meta-caption text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span>
+<span>Ends in 6h</span>
+</span>
+</div>
+<h3 class="font-headline-title text-[22px] leading-8 text-on-surface mb-2 font-light">
+          “Write about a place you never truly left.”
+        </h3>
+<div class="flex items-center justify-between mt-5 pt-4 border-t border-outline-variant/20">
+<div class="flex items-center gap-2 text-outline font-meta-caption text-meta-caption">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="quill">draw</span>
+<span>1,428 stanzas penned today</span>
+</div>
+<button class="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-tertiary-container/20 text-tertiary border border-tertiary/30 hover:bg-tertiary/20 font-nav-label text-xs transition-all active:scale-95">
+<span>Respond to Prompt</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</section>
+<!-- Thought / Verse Quick Composer -->
+<section class="glass-surface rounded-2xl p-4 transition-all focus-within:border-primary/40 focus-within:ring-1 focus-within:ring-primary/30">
+<div class="flex items-start gap-3">
+<img alt="Julian's composer avatar" class="w-10 h-10 rounded-full object-cover shrink-0 mt-0.5" data-alt="Introspective artist profile photo in deep shadowy silhouette with warm amber rim lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfxLG-r3hlzQUP66CKc-THVm9wfM7zf1xT303xAzfNxsRF4WLDcwT7a6JTHgFePF5joC_VHR0MnlyK5eIMxx4VIl0hc-pHArHwCiOwO5ZPLhIriy393Otl3JJbrvYFDwLaUH0Um3g_raXH3knq-6vDvuyaobyw6NeZigbMCll5VdK_xdAnP_N3389WKQGsCfI3WC2gM27oCP_YuuXR-ge25HJ7jqBxV0ADc7griM8mACoiLuSeOdHQ"/>
+<div class="flex-1 space-y-3">
+<textarea class="w-full bg-transparent border-0 p-0 text-on-surface placeholder-outline font-verse-md text-verse-md focus:ring-0 resize-none font-light" placeholder="Leave a quiet verse or thought..." rows="2"></textarea>
+<div class="flex items-center justify-between pt-2 border-t border-outline-variant/20">
+<div class="flex items-center gap-2">
+<button class="px-2.5 py-1 rounded-lg glass-pill text-xs text-outline hover:text-on-surface flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[14px]" data-icon="format_align_left">format_align_left</span>
+<span>Stanzas</span>
+</button>
+<button class="px-2.5 py-1 rounded-lg glass-pill text-xs text-outline hover:text-on-surface flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[14px]" data-icon="public">public</span>
+<span>Public</span>
+</button>
+</div>
+<button class="flex items-center gap-1.5 px-4 py-1 rounded-full bg-gradient-to-r from-primary-container to-secondary text-surface-container-lowest font-body-ui-bold text-xs tracking-wider glowing-btn-aura hover:opacity-95 transition-all">
+<span class="material-symbols-outlined text-[14px]" data-icon="send">send</span>
+<span>Pen</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Feed Filter Navigation Tabs -->
+<div class="flex items-center gap-8 border-b border-outline-variant/30 px-2 pt-2">
+<button class="font-body-ui-bold text-body-ui text-primary pb-3 relative transition-colors">
+          For You
+          <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-primary glow-orchid"></span>
+</button>
+<button class="font-body-ui text-body-ui text-outline hover:text-on-surface pb-3 transition-colors">
+          Following
+        </button>
+<button class="font-body-ui text-body-ui text-outline hover:text-on-surface pb-3 transition-colors">
+          New Voices
+        </button>
+</div>
+<!-- ===================================================================== -->
+<!-- CANONICAL POEM CARDS -->
+<!-- ===================================================================== -->
+<!-- Poem 1: Elena Rostova -->
+<article class="glass-surface rounded-2xl p-7 space-y-5 specular-top-border hover:border-outline-variant/50 transition-all duration-300">
+<!-- Author Header -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<img alt="Elena Rostova avatar" class="w-10 h-10 rounded-full object-cover ring-1 ring-primary/30" data-alt="Moody cinematic portrait of female poet Elena Rostova with vintage styling, soft chiaroscuro lighting and sepia dark tones in literary salon." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSlNBym64kjJ8Y_QV6GsZNwY6vxBw8Q1si4MwEL-RVjQgAMILB-y6a3Px4rsJu_0-QvwYPu8szP5v1yuuhuf9PBVmUiKsFCFAu_aFAWfPoL8CwRmICqhnR2asnEi3dskOz5W7LpDDNYxB0yYU5_K1T2aySKYGeR4vKCUY7gctu1vdpkcQoujdgnSLKwy68D6bM0v5AzvjBzsk84cCeGQ4oSXUMAYYfBt6YfEQj0--eIlGS6GMq88tq"/>
+<div>
+<div class="flex items-center gap-2">
+<h4 class="font-body-ui-bold text-xs text-on-surface">Elena Rostova</h4>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="font-meta-caption text-xs text-outline">@elena.r</span>
+</div>
+<p class="font-meta-caption text-[11px] text-outline">2h ago · Prague</p>
+</div>
+</div>
+<button class="text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+<!-- Poem Body -->
+<div class="space-y-4 pt-1">
+<h3 class="font-headline-title text-headline-title italic text-on-surface font-light tracking-tight">
+            The Geography of Longing
+          </h3>
+<div class="font-verse-lg text-verse-lg text-on-surface/90 space-y-4 font-light leading-relaxed">
+<p>
+              We leave rooms as if we might return within the hour,<br/>
+              leaving tea leaves suspended in lukewarm water,<br/>
+              the book cracked open at the spine.
+            </p>
+<p class="pl-4 border-l border-primary/20 italic text-on-surface-variant">
+              Yet years drift across the threshold,<br/>
+              heavy as uncombed wool,<br/>
+              quiet as dust finding its familiar chair.
+            </p>
+<p>
+              A map is only paper until you trace<br/>
+              the cold distance between two closed doors.
+            </p>
+</div>
+</div>
+<!-- Tags -->
+<div class="flex items-center gap-2 pt-2">
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-highest/40 text-primary/80 font-micro-tag text-[10px]">#nocturne</span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-highest/40 text-primary/80 font-micro-tag text-[10px]">#solitude</span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-highest/40 text-primary/80 font-micro-tag text-[10px]">#memory</span>
+</div>
+<!-- Micro-interactions Footer Toolbar -->
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/20 text-outline">
+<div class="flex items-center gap-6">
+<button class="flex items-center gap-1.5 hover:text-primary transition-colors group">
+<span class="material-symbols-outlined text-[19px] group-hover:scale-110 transition-transform" data-icon="favorite">favorite</span>
+<span class="font-meta-caption text-xs">142</span>
+</button>
+<button class="flex items-center gap-1.5 hover:text-tertiary transition-colors group">
+<span class="material-symbols-outlined text-[19px] group-hover:scale-110 transition-transform" data-icon="mode_comment">mode_comment</span>
+<span class="font-meta-caption text-xs">28</span>
+</button>
+<button class="flex items-center gap-1.5 hover:text-secondary transition-colors group" title="Listen to Recitation">
+<span class="material-symbols-outlined text-[19px] group-hover:scale-110 transition-transform" data-icon="graphic_eq">graphic_eq</span>
+<span class="font-meta-caption text-xs">1:42</span>
+</button>
+</div>
+<div class="flex items-center gap-3">
+<button class="hover:text-primary transition-colors" title="Bookmark">
+<span class="material-symbols-outlined text-[19px]" data-icon="bookmark_border">bookmark_border</span>
+</button>
+<button class="hover:text-primary transition-colors" title="Resonate / Share">
+<span class="material-symbols-outlined text-[19px]" data-icon="share">share</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Poem 2: Marcus Thorne -->
+<article class="glass-surface rounded-2xl p-7 space-y-5 specular-top-border hover:border-outline-variant/50 transition-all duration-300">
+<!-- Author Header -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<img alt="Marcus Thorne avatar" class="w-10 h-10 rounded-full object-cover ring-1 ring-tertiary/30" data-alt="Black and white portrait of poet Marcus Thorne gazing into overcast seaside horizon with moody natural ambient light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4a46YPK9Nzkh1OfowgsRzZBJNcf6HXV_TSZcU2kdv0Y-pvutOyXA-GdYeT6EsLof_gcFhjZdHy3Om_t0SDNR6KRzJ8U-MnZsfMy9KRhwTU7hW8__kvuLYH9tDylD2CfNZNDhIMdf1D41n3YoyrmTOq4aE11y7kq1EV9BG0vOH-0P4neJxSFHwTk6WTXgo_pGNgpmzr87-kIfVdPXLYfcwG9M8ujO03tUyJdQnSz5_W2bxTsT-qZAD"/>
+<div>
+<div class="flex items-center gap-2">
+<h4 class="font-body-ui-bold text-xs text-on-surface">Marcus Thorne</h4>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="font-meta-caption text-xs text-outline">@mthorne</span>
+</div>
+<p class="font-meta-caption text-[11px] text-outline">4h ago · Cornwall</p>
+</div>
+</div>
+<button class="text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+<!-- Poem Body -->
+<div class="space-y-4 pt-1">
+<h3 class="font-headline-title text-headline-title italic text-on-surface font-light tracking-tight">
+            After the Salt Tide
+          </h3>
+<div class="font-verse-lg text-verse-lg text-on-surface/90 space-y-4 font-light leading-relaxed">
+<p>
+              The wet slate remembers nothing of the storm,<br/>
+              only that water came, heavy and deliberate,<br/>
+              erasing the small calligraphy of shorebirds.
+            </p>
+<p>
+              Here, where the gray channel widens toward Ireland,<br/>
+              even grief turns luminous under the breaking clouds.
+            </p>
+</div>
+</div>
+<!-- Tags -->
+<div class="flex items-center gap-2 pt-2">
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-highest/40 text-tertiary font-micro-tag text-[10px]">#oceanic</span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-highest/40 text-tertiary font-micro-tag text-[10px]">#grief</span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-highest/40 text-tertiary font-micro-tag text-[10px]">#transience</span>
+</div>
+<!-- Micro-interactions Footer Toolbar -->
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/20 text-outline">
+<div class="flex items-center gap-6">
+<!-- Active Liked State -->
+<button class="flex items-center gap-1.5 text-primary transition-colors">
+<span class="material-symbols-outlined text-[19px]" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<span class="font-meta-caption text-xs font-semibold">389</span>
+</button>
+<button class="flex items-center gap-1.5 hover:text-tertiary transition-colors group">
+<span class="material-symbols-outlined text-[19px] group-hover:scale-110 transition-transform" data-icon="mode_comment">mode_comment</span>
+<span class="font-meta-caption text-xs">42</span>
+</button>
+<button class="flex items-center gap-1.5 hover:text-secondary transition-colors group" title="Listen to Recitation">
+<span class="material-symbols-outlined text-[19px] group-hover:scale-110 transition-transform" data-icon="graphic_eq">graphic_eq</span>
+<span class="font-meta-caption text-xs">2:05</span>
+</button>
+</div>
+<div class="flex items-center gap-3">
+<button class="text-primary transition-colors" title="Bookmarked">
+<span class="material-symbols-outlined text-[19px]" data-icon="bookmark" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+</button>
+<button class="hover:text-primary transition-colors" title="Resonate / Share">
+<span class="material-symbols-outlined text-[19px]" data-icon="share">share</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Poem 3: Soraya Lin -->
+<article class="glass-surface rounded-2xl p-7 space-y-5 specular-top-border hover:border-outline-variant/50 transition-all duration-300">
+<!-- Author Header -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<img alt="Soraya Lin avatar" class="w-10 h-10 rounded-full object-cover ring-1 ring-secondary/30" data-alt="Minimalist fine art portrait of young Asian writer Soraya Lin in soft dim rainy light with reflections on wet glass windowpane." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHAmnfVYk5te0W3kZHJWl0TtfuWZp6G8QrzcEPQIpnsKCjyPyilLzO2Y7zi1u-kg-TVAYuRUJjdA0YWmB6BsMFtP-wQF_DZbYgUvJ--AFWyu5cYoBgpVjv0cfLBdPVoHLQedr0RQqy2r3I9dJ-xRjCUMV5jJIIKYZkftFX4jr_-Cf_uGru9hGFdxSAmhHEwkjBHYlI7Hcg2s4sSwgyVoZPX5DI5hexmRNLUMQ0aQcZoJPl5ozOCZSi"/>
+<div>
+<div class="flex items-center gap-2">
+<h4 class="font-body-ui-bold text-xs text-on-surface">Soraya Lin</h4>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="font-meta-caption text-xs text-outline">@sorayawrites</span>
+</div>
+<p class="font-meta-caption text-[11px] text-outline">6h ago · Kyoto</p>
+</div>
+</div>
+<button class="text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+<!-- Poem Body -->
+<div class="space-y-4 pt-1">
+<h3 class="font-headline-title text-headline-title italic text-on-surface font-light tracking-tight">
+            Copper and Rain
+          </h3>
+<div class="font-verse-lg text-verse-lg text-on-surface/90 space-y-3 font-light leading-relaxed pl-2 border-l border-primary/30">
+<p>Cold pennies in a pond—</p>
+<p>your unspoken name sinking</p>
+<p>through wet garden stone.</p>
+</div>
+</div>
+<!-- Tags -->
+<div class="flex items-center gap-2 pt-2">
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-highest/40 text-secondary font-micro-tag text-[10px]">#haiku</span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-highest/40 text-secondary font-micro-tag text-[10px]">#petrichor</span>
+</div>
+<!-- Micro-interactions Footer Toolbar -->
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/20 text-outline">
+<div class="flex items-center gap-6">
+<button class="flex items-center gap-1.5 hover:text-primary transition-colors group">
+<span class="material-symbols-outlined text-[19px] group-hover:scale-110 transition-transform" data-icon="favorite">favorite</span>
+<span class="font-meta-caption text-xs">215</span>
+</button>
+<button class="flex items-center gap-1.5 hover:text-tertiary transition-colors group">
+<span class="material-symbols-outlined text-[19px] group-hover:scale-110 transition-transform" data-icon="mode_comment">mode_comment</span>
+<span class="font-meta-caption text-xs">19</span>
+</button>
+</div>
+<div class="flex items-center gap-3">
+<button class="hover:text-primary transition-colors" title="Bookmark">
+<span class="material-symbols-outlined text-[19px]" data-icon="bookmark_border">bookmark_border</span>
+</button>
+<button class="hover:text-primary transition-colors" title="Resonate / Share">
+<span class="material-symbols-outlined text-[19px]" data-icon="share">share</span>
+</button>
+</div>
+</div>
+</article>
+</main>
+<!-- ======================================================================= -->
+<!-- 4. RIGHT CONTEXT & DISCOVERY PANEL (w-80) -->
+<!-- ======================================================================= -->
+<aside class="hidden lg:block w-80 shrink-0 space-y-6">
+<!-- Live Salon Acoustic Banner -->
+<section class="glass-surface rounded-2xl p-5 relative overflow-hidden border border-secondary-container/40">
+<div class="flex items-center gap-2 text-secondary mb-2">
+<span class="material-symbols-outlined text-[18px] animate-pulse" data-icon="mic">mic</span>
+<span class="font-micro-tag text-micro-tag uppercase tracking-wider">Community Salon</span>
+</div>
+<h4 class="font-headline-title text-[18px] leading-6 text-on-surface font-normal">
+          Midnight Acoustics: Verse &amp; Cello
+        </h4>
+<p class="font-meta-caption text-meta-caption text-outline mt-1.5 line-clamp-2">
+          Live reading session hosted by Clara Valmont. Bring a draft or quiet ears.
+        </p>
+<div class="flex items-center justify-between mt-4 pt-3 border-t border-outline-variant/20">
+<div class="flex -space-x-2 overflow-hidden">
+<span class="inline-block h-6 w-6 rounded-full ring-2 ring-surface bg-primary/40 flex items-center justify-center text-[10px] text-white">LV</span>
+<span class="inline-block h-6 w-6 rounded-full ring-2 ring-surface bg-tertiary/40 flex items-center justify-center text-[10px] text-white">MK</span>
+<span class="inline-block h-6 w-6 rounded-full ring-2 ring-surface bg-secondary/40 flex items-center justify-center text-[10px] text-white">+32</span>
+</div>
+<button class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-nav-label text-xs hover:bg-secondary-container/80 transition-colors">
+            Join Salon
+          </button>
+</div>
+</section>
+<!-- Suggested Poets -->
+<section class="glass-surface rounded-2xl p-5 space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-title text-[18px] text-on-surface font-semibold">Suggested Poets</h3>
+<a class="font-meta-caption text-xs text-primary hover:underline" href="#">View all</a>
+</div>
+<div class="space-y-3.5">
+<!-- Poet 1 -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<img alt="Camille Vane avatar" class="w-9 h-9 rounded-full object-cover ring-1 ring-outline/40" data-alt="Moody creative writer portrait of Camille Vane with dramatic window shadow in dark poetic monochrome tone." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-H40rDy-sByjTLJ-WOpGlAjfNjDz7jiO2h_k2NbqrHWi09iysLXKO1epB7aCSf0oUsF1mMXnj4SxtueNzWZKQ5PcL4tpv-hrX6y6be3r14zUARyqp5pN125rpAs9Vs2ZlZXxvyHsKpa2-U0nxPMw_mepQwnbn9fMrVcvLXKEjSsQbB8ZTEUGBmqpC3VVB65i8va1LgYV-shjQjz7iUJbxyTcSAtQLTCk3mS1kN1ozSSYMURrx9ak0"/>
+<div class="max-w-[130px]">
+<p class="font-body-ui-bold text-xs text-on-surface truncate">Camille Vane</p>
+<p class="font-meta-caption text-[11px] text-outline truncate">Writing between shadows and dawn</p>
+</div>
+</div>
+<button class="px-3 py-1 rounded-full glass-pill hover:border-primary/50 text-xs font-nav-label text-on-surface hover:text-primary transition-all">
+              Follow
+            </button>
+</div>
+<!-- Poet 2 -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<img alt="Arthur Pendelton avatar" class="w-9 h-9 rounded-full object-cover ring-1 ring-outline/40" data-alt="Classical portrait of elderly essayist and poet Arthur Pendelton in warm dim amber lamplight surrounded by library bookshelves." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG93HsLdQUQuzY9vS8VaQOim70HNkbHz-zCsrxtVp6aZNN-UIDf-Ho4f7q0Yh9HLUj33YnRLHTB6N-Ujg0TJ14xAGWpNCq92jZnXhi1jrHcUN3LprwlFaWlKgWDzVQNnfHDW_HzWSCNBZjnqMVa8fplAJPt5z2p8w1duYY3Y2_C5gLm0Ov_FEiv5Rl2k_Buqpuj3iu__1qaoiVd8iYqyJcYagInTI-Kzyqe5QHspJpev3Udzg8BS_w"/>
+<div class="max-w-[130px]">
+<p class="font-body-ui-bold text-xs text-on-surface truncate">Arthur Pendelton</p>
+<p class="font-meta-caption text-[11px] text-outline truncate">Elegies and historical epics</p>
+</div>
+</div>
+<button class="px-3 py-1 rounded-full glass-pill hover:border-primary/50 text-xs font-nav-label text-on-surface hover:text-primary transition-all">
+              Follow
+            </button>
+</div>
+<!-- Poet 3 -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<img alt="Maya Selim avatar" class="w-9 h-9 rounded-full object-cover ring-1 ring-outline/40" data-alt="Soft poetic portrait of young female lyricist Maya Selim against deep violet velvet drape with serene contemplation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAid5ichTbq9aqECQbSZ0GpFkyyJmggsERMfKaBnVQXjDjIbNIhM466GbxjgS1RM3_nDA87oInGxh-XJ84UUeh2nExQQxix_hHYd6HSJMHqfhIHZAfOgajJl5f5UiXpbS9kAL57OPcGAaiuNRBLm56EielK6rWWu7S3U4uK5lIb9RzGg5fJ33GazoI6sNG3iiwrWwD62Vf87HSFIoe8aeWLOYdvULoUNWIawRCW5BWH_3t4pGHJF7Ew"/>
+<div class="max-w-[130px]">
+<p class="font-body-ui-bold text-xs text-on-surface truncate">Maya Selim</p>
+<p class="font-meta-caption text-[11px] text-outline truncate">Urban gazals &amp; free prose</p>
+</div>
+</div>
+<button class="px-3 py-1 rounded-full glass-pill hover:border-primary/50 text-xs font-nav-label text-on-surface hover:text-primary transition-all">
+              Follow
+            </button>
+</div>
+</div>
+</section>
+<!-- Trending Stanzas & Themes -->
+<section class="glass-surface rounded-2xl p-5 space-y-3.5">
+<h3 class="font-headline-title text-[18px] text-on-surface font-semibold">Trending Themes</h3>
+<div class="space-y-2.5">
+<a class="flex items-center justify-between p-2 rounded-xl hover:bg-surface-container-highest/30 transition-colors group" href="#">
+<div>
+<p class="font-nav-label text-xs text-on-surface group-hover:text-primary transition-colors">#solitude</p>
+<p class="font-meta-caption text-[11px] text-outline">4.2k verses</p>
+</div>
+<span class="material-symbols-outlined text-[16px] text-outline/50 group-hover:text-primary transition-colors" data-icon="north_east">north_east</span>
+</a>
+<a class="flex items-center justify-between p-2 rounded-xl hover:bg-surface-container-highest/30 transition-colors group" href="#">
+<div>
+<p class="font-nav-label text-xs text-on-surface group-hover:text-primary transition-colors">#midnightink</p>
+<p class="font-meta-caption text-[11px] text-outline">1.8k verses</p>
+</div>
+<span class="material-symbols-outlined text-[16px] text-outline/50 group-hover:text-primary transition-colors" data-icon="north_east">north_east</span>
+</a>
+<a class="flex items-center justify-between p-2 rounded-xl hover:bg-surface-container-highest/30 transition-colors group" href="#">
+<div>
+<p class="font-nav-label text-xs text-on-surface group-hover:text-primary transition-colors">#haiku</p>
+<p class="font-meta-caption text-[11px] text-outline">3.1k verses</p>
+</div>
+<span class="material-symbols-outlined text-[16px] text-outline/50 group-hover:text-primary transition-colors" data-icon="north_east">north_east</span>
+</a>
+<a class="flex items-center justify-between p-2 rounded-xl hover:bg-surface-container-highest/30 transition-colors group" href="#">
+<div>
+<p class="font-nav-label text-xs text-on-surface group-hover:text-primary transition-colors">#petrichor</p>
+<p class="font-meta-caption text-[11px] text-outline">950 verses</p>
+</div>
+<span class="material-symbols-outlined text-[16px] text-outline/50 group-hover:text-primary transition-colors" data-icon="north_east">north_east</span>
+</a>
+</div>
+</section>
+<!-- Footer Micro-links -->
+<div class="px-2 font-meta-caption text-[11px] text-outline/70 space-y-1">
+<div class="flex flex-wrap gap-x-3 gap-y-1">
+<a class="hover:text-on-surface" href="#">Manifesto</a>
+<a class="hover:text-on-surface" href="#">Anthology Volume IV</a>
+<a class="hover:text-on-surface" href="#">Acoustics</a>
+<a class="hover:text-on-surface" href="#">Privacy</a>
+</div>
+<p class="pt-2">© 2025 Poetly Salon. Crafted for quiet thoughts.</p>
+</div>
+</aside>
+</div>
+</body></html>

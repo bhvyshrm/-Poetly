@@ -14,10 +14,10 @@ import {
   LogOut,
   User as UserIcon,
   ShieldAlert,
+  Sparkles,
 } from "lucide-react";
 import { useAuth } from "@/components/AuthProvider";
 import { useTheme } from "@/components/ThemeProvider";
-import Logo from "@/components/Logo";
 import Avatar from "@/components/ui/Avatar";
 
 export interface GlobalHeaderProps {
@@ -47,70 +47,104 @@ export default function GlobalHeader({
   return (
     <header
       role="banner"
-      className="sticky top-0 z-40 w-full h-[var(--nav-height,60px)] bg-background/90 backdrop-blur-md border-b border-border-subtle transition-colors duration-200"
+      className="sticky top-0 z-50 w-full h-[var(--nav-height,60px)] bg-background/80 dark:bg-background/80 backdrop-blur-2xl border-b border-border-subtle/50 shadow-xs transition-colors duration-200"
     >
       <div className="w-full max-w-[1360px] mx-auto h-full px-3 sm:px-6 lg:px-8 flex items-center justify-between gap-3 sm:gap-6">
         {/* Left: Mobile Menu Toggle & Brand Wordmark */}
-        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+        <div className="flex items-center gap-2.5 sm:gap-4 shrink-0">
           <button
             type="button"
             onClick={onMenuToggle}
-            className="md:hidden flex items-center justify-center w-10 h-10 rounded-[var(--radius-sm)] text-text-secondary hover:text-text-primary hover:bg-surface-hover active:scale-95 transition-all"
+            className="md:hidden flex items-center justify-center w-10 h-10 rounded-full text-text-secondary hover:text-text-primary hover:bg-surface-hover/60 active:scale-95 transition-all"
             aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={isMenuOpen}
           >
             {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
 
-          <Logo size="sm" withWordmark={true} />
+          {/* Stitch Brand Logo */}
+          <Link
+            href="/home"
+            className="font-display italic text-xl sm:text-2xl text-primary tracking-tight flex items-center gap-1.5 transition-all duration-200 active:scale-95 group select-none"
+            aria-label="Poetly home"
+          >
+            <span className="font-semibold">Poetly</span>
+            <Sparkles
+              size={18}
+              className="text-primary group-hover:rotate-12 transition-transform duration-300"
+            />
+          </Link>
+
+          {/* Desktop Global Search */}
+          <div className="relative w-72 lg:w-80 hidden md:block ml-2">
+            <form onSubmit={handleSearchSubmit} className="relative w-full" role="search">
+              <Search
+                size={16}
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-outline pointer-events-none"
+                aria-hidden="true"
+              />
+              <input
+                id="global-search-input"
+                type="search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search poems, poets, stanzas... ⌘K"
+                aria-label="Search poems, writers, and tags"
+                className="w-full h-9 pl-10 pr-9 rounded-full bg-surface-secondary/70 border border-outline-variant/30 text-xs sm:text-sm text-text-primary placeholder:text-outline focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/40 transition-all"
+              />
+            </form>
+          </div>
         </div>
 
-        {/* Center: Desktop Global Search */}
-        <div className="flex-1 max-w-md mx-2 hidden md:block">
-          <form onSubmit={handleSearchSubmit} className="relative w-full" role="search">
-            <Search
-              size={15}
-              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-tertiary pointer-events-none"
-              aria-hidden="true"
-            />
-            <input
-              type="search"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search poems, writers, tags..."
-              aria-label="Search poems, writers, and tags"
-              className="w-full h-9.5 pl-10 pr-4 rounded-[var(--radius-full)] bg-surface border border-border-subtle text-xs sm:text-sm text-text-primary placeholder:text-text-tertiary focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/15 transition-all"
-            />
-          </form>
-        </div>
+        {/* Center: Desktop Navigation Links */}
+        <nav className="hidden lg:flex items-center gap-2" aria-label="Quick Navigation">
+          <Link
+            href="/explore"
+            className="text-text-secondary hover:text-primary px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-colors"
+          >
+            Explore
+          </Link>
+          <Link
+            href="/collections"
+            className="text-text-secondary hover:text-primary px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-colors"
+          >
+            Collections
+          </Link>
+          <Link
+            href="/explore?tab=prompts"
+            className="text-text-secondary hover:text-primary px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-colors"
+          >
+            Anthologies
+          </Link>
+        </nav>
 
         {/* Right: Actions */}
-        <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           {/* Mobile search toggle */}
           <button
             type="button"
             onClick={() => setMobileSearchOpen((prev) => !prev)}
-            className="md:hidden flex items-center justify-center w-10 h-10 rounded-[var(--radius-sm)] text-text-secondary hover:text-text-primary hover:bg-surface-hover active:scale-95 transition-all"
+            className="md:hidden flex items-center justify-center w-10 h-10 rounded-full text-text-secondary hover:text-text-primary hover:bg-surface-hover/60 active:scale-95 transition-all"
             aria-label="Toggle mobile search"
           >
             <Search size={18} strokeWidth={1.8} />
           </button>
 
-          {/* Primary Action: Write */}
+          {/* Primary Action: Glowing Stitch Write Pill */}
           <Link
             href={user ? "/write" : "/login"}
-            className="flex items-center gap-1.5 px-3.5 sm:px-4 py-2 sm:py-2 rounded-[var(--radius-full)] bg-brand text-white hover:bg-brand-hover active:scale-[0.98] transition-all duration-150 text-xs sm:text-sm font-medium shadow-sm shadow-brand/20 select-none min-h-[36px]"
+            className="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-gradient-to-r from-primary-container to-secondary text-[#050507] font-semibold text-xs sm:text-sm glowing-btn-aura hover:opacity-95 active:scale-95 transition-all select-none shadow-sm min-h-[34px]"
             aria-label="Write a poem"
           >
-            <PenLine size={15} strokeWidth={2.2} />
-            <span className="hidden xs:inline">Write</span>
+            <PenLine size={15} strokeWidth={2.4} />
+            <span>Write</span>
           </Link>
 
           {/* Notifications */}
           {user && (
             <Link
               href="/notifications"
-              className="flex items-center justify-center w-10 h-10 rounded-[var(--radius-sm)] text-text-secondary hover:text-text-primary hover:bg-surface-hover active:scale-95 transition-all"
+              className="flex items-center justify-center w-9 h-9 rounded-full text-text-secondary hover:text-text-primary hover:bg-surface-hover/60 active:scale-95 transition-all"
               aria-label="View notifications"
             >
               <Bell size={18} strokeWidth={1.8} />
@@ -121,7 +155,7 @@ export default function GlobalHeader({
           <button
             type="button"
             onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-            className="flex items-center justify-center w-10 h-10 rounded-[var(--radius-sm)] text-text-secondary hover:text-text-primary hover:bg-surface-hover active:scale-95 transition-all"
+            className="flex items-center justify-center w-9 h-9 rounded-full text-text-secondary hover:text-text-primary hover:bg-surface-hover/60 active:scale-95 transition-all"
             aria-label={`Switch to ${resolvedTheme === "dark" ? "light" : "dark"} mode`}
           >
             {resolvedTheme === "dark" ? (
@@ -137,7 +171,7 @@ export default function GlobalHeader({
               <button
                 type="button"
                 onClick={() => setProfileDropdownOpen((prev) => !prev)}
-                className="flex items-center justify-center w-10 h-10 rounded-full hover:ring-2 hover:ring-brand/30 transition-all cursor-pointer"
+                className="flex items-center justify-center w-9 h-9 rounded-full hover:ring-2 hover:ring-primary/40 transition-all cursor-pointer"
                 aria-label="User account menu"
                 aria-expanded={profileDropdownOpen}
               >

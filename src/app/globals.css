@@ -1,79 +1,103 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
 @import "tailwindcss";
 
 /* ============================================================
-   POETLY DESIGN SYSTEM — v2
+   POETLY DESIGN SYSTEM — v2 (Stitch Liquid Literary Glass)
    Brand: Poetly
    Tagline: Write what you cannot say.
-   Identity: Soft blue + pink · iOS smoothness · Material surfaces
+   Identity: Obsidian Ink · Frosted Liquid Glass · Orchid & Lavender
    ============================================================ */
 
 :root {
-  --background:              #FAF7F1;
-  --background-subtle:       #F3EDE3;
-  --background-elevated:     #FFFEFA;
+  --background:              #F7F5F8;
+  --background-subtle:       #EFECF3;
+  --background-elevated:     #FFFFFF;
 
-  --surface:                 #FFFEFA;
-  --surface-hover:           #F6F0E6;
-  --surface-active:          #EEE6D7;
+  --surface:                 #FFFFFF;
+  --surface-hover:           #F2EEF6;
+  --surface-active:          #E8E3EE;
   --surface-elevated:        #FFFFFF;
-  --surface-secondary:       #F5F0E7;
+  --surface-secondary:       #F2EEF6;
   --surface-input:           #FFFFFF;
 
-  --text-primary:            #221D18;
-  --text-secondary:          #6C6257;
-  --text-tertiary:           #A2988A;
-  --text-disabled:           #C9C0B2;
+  --text-primary:            #211B29;
+  --text-secondary:          #746C7D;
+  --text-tertiary:           #9B94A4;
+  --text-disabled:           #C9C3D0;
   --text-on-accent:          #FFFFFF;
 
-  --brand-primary:           #D67FA1;
-  --brand-primary-hover:     #C2668B;
-  --brand-primary-subtle:    rgba(214, 127, 161, 0.12);
-  --brand-primary-muted:     rgba(214, 127, 161, 0.07);
-  --brand-secondary:         #8B90C8;
-  --brand-secondary-hover:   #767BC0;
-  --brand-secondary-subtle:  rgba(139, 144, 200, 0.12);
-  --brand-secondary-muted:   rgba(139, 144, 200, 0.07);
+  --brand-primary:           #C84EDC;
+  --brand-primary-hover:     #B03FC2;
+  --brand-primary-subtle:    rgba(200, 78, 220, 0.12);
+  --brand-primary-muted:     rgba(200, 78, 220, 0.06);
+  --brand-secondary:         #7C5CE5;
+  --brand-secondary-hover:   #6744D4;
+  --brand-secondary-subtle:  rgba(124, 92, 229, 0.12);
+  --brand-secondary-muted:   rgba(124, 92, 229, 0.06);
 
-  --border-subtle:           #EAE1D2;
-  --border-default:          #DDD2BE;
-  --border-strong:           #C5B89F;
+  /* Stitch Tokens */
+  --primary:                 #C84EDC;
+  --primary-hover:           #B03FC2;
+  --primary-container:       #E879F9;
+  --on-primary:              #FFFFFF;
+  --secondary:               #7C5CE5;
+  --secondary-container:     #503A8F;
+  --tertiary:                #0284C7;
+  --tertiary-container:      #90CFF1;
 
-  /* ── Semantic ── */
-  --success:                 #5CB88A;
-  --success-subtle:          rgba(92, 184, 138, 0.10);
-  --warning:                 #E5A84B;
-  --warning-subtle:          rgba(229, 168, 75, 0.10);
-  --error:                   #E86C6C;
-  --error-subtle:            rgba(232, 108, 108, 0.10);
-  --info:                    #6C8CFF;
-  --info-subtle:             rgba(108, 140, 255, 0.10);
+  --outline:                 #9B94A4;
+  --outline-variant:         #D6CFDF;
 
-  /* ── Multi-Accent System ── */
-  --accent-rose:             #D67FA1;
-  --accent-lavender:         #8B90C8;
+  /* Glass Surface Tokens */
+  --glass-surface:           rgba(255, 255, 255, 0.72);
+  --glass-surface-elevated:  rgba(255, 255, 255, 0.88);
+  --glass-border:            rgba(33, 27, 41, 0.08);
+  --glass-border-elevated:   rgba(33, 27, 41, 0.14);
+  --glass-highlight:         inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  --glass-shadow:            0 8px 32px 0 rgba(33, 27, 41, 0.08);
+  --glass-shadow-elevated:   0 16px 40px -8px rgba(33, 27, 41, 0.14), inset 0 1px 1px 0 rgba(255, 255, 255, 0.8);
+  --glass-blur:              20px;
+  --glass-blur-elevated:     28px;
+
+  --border-subtle:           #E8E3EE;
+  --border-default:          #D6CFDF;
+  --border-strong:           #BAAFCE;
+
+  /* Semantic */
+  --success:                 #2E9F6E;
+  --success-subtle:          rgba(46, 159, 110, 0.10);
+  --warning:                 #D98822;
+  --warning-subtle:          rgba(217, 136, 34, 0.10);
+  --error:                   #E04848;
+  --error-subtle:            rgba(224, 72, 72, 0.10);
+  --info:                    #0284C7;
+  --info-subtle:             rgba(2, 132, 199, 0.10);
+
+  /* Multi-Accent System */
+  --accent-rose:             #C84EDC;
+  --accent-lavender:         #7C5CE5;
   --accent-lilac:            #9B7AB8;
-  --accent-sky:              #6CA4D9;
-  --accent-mint:             #5CB88A;
-  --accent-sage:             #7A9A70;
-  --accent-peach:            #DDA07A;
+  --accent-sky:              #0284C7;
+  --accent-mint:             #2E9F6E;
+  --accent-sage:             #6E8E64;
+  --accent-peach:            #D68456;
   --accent-cream:            #C8B898;
   --accent-gold:             #C8A860;
 
-  /* ── Poetry Accents ── */
-  --accent-love:             #E89AC7;
-  --accent-midnight:         #4A4F7C;
-  --accent-nature:           #5CB88A;
-  --accent-rain:             #6CA4D9;
+  /* Poetry Accents */
+  --accent-love:             #E879F9;
+  --accent-midnight:         #7C5CE5;
+  --accent-nature:           #2E9F6E;
+  --accent-rain:             #0284C7;
   --accent-melancholy:       #8B7FB0;
-  --accent-hope:             #7BC4A0;
+  --accent-hope:             #2E9F6E;
 
-  /* ── Elevation / Shadows ── */
-  --shadow-xs:               0 1px 2px rgba(26, 29, 43, 0.04);
-  --shadow-sm:               0 1px 3px rgba(26, 29, 43, 0.06), 0 1px 2px rgba(26, 29, 43, 0.04);
-  --shadow-md:               0 4px 8px -1px rgba(26, 29, 43, 0.06), 0 2px 4px -1px rgba(26, 29, 43, 0.04);
-  --shadow-lg:               0 10px 24px -3px rgba(26, 29, 43, 0.08), 0 4px 8px -2px rgba(26, 29, 43, 0.04);
+  /* Elevation / Shadows */
+  --shadow-xs:               0 1px 2px rgba(33, 27, 41, 0.04);
+  --shadow-sm:               0 1px 3px rgba(33, 27, 41, 0.06), 0 1px 2px rgba(33, 27, 41, 0.04);
+  --shadow-md:               0 4px 8px -1px rgba(33, 27, 41, 0.06), 0 2px 4px -1px rgba(33, 27, 41, 0.04);
+  --shadow-lg:               0 10px 24px -3px rgba(33, 27, 41, 0.08), 0 4px 8px -2px rgba(33, 27, 41, 0.04);
 
   --radius-sm:               8px;
   --radius-md:               12px;
@@ -89,11 +113,11 @@
   --duration-normal:         220ms;
   --duration-slow:           340ms;
 
-  --font-display:            'DM Serif Display', 'Cormorant Garamond', Georgia, serif;
-  --font-poem:               'Cormorant Garamond', Georgia, serif;
-  --font-sans:               'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display:            'Newsreader', 'DM Serif Display', 'Cormorant Garamond', Georgia, serif;
+  --font-poem:               'Newsreader', 'Cormorant Garamond', Georgia, serif;
+  --font-sans:               'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
-  --text-display:            2.5rem;
+  --text-display:            2.75rem;
   --text-h1:                 2rem;
   --text-h2:                 1.5rem;
   --text-h3:                 1.25rem;
@@ -111,17 +135,16 @@
   --space-2xl:               48px;
   --space-3xl:               72px;
 
-  --max-width:               1280px;
+  --max-width:               1360px;
   --content-width:           680px;
   --reading-width:           42rem;
   --nav-height:              60px;
   --mobile-nav-height:       64px;
 
-  /* ── Home Layout ── */
-  --sidebar-width:            280px;
-  --sidebar-width-lg:         320px;
-  --center-width:             600px;
-  --right-sidebar-width:      300px;
+  --sidebar-width:            260px;
+  --sidebar-width-lg:         280px;
+  --center-width:             680px;
+  --right-sidebar-width:      340px;
   --home-gap:                 32px;
 
   --atmo-midnight-bg:        #121014;
@@ -137,60 +160,83 @@
 }
 
 .dark {
-  /* ── AMOLED Dark Mode ── */
-  --background:              #050505;
-  --background-subtle:       #0A0A0E;
-  --background-elevated:     #0D0D11;
+  /* Stitch Liquid Literary Glass tokens - Dark Mode (Obsidian Void) */
+  --background:              #050507;
+  --background-subtle:       #0A0A0F;
+  --background-elevated:     #131316;
 
-  --surface:                 #0D0D11;
-  --surface-hover:           #14141A;
-  --surface-active:          #1A1A22;
-  --surface-elevated:        #111116;
-  --surface-secondary:       #09090C;
-  --surface-input:           #0D0D11;
+  --surface:                 #131316;
+  --surface-hover:           #1C1B1E;
+  --surface-active:          #201F22;
+  --surface-elevated:        #1C1B1E;
+  --surface-secondary:       #0E0E11;
+  --surface-input:           #0E0E11;
 
-  --text-primary:            #F5F5F5;
-  --text-secondary:          #A0A0A0;
-  --text-tertiary:           #666666;
-  --text-disabled:           #404040;
-  --text-on-accent:          #050505;
+  --text-primary:            #F5F3F8;
+  --text-secondary:          #A5A1AE;
+  --text-tertiary:           #777180;
+  --text-disabled:           #504250;
+  --text-on-accent:          #050507;
 
-  /* ── Accent Colors (Rose as primary) ── */
-  --brand-primary:           #E8A0B8;
-  --brand-primary-hover:     #F0B8CC;
-  --brand-primary-subtle:    rgba(232, 160, 184, 0.10);
-  --brand-primary-muted:     rgba(232, 160, 184, 0.05);
-  --brand-secondary:         #B8B8D8;
-  --brand-secondary-hover:   #C8C8E8;
-  --brand-secondary-subtle:  rgba(184, 184, 216, 0.10);
-  --brand-secondary-muted:   rgba(184, 184, 216, 0.05);
+  /* Accent Colors (Orchid & Lavender) */
+  --brand-primary:           #E879F9;
+  --brand-primary-hover:     #F8ACFF;
+  --brand-primary-subtle:    rgba(232, 121, 249, 0.12);
+  --brand-primary-muted:     rgba(232, 121, 249, 0.06);
+  --brand-secondary:         #B9A2FF;
+  --brand-secondary-hover:   #CEBDFF;
+  --brand-secondary-subtle:  rgba(185, 162, 255, 0.12);
+  --brand-secondary-muted:   rgba(185, 162, 255, 0.06);
 
-  /* ── Multi-Accent System ── */
-  --accent-rose:             #E8A0B8;
-  --accent-lavender:         #B8B8D8;
+  /* Stitch Tokens */
+  --primary:                 #F8ACFF;
+  --primary-hover:           #FFC4FF;
+  --primary-container:       #E879F9;
+  --on-primary:              #570067;
+  --secondary:               #CEBDFF;
+  --secondary-container:     #503A8F;
+  --tertiary:                #90CFF1;
+  --tertiary-container:      #6EADCE;
+
+  --outline:                 #9D8B9B;
+  --outline-variant:         #504250;
+
+  /* Glass Surface Tokens */
+  --glass-surface:           rgba(255, 255, 255, 0.035);
+  --glass-surface-elevated:  rgba(255, 255, 255, 0.055);
+  --glass-border:            rgba(255, 255, 255, 0.08);
+  --glass-border-elevated:   rgba(255, 255, 255, 0.14);
+  --glass-highlight:         inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  --glass-shadow:            0 8px 32px 0 rgba(0, 0, 0, 0.45);
+  --glass-shadow-elevated:   0 16px 40px -8px rgba(0, 0, 0, 0.6), inset 0 1px 1px 0 rgba(255, 255, 255, 0.12);
+  --glass-blur:              24px;
+  --glass-blur-elevated:     32px;
+
+  --border-subtle:           #1C1B1E;
+  --border-default:          #2A2A2D;
+  --border-strong:           #353438;
+
+  --success:                 #6DCD9E;
+  --success-subtle:          rgba(109, 205, 158, 0.10);
+  --warning:                 #F0BE60;
+  --warning-subtle:          rgba(240, 190, 96, 0.10);
+  --error:                   #FFB4AB;
+  --error-subtle:            rgba(255, 180, 171, 0.10);
+
+  --accent-rose:             #F8ACFF;
+  --accent-lavender:         #CEBDFF;
   --accent-lilac:            #C8A8D8;
-  --accent-sky:              #A0C8E8;
+  --accent-sky:              #90CFF1;
   --accent-mint:             #A8D8C0;
   --accent-sage:             #B8C8A8;
   --accent-peach:            #E8C0A8;
   --accent-cream:            #E8E0D0;
   --accent-gold:             #D8C098;
 
-  --border-subtle:           #16161E;
-  --border-default:          #22222C;
-  --border-strong:           #2E2E3C;
-
-  --success:                 #6DCD9E;
-  --success-subtle:          rgba(109, 205, 158, 0.10);
-  --warning:                 #F0BE60;
-  --warning-subtle:          rgba(240, 190, 96, 0.10);
-  --error:                   #F08080;
-  --error-subtle:            rgba(240, 128, 128, 0.10);
-
-  --accent-love:             #E8A0B8;
-  --accent-midnight:         #B8B8D8;
+  --accent-love:             #E879F9;
+  --accent-midnight:         #CEBDFF;
   --accent-nature:           #6DCD9E;
-  --accent-rain:             #80B8E0;
+  --accent-rain:             #90CFF1;
   --accent-melancholy:       #A8A0D0;
   --accent-hope:             #80D4B0;
 
@@ -200,13 +246,13 @@
   --shadow-lg:               0 10px 24px -3px rgba(0, 0, 0, 0.60), 0 4px 8px -2px rgba(0, 0, 0, 0.50);
 
   --atmo-midnight-bg:        #000000;
-  --atmo-midnight-glow:      rgba(232, 160, 184, 0.08);
+  --atmo-midnight-glow:      rgba(232, 121, 249, 0.08);
   --atmo-paper-bg:           #0A0A0A;
-  --atmo-paper-ink:          #F5F5F5;
+  --atmo-paper-ink:          #F5F3F8;
   --atmo-lavender-bg:        #0A0A10;
   --atmo-lavender-ink:       #E0E0F0;
   --atmo-rain-bg:            #050810;
-  --atmo-rain-glow:          rgba(128, 184, 224, 0.08);
+  --atmo-rain-glow:          rgba(144, 207, 241, 0.08);
   --atmo-dawn-bg:            #100808;
   --atmo-dawn-glow:          rgba(232, 192, 168, 0.08);
 }
@@ -233,6 +279,16 @@
   --color-brand-secondary:     var(--brand-secondary);
   --color-brand-secondary-hover: var(--brand-secondary-hover);
   --color-brand-secondary-subtle: var(--brand-secondary-subtle);
+  --color-primary:             var(--primary);
+  --color-primary-hover:       var(--primary-hover);
+  --color-primary-container:   var(--primary-container);
+  --color-on-primary:          var(--on-primary);
+  --color-secondary:           var(--secondary);
+  --color-secondary-container: var(--secondary-container);
+  --color-tertiary:            var(--tertiary);
+  --color-tertiary-container:  var(--tertiary-container);
+  --color-outline:             var(--outline);
+  --color-outline-variant:     var(--outline-variant);
   --color-border-subtle:       var(--border-subtle);
   --color-border-default:      var(--border-default);
   --color-border-strong:       var(--border-strong);
@@ -254,6 +310,81 @@
   --font-display:              var(--font-display);
   --font-poem:                 var(--font-poem);
   --font-sans:                 var(--font-sans);
+}
+
+/* ============================================================
+   LIQUID LITERARY GLASS UTILITIES
+   ============================================================ */
+
+.glass-surface {
+  background: var(--glass-surface);
+  backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-panel-elevated {
+  background: var(--glass-surface-elevated);
+  backdrop-filter: blur(var(--glass-blur-elevated)) saturate(200%);
+  -webkit-backdrop-filter: blur(var(--glass-blur-elevated)) saturate(200%);
+  border: 1px solid var(--glass-border-elevated);
+  box-shadow: var(--glass-shadow-elevated);
+}
+
+.glass-pill {
+  background: var(--glass-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.glass-pill:hover {
+  background: var(--surface-hover);
+  border-color: var(--brand-primary);
+}
+
+.glow-orchid {
+  box-shadow: 0 0 24px -2px rgba(232, 121, 249, 0.25);
+}
+
+.glowing-btn-aura {
+  box-shadow: 0 4px 20px rgba(232, 121, 249, 0.35);
+}
+
+.specular-top-border {
+  position: relative;
+}
+.specular-top-border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+}
+
+/* Fallback for browsers without backdrop-filter */
+@supports not (backdrop-filter: blur(1px)) {
+  .glass-surface {
+    background: var(--surface);
+  }
+  .glass-panel-elevated {
+    background: var(--surface-elevated);
+  }
+  .glass-pill {
+    background: var(--surface);
+  }
+}
+
+/* Restrained blur on small mobile to conserve battery and GPU */
+@media (max-width: 640px) {
+  .glass-surface, .glass-panel-elevated {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
 }
 
 /* ============================================================
