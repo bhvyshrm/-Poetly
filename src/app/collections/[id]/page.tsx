@@ -8,7 +8,7 @@ import { supabase } from "@/lib/supabase/client";
 import { Collection, PoemWithAuthor } from "@/lib/types";
 import { useAuth } from "@/components/AuthProvider";
 import PoemCard from "@/components/PoemCard";
-import AppShell from "@/components/shell/AppShell";
+import AppShell from "@/components/layout/AppShell";
 import Toast from "@/components/Toast";
 
 export default function CollectionDetailPage() {
@@ -164,10 +164,15 @@ export default function CollectionDetailPage() {
 
   if (loading) {
     return (
-      <AppShell>
-        <div className="max-w-[var(--content-width)] mx-auto px-5 py-8">
-          <div className="w-48 h-6 skeleton rounded mb-4" />
-          <div className="w-64 h-4 skeleton rounded" />
+      <AppShell maxWidth="feed">
+        <div className="py-12 space-y-4">
+          <div className="w-32 h-4 skeleton rounded" />
+          <div className="w-3/4 h-10 skeleton rounded-xl" />
+          <div className="w-1/2 h-4 skeleton rounded" />
+          <div className="pt-8 space-y-4">
+            <div className="h-44 skeleton rounded-2xl" />
+            <div className="h-44 skeleton rounded-2xl" />
+          </div>
         </div>
       </AppShell>
     );
@@ -175,11 +180,15 @@ export default function CollectionDetailPage() {
 
   if (!collection) {
     return (
-      <AppShell>
-        <div className="max-w-[var(--content-width)] mx-auto px-5 py-16 text-center">
-          <p className="font-poem text-xl text-text-tertiary italic">Collection not found.</p>
-          <Link href="/collections" className="text-sm text-brand hover:text-brand-hover mt-4 inline-block">
-            Return to collections
+      <AppShell maxWidth="feed">
+        <div className="py-20 text-center glass-surface rounded-2xl p-8 border border-border-subtle/40">
+          <p className="font-display text-2xl text-text-primary mb-2">Collection Not Found</p>
+          <p className="font-verse italic text-text-tertiary mb-6">This anthology binder does not exist or has been retired.</p>
+          <Link
+            href="/collections"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary/15 text-primary border border-primary/30 hover:bg-primary/25 text-xs font-semibold transition-colors"
+          >
+            <ArrowLeft size={14} /> Return to Collections
           </Link>
         </div>
       </AppShell>
@@ -188,90 +197,120 @@ export default function CollectionDetailPage() {
 
   return (
     <AppShell maxWidth="feed">
-      <Link
-        href="/collections"
-        className="inline-flex items-center gap-1.5 text-xs text-text-tertiary hover:text-text-primary transition-colors mb-6"
-      >
-        <ArrowLeft size={14} strokeWidth={1.5} /> Collections
-      </Link>
+      <div className="space-y-6">
+        <Link
+          href="/collections"
+          className="inline-flex items-center gap-1.5 text-xs text-text-tertiary hover:text-text-primary transition-colors group"
+        >
+          <ArrowLeft size={14} className="group-hover:-translate-x-0.5 transition-transform" />
+          <span>Back to Library</span>
+        </Link>
 
         {isEditing ? (
-          <div className="mb-8 p-5 bg-surface border border-border-subtle rounded-[var(--radius-lg)] animate-fade-in space-y-4">
+          <div className="p-6 glass-surface rounded-2xl border border-primary/30 shadow-lg space-y-4 animate-fade-in">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-mono uppercase tracking-wider text-primary">Edit Binder Details</span>
+              <button
+                onClick={() => setIsEditing(false)}
+                className="text-text-tertiary hover:text-text-primary p-1"
+              >
+                <X size={16} />
+              </button>
+            </div>
             <div>
-              <label className="text-[10px] uppercase tracking-wider text-text-tertiary block mb-1">Title</label>
+              <label className="text-[10px] font-mono uppercase tracking-wider text-text-tertiary block mb-1">
+                Anthology Title
+              </label>
               <input
                 type="text"
                 value={editTitle}
                 onChange={(e) => setEditTitle(e.target.value)}
-                className="w-full bg-surface-secondary border border-border-subtle rounded-[var(--radius-sm)] px-3 py-2 text-base text-text-primary outline-none focus:border-brand"
+                className="w-full bg-surface-secondary/70 border border-border-subtle/60 rounded-xl px-4 py-2.5 text-text-primary outline-none focus:border-primary transition-colors text-sm font-sans"
                 autoFocus
               />
             </div>
             <div>
-              <label className="text-[10px] uppercase tracking-wider text-text-tertiary block mb-1">Description</label>
+              <label className="text-[10px] font-mono uppercase tracking-wider text-text-tertiary block mb-1">
+                Poetic Curatorial Note
+              </label>
               <textarea
                 value={editDesc}
                 onChange={(e) => setEditDesc(e.target.value)}
-                className="w-full bg-surface-secondary border border-border-subtle rounded-[var(--radius-sm)] px-3 py-2 text-sm text-text-primary outline-none focus:border-brand resize-none"
+                className="w-full bg-surface-secondary/70 border border-border-subtle/60 rounded-xl px-4 py-2.5 text-sm text-text-primary outline-none focus:border-primary transition-colors resize-none font-sans"
                 rows={3}
               />
             </div>
-            <div className="flex gap-2 justify-end">
+            <div className="flex gap-2 justify-end pt-2">
               <button
                 onClick={() => setIsEditing(false)}
-                className="px-3 py-1.5 text-xs text-text-tertiary hover:text-text-primary rounded-full"
+                className="px-4 py-2 text-xs font-medium text-text-tertiary hover:text-text-primary rounded-full transition-colors"
               >
                 Cancel
               </button>
               <button
                 onClick={handleSaveEdit}
                 disabled={savingEdit || !editTitle.trim()}
-                className="px-4 py-1.5 text-xs font-medium text-white gradient-brand rounded-full hover:opacity-90 disabled:opacity-50"
+                className="px-5 py-2 text-xs font-semibold text-white gradient-brand rounded-full hover:opacity-95 disabled:opacity-50 transition-all shadow-md shadow-primary/20"
               >
                 {savingEdit ? "Saving..." : "Save Changes"}
               </button>
             </div>
           </div>
         ) : (
-          <div className="mb-8 animate-fade-in">
+          <section className="glass-surface rounded-2xl p-6 sm:p-8 border border-border-subtle/40 specular-top-border space-y-4">
             <div className="flex items-start justify-between gap-4">
-              <div>
-                <h1 className="font-poem text-2xl md:text-3xl text-text-primary mb-1">{collection.title}</h1>
-                {collection.description && <p className="text-sm text-text-secondary mb-2">{collection.description}</p>}
-                <p className="text-xs text-text-tertiary">
-                  {poems.length} {poems.length === 1 ? "poem" : "poems"}
-                </p>
-              </div>
-              {isOwner && (
+              <div className="space-y-2">
                 <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-secondary px-2.5 py-0.5 rounded-full bg-secondary/15 border border-secondary/30">
+                    Anthology Binder
+                  </span>
+                  <span className="text-xs text-text-tertiary font-mono">
+                    {poems.length} {poems.length === 1 ? "poem bound" : "poems bound"}
+                  </span>
+                </div>
+                <h1 className="font-display text-2xl sm:text-3xl text-text-primary font-normal leading-tight">
+                  {collection.title}
+                </h1>
+                {collection.description && (
+                  <p className="font-verse italic text-stone-600 dark:text-stone-300 text-sm sm:text-base leading-relaxed">
+                    &ldquo;{collection.description}&rdquo;
+                  </p>
+                )}
+              </div>
+
+              {isOwner && (
+                <div className="flex items-center gap-1.5 shrink-0">
                   <button
                     onClick={() => setIsEditing(true)}
-                    className="p-2 text-text-tertiary hover:text-text-primary rounded-[var(--radius-sm)] hover:bg-surface-hover transition-colors"
-                    title="Edit collection"
+                    className="p-2 text-text-tertiary hover:text-primary rounded-xl glass-surface border border-border-subtle/40 hover:border-primary/40 transition-colors"
+                    title="Edit Anthology Details"
                   >
-                    <Edit2 size={16} />
+                    <Edit2 size={15} />
                   </button>
                   <button
                     onClick={handleDelete}
                     disabled={deleting}
-                    className="p-2 text-text-tertiary hover:text-error rounded-[var(--radius-sm)] hover:bg-surface-hover transition-colors"
-                    title="Delete collection"
+                    className="p-2 text-text-tertiary hover:text-red-400 rounded-xl glass-surface border border-border-subtle/40 hover:border-red-400/40 transition-colors"
+                    title="Delete Anthology"
                   >
-                    <Trash2 size={16} />
+                    <Trash2 size={15} />
                   </button>
                 </div>
               )}
             </div>
-          </div>
-        )}
 
-        {isOwner && (
-          <button
-            onClick={() => setShowAddPoem(!showAddPoem)}
-            className="flex items-center gap-1.5 text-xs font-medium text-brand hover:text-brand-hover transition-colors mb-6"
-          >
-            <Plus size={12} strokeWidth={2} /> Add poem to collection
-          </button>
+            {isOwner && (
+              <div className="pt-2">
+                <button
+                  onClick={() => setShowAddPoem(!showAddPoem)}
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-1.5 rounded-full bg-primary/15 text-primary border border-primary/30 hover:bg-primary/25 transition-colors"
+                >
+                  <Plus size={13} strokeWidth={2.5} />
+                  <span>Bind Stanza to Anthology</span>
+                </button>
+              </div>
+            )}
+          </section>
         )}
 
         {showAddPoem && (
@@ -283,36 +322,42 @@ export default function CollectionDetailPage() {
         )}
 
         {poems.length > 0 ? (
-          <div className="space-y-4">
+          <div className="space-y-4 pt-2">
             {poems.map((poem) => (
               <div key={poem.id} className="relative group">
                 <PoemCard poem={poem} />
                 {isOwner && (
                   <button
                     onClick={() => handleRemovePoem(poem.id)}
-                    className="absolute top-4 right-4 text-xs text-text-tertiary hover:text-error transition-colors opacity-0 group-hover:opacity-100 bg-surface/80 px-2 py-1 rounded"
+                    className="absolute top-4 right-4 text-[11px] font-mono text-text-tertiary hover:text-red-400 transition-colors opacity-0 group-hover:opacity-100 glass-surface px-2.5 py-1 rounded-full border border-border-subtle/60 shadow-sm"
                   >
-                    Remove
+                    Remove from Binder
                   </button>
                 )}
               </div>
             ))}
           </div>
         ) : (
-          <div className="text-center py-16 bg-surface-secondary rounded-[var(--radius-lg)] p-8">
-            <p className="font-poem text-xl text-text-tertiary italic mb-2">This collection is quiet.</p>
-            <p className="text-sm text-text-secondary mb-4">Add poems to build your personal poetry collection.</p>
+          <div className="text-center py-16 glass-surface rounded-2xl p-8 border border-border-subtle/40 space-y-3">
+            <p className="font-display text-xl text-text-primary">This Sanctuary is Quiet</p>
+            <p className="font-verse italic text-xs sm:text-sm text-text-tertiary max-w-sm mx-auto">
+              Bind stanzas to weave this collection into an enduring tapestry.
+            </p>
             {isOwner && (
-              <button
-                onClick={() => setShowAddPoem(true)}
-                className="text-sm font-medium text-brand hover:text-brand-hover transition-colors"
-              >
-                + Add a poem
-              </button>
+              <div className="pt-2">
+                <button
+                  onClick={() => setShowAddPoem(true)}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full gradient-brand text-white text-xs font-semibold shadow-md shadow-primary/20 hover:opacity-95 transition-all"
+                >
+                  <Plus size={13} />
+                  <span>Add First Poem</span>
+                </button>
+              </div>
             )}
           </div>
         )}
-      {toast && <Toast message={toast} onClose={() => setToast(null)} />}
+        {toast && <Toast message={toast} onClose={() => setToast(null)} />}
+      </div>
     </AppShell>
   );
 }
@@ -353,37 +398,42 @@ function AddPoemSelector({
   const available = poems.filter((p) => !existingIds.includes(p.id));
 
   return (
-    <div className="mb-6 p-4 bg-surface border border-border-subtle rounded-[var(--radius-lg)] animate-fade-in">
-      <div className="flex items-center justify-between mb-3">
-        <p className="text-sm font-medium text-text-primary">Select a poem</p>
-        <button onClick={onClose} className="text-xs text-text-tertiary hover:text-text-primary">
-          <X size={16} />
+    <div className="mb-6 p-5 glass-surface border border-primary/30 rounded-2xl animate-fade-in shadow-lg">
+      <div className="flex items-center justify-between mb-3 pb-2 border-b border-border-subtle/30">
+        <p className="text-xs font-mono uppercase tracking-wider text-primary">Select a Stanza to Bind</p>
+        <button
+          onClick={onClose}
+          className="text-xs text-text-tertiary hover:text-text-primary p-1 rounded-md transition-colors"
+        >
+          <X size={15} />
         </button>
       </div>
       {loading ? (
-        <div className="space-y-2">
+        <div className="space-y-2 py-2">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="h-12 skeleton rounded" />
+            <div key={i} className="h-12 skeleton rounded-xl" />
           ))}
         </div>
       ) : available.length > 0 ? (
-        <div className="space-y-1 max-h-60 overflow-y-auto">
+        <div className="space-y-1.5 max-h-64 overflow-y-auto pr-1">
           {available.map((poem) => (
             <button
               key={poem.id}
               onClick={() => onSelect(poem.id)}
-              className="w-full text-left px-3 py-2.5 rounded-[var(--radius-sm)] hover:bg-surface-hover transition-colors flex items-center justify-between group"
+              className="w-full text-left px-3.5 py-2.5 rounded-xl hover:bg-surface-secondary/70 border border-transparent hover:border-border-subtle/40 transition-colors flex items-center justify-between group"
             >
               <div className="min-w-0 flex-1 pr-3">
                 <p className="text-sm font-medium text-text-primary truncate">{poem.title}</p>
-                <p className="text-xs text-text-tertiary truncate">by {poem.profiles?.display_name}</p>
+                <p className="text-xs text-text-tertiary truncate">by {poem.profiles?.display_name || "Anonymous Poet"}</p>
               </div>
-              <span className="text-xs text-brand opacity-0 group-hover:opacity-100 transition-opacity">Add →</span>
+              <span className="text-xs font-semibold text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                Bind +
+              </span>
             </button>
           ))}
         </div>
       ) : (
-        <p className="text-xs text-text-tertiary py-4 text-center">No more published poems found.</p>
+        <p className="text-xs text-text-tertiary py-4 text-center font-verse italic">No more available published poems found.</p>
       )}
     </div>
   );
