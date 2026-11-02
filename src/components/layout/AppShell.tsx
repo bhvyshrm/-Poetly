@@ -60,13 +60,6 @@ export default function AppShell({
 
   return (
     <div className={`min-h-screen bg-background text-text-primary flex flex-col relative ${className}`}>
-      {/* Ambient Light Wells (Stitch Atmospheric Ground Layer) */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
-        <div className="absolute -top-40 right-10 w-[680px] h-[680px] rounded-full bg-primary-container/5 blur-[140px]" />
-        <div className="absolute top-[40%] -left-48 w-[600px] h-[600px] rounded-full bg-secondary-container/10 blur-[160px]" />
-        <div className="absolute -bottom-40 right-1/3 w-[500px] h-[500px] rounded-full bg-tertiary-container/10 blur-[130px]" />
-      </div>
-
       {/* Top Header */}
       {!noHeader && (
         <GlobalHeader
@@ -78,7 +71,7 @@ export default function AppShell({
       {/* Mobile Drawer Overlay */}
       {mobileDrawerOpen && (
         <div
-          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs md:hidden transition-opacity"
+          className="fixed inset-0 z-50 bg-black/60 md:hidden transition-opacity"
           onClick={() => setMobileDrawerOpen(false)}
           aria-hidden="true"
         />
@@ -86,7 +79,7 @@ export default function AppShell({
 
       {/* Mobile Slide-Out Drawer */}
       <div
-        className={`fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] glass-panel-elevated border-r border-border-subtle/50 p-3 flex flex-col md:hidden transition-transform duration-300 ease-out shadow-2xl ${
+        className={`fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] bg-surface border-r border-border-default p-3 flex flex-col md:hidden transition-transform duration-300 ease-out shadow-2xl ${
           mobileDrawerOpen ? "translate-x-0" : "-translate-x-full"
         }`}
         aria-label="Navigation drawer"

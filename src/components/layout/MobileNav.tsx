@@ -53,7 +53,7 @@ export default function MobileNav() {
   return (
     <nav
       aria-label="Mobile Bottom Navigation"
-      className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-background/85 dark:bg-background/85 backdrop-blur-2xl border-t border-border-subtle/50 shadow-xl"
+      className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-background/95 border-t border-border-default shadow-sm"
       style={{ paddingBottom: "max(0.35rem, env(safe-area-inset-bottom))" }}
     >
       <div className="flex items-center justify-around h-14 px-3 max-w-lg mx-auto">
@@ -65,10 +65,10 @@ export default function MobileNav() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="relative -top-3 flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-primary-container to-secondary text-[#050507] glowing-btn-aura shadow-lg active:scale-95 transition-transform"
+                className="relative -top-2 flex items-center justify-center w-11 h-11 rounded-full bg-primary text-on-primary shadow-md active:scale-95 transition-transform"
                 aria-label="Write a poem"
               >
-                <Icon size={20} strokeWidth={2.4} />
+                <Icon size={20} strokeWidth={2} />
               </Link>
             );
           }
@@ -78,7 +78,7 @@ export default function MobileNav() {
               key={item.href}
               href={item.href}
               className={`flex flex-col items-center justify-center min-w-[56px] min-h-[44px] py-1 rounded-full transition-colors active:scale-95 ${
-                item.isActive ? "text-primary" : "text-text-tertiary hover:text-text-primary"
+                item.isActive ? "text-text-primary font-semibold" : "text-text-tertiary hover:text-text-primary"
               }`}
               aria-label={item.label}
               aria-current={item.isActive ? "page" : undefined}
@@ -88,7 +88,7 @@ export default function MobileNav() {
                 {item.label}
               </span>
               {item.isActive && (
-                <span className="w-1 h-1 rounded-full bg-primary mt-0.5" aria-hidden="true" />
+                <span className="w-1 h-1 rounded-full bg-text-primary mt-0.5" aria-hidden="true" />
               )}
             </Link>
           );

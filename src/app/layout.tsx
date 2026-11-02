@@ -45,7 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <ThemeProvider>
           <AuthProvider>
-            <main id="main-content">{children}</main>
+            <div className="min-h-full flex flex-col flex-1">{children}</div>
           </AuthProvider>
         </ThemeProvider>
       </body>

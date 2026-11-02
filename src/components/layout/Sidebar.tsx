@@ -67,7 +67,7 @@ export default function Sidebar({ onNavigate, className = "" }: SidebarProps) {
       <div className="flex flex-col space-y-4">
         {/* Brand Header */}
         <div className="flex items-center gap-3 px-2 py-1">
-          <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center border border-primary/40 text-primary font-serif font-bold text-sm shrink-0">
+          <div className="w-8 h-8 rounded-full bg-surface-secondary flex items-center justify-center border border-border-default text-text-primary font-serif font-bold text-sm shrink-0">
             P
           </div>
           <div className="leading-tight">
@@ -75,13 +75,13 @@ export default function Sidebar({ onNavigate, className = "" }: SidebarProps) {
               Poetly
             </div>
             <div className="text-[10px] text-text-tertiary tracking-widest uppercase font-medium">
-              Digital Salon
+              Poetry & Writing
             </div>
           </div>
         </div>
 
         {/* Primary Navigation List */}
-        <nav aria-label="Salon Navigation" className="space-y-1">
+        <nav aria-label="Main Navigation" className="space-y-1">
           <NavigationItem
             href="/home"
             label="Home"
@@ -133,25 +133,14 @@ export default function Sidebar({ onNavigate, className = "" }: SidebarProps) {
             onClick={onNavigate}
           />
         </nav>
-
-        {/* Secondary Compose Action */}
-        <div className="pt-2">
-          <NavigationItem
-            href={user ? "/write" : "/login"}
-            label="Write Poem"
-            icon={Sparkles}
-            isAccent={true}
-            onClick={onNavigate}
-          />
-        </div>
       </div>
 
       {/* Footer Settings & User Card */}
-      <div className="pt-4 border-t border-border-subtle/50 space-y-3">
+      <div className="pt-4 border-t border-border-default space-y-3">
         <Link
           href={user ? "/profile" : "/login"}
           onClick={onNavigate}
-          className="flex items-center gap-2.5 px-3 py-1.5 text-xs text-text-tertiary hover:text-text-primary transition-colors rounded-lg hover:bg-surface-hover/50"
+          className="flex items-center gap-2.5 px-3 py-1.5 text-xs text-text-tertiary hover:text-text-primary transition-colors rounded-lg hover:bg-surface-hover"
         >
           <Settings size={15} />
           <span>Settings</span>
@@ -161,7 +150,7 @@ export default function Sidebar({ onNavigate, className = "" }: SidebarProps) {
           <Link
             href={profileHref}
             onClick={onNavigate}
-            className="flex items-center justify-between p-2 rounded-xl bg-surface-hover/30 hover:bg-surface-hover/60 transition-colors border border-border-subtle/40"
+            className="flex items-center justify-between p-2 rounded-xl bg-surface-secondary hover:bg-surface-hover transition-colors border border-border-default"
           >
             <div className="flex items-center gap-2.5 min-w-0">
               <Avatar
@@ -183,9 +172,9 @@ export default function Sidebar({ onNavigate, className = "" }: SidebarProps) {
           <Link
             href="/login"
             onClick={onNavigate}
-            className="flex items-center justify-center py-2 px-3 text-xs font-medium text-primary hover:text-primary-hover transition-colors"
+            className="flex items-center justify-center py-2 px-3 text-xs font-medium text-text-primary hover:underline transition-colors"
           >
-            Sign in to Salon →
+            Sign in to Poetly →
           </Link>
         )}
       </div>

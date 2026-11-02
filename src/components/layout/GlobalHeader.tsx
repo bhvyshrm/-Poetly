@@ -47,7 +47,7 @@ export default function GlobalHeader({
   return (
     <header
       role="banner"
-      className="sticky top-0 z-50 w-full h-[var(--nav-height,60px)] bg-background/80 dark:bg-background/80 backdrop-blur-2xl border-b border-border-subtle/50 shadow-xs transition-colors duration-200"
+      className="sticky top-0 z-50 w-full h-[var(--nav-height,60px)] bg-background/95 border-b border-border-default transition-colors duration-200"
     >
       <div className="w-full max-w-[1360px] mx-auto h-full px-3 sm:px-6 lg:px-8 flex items-center justify-between gap-3 sm:gap-6">
         {/* Left: Mobile Menu Toggle & Brand Wordmark */}
@@ -55,24 +55,20 @@ export default function GlobalHeader({
           <button
             type="button"
             onClick={onMenuToggle}
-            className="md:hidden flex items-center justify-center w-10 h-10 rounded-full text-text-secondary hover:text-text-primary hover:bg-surface-hover/60 active:scale-95 transition-all"
+            className="md:hidden flex items-center justify-center w-10 h-10 rounded-full text-text-secondary hover:text-text-primary hover:bg-surface-hover active:scale-95 transition-all"
             aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={isMenuOpen}
           >
             {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
 
-          {/* Stitch Brand Logo */}
+          {/* Monochrome Brand Logo */}
           <Link
             href="/home"
-            className="font-display italic text-xl sm:text-2xl text-primary tracking-tight flex items-center gap-1.5 transition-all duration-200 active:scale-95 group select-none"
+            className="font-display italic text-xl sm:text-2xl text-text-primary tracking-tight flex items-center gap-1 transition-opacity hover:opacity-80 active:scale-95 select-none"
             aria-label="Poetly home"
           >
             <span className="font-semibold">Poetly</span>
-            <Sparkles
-              size={18}
-              className="text-primary group-hover:rotate-12 transition-transform duration-300"
-            />
           </Link>
 
           {/* Desktop Global Search */}
@@ -80,7 +76,7 @@ export default function GlobalHeader({
             <form onSubmit={handleSearchSubmit} className="relative w-full" role="search">
               <Search
                 size={16}
-                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-outline pointer-events-none"
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-tertiary pointer-events-none"
                 aria-hidden="true"
               />
               <input
@@ -88,33 +84,33 @@ export default function GlobalHeader({
                 type="search"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search poems, poets, stanzas... ⌘K"
+                placeholder="Search poems, poets, tags... ⌘K"
                 aria-label="Search poems, writers, and tags"
-                className="w-full h-9 pl-10 pr-9 rounded-full bg-surface-secondary/70 border border-outline-variant/30 text-xs sm:text-sm text-text-primary placeholder:text-outline focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/40 transition-all"
+                className="w-full h-9 pl-10 pr-4 rounded-full bg-surface-secondary border border-border-default text-xs sm:text-sm text-text-primary placeholder:text-text-tertiary focus:outline-none focus:border-text-primary transition-all"
               />
             </form>
           </div>
         </div>
 
         {/* Center: Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-2" aria-label="Quick Navigation">
+        <nav className="hidden lg:flex items-center gap-1" aria-label="Quick Navigation">
           <Link
             href="/explore"
-            className="text-text-secondary hover:text-primary px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-colors"
+            className="text-text-secondary hover:text-text-primary px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-colors"
           >
             Explore
           </Link>
           <Link
             href="/collections"
-            className="text-text-secondary hover:text-primary px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-colors"
+            className="text-text-secondary hover:text-text-primary px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-colors"
           >
             Collections
           </Link>
           <Link
             href="/explore?tab=prompts"
-            className="text-text-secondary hover:text-primary px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-colors"
+            className="text-text-secondary hover:text-text-primary px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-colors"
           >
-            Anthologies
+            Prompts
           </Link>
         </nav>
 
@@ -124,19 +120,19 @@ export default function GlobalHeader({
           <button
             type="button"
             onClick={() => setMobileSearchOpen((prev) => !prev)}
-            className="md:hidden flex items-center justify-center w-10 h-10 rounded-full text-text-secondary hover:text-text-primary hover:bg-surface-hover/60 active:scale-95 transition-all"
+            className="md:hidden flex items-center justify-center w-10 h-10 rounded-full text-text-secondary hover:text-text-primary hover:bg-surface-hover active:scale-95 transition-all"
             aria-label="Toggle mobile search"
           >
             <Search size={18} strokeWidth={1.8} />
           </button>
 
-          {/* Primary Action: Glowing Stitch Write Pill */}
+          {/* Primary Action: Monochrome Write Pill */}
           <Link
             href={user ? "/write" : "/login"}
-            className="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-gradient-to-r from-primary-container to-secondary text-[#050507] font-semibold text-xs sm:text-sm glowing-btn-aura hover:opacity-95 active:scale-95 transition-all select-none shadow-sm min-h-[34px]"
+            className="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-primary text-on-primary font-medium text-xs sm:text-sm hover:opacity-90 active:scale-95 transition-all select-none shadow-sm min-h-[36px]"
             aria-label="Write a poem"
           >
-            <PenLine size={15} strokeWidth={2.4} />
+            <PenLine size={15} strokeWidth={2} />
             <span>Write</span>
           </Link>
 
@@ -144,7 +140,7 @@ export default function GlobalHeader({
           {user && (
             <Link
               href="/notifications"
-              className="flex items-center justify-center w-9 h-9 rounded-full text-text-secondary hover:text-text-primary hover:bg-surface-hover/60 active:scale-95 transition-all"
+              className="flex items-center justify-center w-9 h-9 rounded-full text-text-secondary hover:text-text-primary hover:bg-surface-hover active:scale-95 transition-all"
               aria-label="View notifications"
             >
               <Bell size={18} strokeWidth={1.8} />
@@ -155,7 +151,7 @@ export default function GlobalHeader({
           <button
             type="button"
             onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-            className="flex items-center justify-center w-9 h-9 rounded-full text-text-secondary hover:text-text-primary hover:bg-surface-hover/60 active:scale-95 transition-all"
+            className="flex items-center justify-center w-9 h-9 rounded-full text-text-secondary hover:text-text-primary hover:bg-surface-hover active:scale-95 transition-all"
             aria-label={`Switch to ${resolvedTheme === "dark" ? "light" : "dark"} mode`}
           >
             {resolvedTheme === "dark" ? (
@@ -171,7 +167,7 @@ export default function GlobalHeader({
               <button
                 type="button"
                 onClick={() => setProfileDropdownOpen((prev) => !prev)}
-                className="flex items-center justify-center w-9 h-9 rounded-full hover:ring-2 hover:ring-primary/40 transition-all cursor-pointer"
+                className="flex items-center justify-center w-9 h-9 rounded-full hover:ring-2 hover:ring-text-primary/20 transition-all cursor-pointer"
                 aria-label="User account menu"
                 aria-expanded={profileDropdownOpen}
               >
@@ -191,10 +187,10 @@ export default function GlobalHeader({
                     aria-hidden="true"
                   />
                   <div
-                    className="absolute right-0 mt-2 w-52 bg-surface border border-border-subtle rounded-[var(--radius-md)] shadow-xl z-40 py-1.5 animate-scale-in text-sm"
+                    className="absolute right-0 mt-2 w-52 bg-surface border border-border-default rounded-xl shadow-lg z-40 py-1.5 animate-scale-in text-sm"
                     role="menu"
                   >
-                    <div className="px-3.5 py-2 border-b border-border-subtle">
+                    <div className="px-3.5 py-2 border-b border-border-default">
                       <p className="font-medium text-text-primary truncate">
                         {profile?.display_name || "Writer"}
                       </p>
@@ -232,7 +228,7 @@ export default function GlobalHeader({
                         await signOut();
                         router.push("/home");
                       }}
-                      className="w-full flex items-center gap-2.5 px-3.5 py-2 text-error hover:bg-surface-hover transition-colors text-left"
+                      className="w-full flex items-center gap-2.5 px-3.5 py-2 text-text-secondary hover:text-text-primary hover:bg-surface-hover transition-colors text-left"
                       role="menuitem"
                     >
                       <LogOut size={16} />
@@ -245,7 +241,7 @@ export default function GlobalHeader({
           ) : (
             <Link
               href="/login"
-              className="text-xs sm:text-sm font-medium text-brand hover:text-brand-hover hover:bg-brand-subtle px-3 py-1.5 rounded-[var(--radius-sm)] transition-colors"
+              className="text-xs sm:text-sm font-medium text-text-primary hover:bg-surface-hover px-3.5 py-1.5 rounded-full border border-border-default transition-colors min-h-[36px] flex items-center"
             >
               Sign In
             </Link>
@@ -255,7 +251,7 @@ export default function GlobalHeader({
 
       {/* Expandable Mobile Search Bar */}
       {mobileSearchOpen && (
-        <div className="md:hidden px-3 py-2 bg-surface border-b border-border-subtle animate-fade-in">
+        <div className="md:hidden px-3 py-2 bg-surface border-b border-border-default animate-fade-in">
           <form onSubmit={handleSearchSubmit} className="relative w-full">
             <Search
               size={15}
@@ -268,13 +264,13 @@ export default function GlobalHeader({
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search poems, writers, tags..."
               autoFocus
-              className="w-full h-9 pl-9 pr-8 rounded-[var(--radius-full)] bg-background border border-border-subtle text-xs text-text-primary placeholder:text-text-tertiary focus:outline-none focus:border-brand"
+              className="w-full h-10 pl-9 pr-8 rounded-full bg-surface-secondary border border-border-default text-xs text-text-primary placeholder:text-text-tertiary focus:outline-none focus:border-text-primary"
             />
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => setSearchQuery("")}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-text-tertiary hover:text-text-primary"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-text-tertiary hover:text-text-primary p-1"
               >
                 <X size={14} />
               </button>
