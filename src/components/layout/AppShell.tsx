@@ -102,7 +102,7 @@ export default function AppShell({
         ) : (
           <MainContent
             maxWidth={maxWidth}
-            className={`pb-20 md:pb-8 ${contentClassName}`}
+            className={`pb-24 md:pb-8 ${contentClassName}`}
           >
             {children}
           </MainContent>

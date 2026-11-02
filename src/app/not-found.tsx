@@ -13,7 +13,7 @@ export default function NotFound() {
         </p>
         <Link
           href="/home"
-          className="inline-flex items-center justify-center px-6 py-2.5 gradient-brand text-white text-sm font-medium rounded-[var(--radius-full)] hover:opacity-90 transition-opacity"
+          className="inline-flex items-center justify-center px-6 py-2.5 min-h-[44px] bg-primary text-background text-sm font-medium rounded-full hover:opacity-90 transition-opacity"
         >
           Return to Poetly
         </Link>

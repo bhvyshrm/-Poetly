@@ -105,7 +105,7 @@ export default function SuggestedWriters() {
 
   if (loading) {
     return (
-      <div className="glass-surface rounded-2xl p-5 space-y-4">
+      <div className="bg-surface border border-border-default rounded-[var(--radius-lg)] p-5 space-y-4">
         <div className="flex items-center justify-between">
           <div className="w-28 h-5 skeleton rounded" />
           <div className="w-12 h-3 skeleton rounded" />
@@ -133,14 +133,14 @@ export default function SuggestedWriters() {
   }
 
   return (
-    <section className="glass-surface rounded-2xl p-5 space-y-4">
+    <section className="bg-surface border border-border-default rounded-[var(--radius-lg)] p-5 space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="font-display text-lg text-text-primary font-semibold tracking-tight">
+        <h3 className="font-display text-lg text-text-primary font-medium tracking-tight">
           Suggested Poets
         </h3>
         <Link
           href="/writers"
-          className="text-xs text-primary hover:underline font-medium"
+          className="text-xs text-text-secondary hover:text-text-primary hover:underline font-medium"
         >
           View all
         </Link>
@@ -154,7 +154,7 @@ export default function SuggestedWriters() {
                 href={`/profile/${writer.username}`}
                 className="shrink-0 focus-visible:outline-none"
               >
-                <div className="w-9 h-9 rounded-full overflow-hidden ring-1 ring-border-subtle/50 shrink-0 bg-surface-secondary flex items-center justify-center">
+                <div className="w-9 h-9 rounded-full overflow-hidden border border-border-default shrink-0 bg-surface-secondary flex items-center justify-center">
                   {writer.profile_image ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -172,7 +172,7 @@ export default function SuggestedWriters() {
               <div className="min-w-0 flex-1">
                 <Link
                   href={`/profile/${writer.username}`}
-                  className="font-semibold text-xs text-text-primary hover:text-primary transition-colors block truncate"
+                  className="font-medium text-xs text-text-primary hover:underline transition-colors block truncate"
                 >
                   {writer.display_name}
                 </Link>
@@ -185,10 +185,10 @@ export default function SuggestedWriters() {
             <button
               type="button"
               onClick={() => toggleFollow(writer.id, writer.isFollowed)}
-              className={`px-3 py-1 rounded-full text-xs font-semibold shrink-0 transition-all ${
+              className={`px-3 py-1.5 rounded-full text-xs font-medium shrink-0 transition-colors min-h-[32px] ${
                 writer.isFollowed
-                  ? "bg-primary/15 text-primary border border-primary/30 hover:bg-primary/25"
-                  : "glass-pill text-text-secondary hover:text-primary hover:border-primary/40"
+                  ? "border border-border-default text-text-secondary bg-surface-secondary hover:bg-surface-hover hover:text-text-primary"
+                  : "bg-primary text-background hover:opacity-90"
               }`}
             >
               {writer.isFollowed ? "Following" : "Follow"}

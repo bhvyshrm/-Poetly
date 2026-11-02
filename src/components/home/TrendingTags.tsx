@@ -15,8 +15,8 @@ const trendingTags = [
 
 export default function TrendingTags() {
   return (
-    <section className="glass-surface rounded-2xl p-5 space-y-3.5">
-      <h3 className="font-display text-lg text-text-primary font-semibold tracking-tight">
+    <section className="bg-surface rounded-[var(--radius-lg)] border border-border-default p-5 space-y-3.5">
+      <h3 className="font-display text-lg text-text-primary font-medium tracking-tight">
         Trending Tags
       </h3>
       <div className="flex flex-wrap gap-2">
@@ -24,7 +24,7 @@ export default function TrendingTags() {
           <Link
             key={item.tag}
             href={`/search?tag=${item.tag}`}
-            className="px-3 py-1 rounded-full glass-pill text-xs font-medium text-text-secondary hover:text-primary hover:border-primary/40 transition-colors"
+            className="px-3 py-1.5 rounded-full bg-surface-secondary border border-border-default text-xs font-medium text-text-secondary hover:text-text-primary hover:border-text-primary transition-colors min-h-[32px] inline-flex items-center"
           >
             #{item.tag}
           </Link>

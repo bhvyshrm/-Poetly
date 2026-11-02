@@ -14,8 +14,8 @@ export default function WritingCTA() {
   return (
     <div className="space-y-6">
       {/* Trending Stanzas & Themes */}
-      <section className="glass-surface rounded-2xl p-5 space-y-3.5">
-        <h3 className="font-display text-lg text-text-primary font-semibold tracking-tight">
+      <section className="bg-surface border border-border-default rounded-[var(--radius-lg)] p-5 space-y-3.5">
+        <h3 className="font-display text-lg text-text-primary font-medium tracking-tight">
           Trending Themes
         </h3>
         <div className="space-y-1.5">
@@ -23,17 +23,17 @@ export default function WritingCTA() {
             <Link
               key={item.tag}
               href={`/explore?tag=${item.tag}`}
-              className="flex items-center justify-between p-2 rounded-xl hover:bg-surface-hover/50 transition-colors group"
+              className="flex items-center justify-between p-2 rounded-[var(--radius-md)] hover:bg-surface-hover transition-colors group"
             >
               <div>
-                <p className="font-medium text-xs text-text-primary group-hover:text-primary transition-colors">
+                <p className="font-medium text-xs text-text-primary group-hover:underline transition-colors">
                   #{item.tag}
                 </p>
                 <p className="text-[11px] text-text-tertiary">{item.count}</p>
               </div>
               <ArrowUpRight
                 size={14}
-                className="text-text-tertiary/50 group-hover:text-primary transition-colors"
+                className="text-text-tertiary group-hover:text-text-primary transition-colors"
               />
             </Link>
           ))}

@@ -356,14 +356,14 @@ export default function PoemPage() {
       <section className="space-y-2">
         <Link
           href={`/poem/${id}/respond`}
-          className="w-full py-2.5 px-4 rounded-full gradient-brand text-white text-xs font-semibold shadow-md shadow-primary/20 hover:opacity-95 transition-all flex items-center justify-center gap-2"
+          className="w-full py-2.5 px-4 min-h-[44px] rounded-full bg-primary text-background text-xs font-medium hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
         >
           <PenTool size={13} />
           <span>Inscribe Resonant Response</span>
         </Link>
         <Link
           href={`/poem/${id}/canvas`}
-          className="w-full py-2.5 px-4 rounded-full glass-surface border border-border-subtle/50 hover:border-secondary/40 text-xs font-semibold text-text-primary hover:text-secondary transition-colors flex items-center justify-center gap-2"
+          className="w-full py-2.5 px-4 min-h-[44px] rounded-full bg-surface border border-border-default hover:border-text-primary text-xs font-medium text-text-primary transition-colors flex items-center justify-center gap-2"
         >
           <Palette size={13} />
           <span>Format as Canvas Folio</span>

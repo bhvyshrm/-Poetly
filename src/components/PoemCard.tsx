@@ -404,13 +404,13 @@ export default function PoemCard({
       )}
 
       {/* Micro-interactions Footer Toolbar */}
-      <div className="flex items-center justify-between pt-4 border-t border-border-subtle text-text-tertiary select-none">
-        <div className="flex items-center gap-6">
+      <div className="flex items-center justify-between pt-4 border-t border-border-default text-text-tertiary select-none">
+        <div className="flex items-center gap-4 sm:gap-6">
           {/* Like */}
           <button
             type="button"
             onClick={handleLike}
-            className={`flex items-center gap-1.5 transition-colors group cursor-pointer ${
+            className={`flex items-center gap-1.5 min-h-[44px] py-1 transition-colors group cursor-pointer ${
               isLiked ? "text-text-primary font-semibold" : "hover:text-text-primary"
             }`}
             aria-label={isLiked ? "Unlike poem" : "Like poem"}
@@ -427,7 +427,7 @@ export default function PoemCard({
           {/* Comments */}
           <Link
             href={`/poem/${poem.id}#comments`}
-            className="flex items-center gap-1.5 hover:text-text-primary transition-colors group"
+            className="flex items-center gap-1.5 min-h-[44px] py-1 hover:text-text-primary transition-colors group"
             aria-label="View comments"
           >
             <MessageCircle size={18} strokeWidth={1.8} className="group-hover:scale-110 transition-transform" />
@@ -435,12 +435,12 @@ export default function PoemCard({
           </Link>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1 sm:gap-2">
           {/* Save Bookmark */}
           <button
             type="button"
             onClick={handleSave}
-            className={`transition-colors p-1 rounded-full hover:bg-surface-hover cursor-pointer ${
+            className={`min-h-[44px] min-w-[44px] flex items-center justify-center transition-colors rounded-full hover:bg-surface-hover cursor-pointer ${
               isSaved ? "text-text-primary" : "hover:text-text-primary"
             }`}
             aria-label={isSaved ? "Unsave poem" : "Save poem"}
@@ -456,7 +456,7 @@ export default function PoemCard({
           <button
             type="button"
             onClick={handleShare}
-            className="hover:text-text-primary transition-colors p-1 rounded-full hover:bg-surface-hover cursor-pointer"
+            className="min-h-[44px] min-w-[44px] flex items-center justify-center hover:text-text-primary transition-colors rounded-full hover:bg-surface-hover cursor-pointer"
             aria-label="Share poem"
           >
             <Share2 size={18} strokeWidth={1.8} />
