@@ -42,11 +42,11 @@ export default function AdminSettingsPage() {
           </p>
         </div>
 
-        <div className="bg-surface border border-border-subtle rounded-[var(--radius-md)] p-5">
+        <div className="bg-surface border border-border-default rounded-[var(--radius-md)] p-5">
           <h2 className="text-sm font-medium text-text-primary mb-2">Admin Roles</h2>
           <p className="text-xs text-text-tertiary leading-relaxed mb-3">
             Roles determine what actions an admin can perform. Stored in the{" "}
-            <code className="text-brand bg-brand-subtle px-1 py-0.5 rounded text-[11px]">admin_users</code> table.
+            <code className="text-text-primary bg-surface-secondary px-1 py-0.5 rounded text-[11px]">admin_users</code> table.
           </p>
           <div className="space-y-2">
             <div className="flex items-center gap-3">
@@ -60,17 +60,17 @@ export default function AdminSettingsPage() {
           </div>
         </div>
 
-        <div className="bg-surface border border-border-subtle rounded-[var(--radius-md)] p-5">
+        <div className="bg-surface border border-border-default rounded-[var(--radius-md)] p-5">
           <h2 className="text-sm font-medium text-text-primary mb-3">Registered Admins</h2>
           {loading ? (
             <AdminSkeleton rows={2} />
           ) : admins.length > 0 ? (
             <div className="space-y-2">
               {admins.map((admin) => (
-                <div key={admin.id} className="flex items-center justify-between py-2 border-b border-border-subtle last:border-0">
+                <div key={admin.id} className="flex items-center justify-between py-2 border-b border-border-default last:border-0">
                   <div className="flex items-center gap-3">
-                    <div className="w-7 h-7 rounded-full bg-brand-subtle flex items-center justify-center">
-                      <span className="text-[10px] font-medium text-brand">{admin.user_id.slice(0, 2).toUpperCase()}</span>
+                    <div className="w-7 h-7 rounded-full bg-surface-secondary flex items-center justify-center">
+                      <span className="text-[10px] font-medium text-text-primary">{admin.user_id.slice(0, 2).toUpperCase()}</span>
                     </div>
                     <div>
                       <p className="text-xs font-medium text-text-primary">{admin.user_id.slice(0, 8)}...</p>
@@ -88,11 +88,11 @@ export default function AdminSettingsPage() {
           )}
         </div>
 
-        <div className="bg-surface border border-border-subtle rounded-[var(--radius-md)] p-5">
+        <div className="bg-surface border border-border-default rounded-[var(--radius-md)] p-5">
           <h2 className="text-sm font-medium text-text-primary mb-2">Activity Log</h2>
           <p className="text-xs text-text-tertiary leading-relaxed">
             All admin actions are logged in the{" "}
-            <code className="text-brand bg-brand-subtle px-1 py-0.5 rounded text-[11px]">admin_activity_log</code> table
+            <code className="text-text-primary bg-surface-secondary px-1 py-0.5 rounded text-[11px]">admin_activity_log</code> table
             for audit purposes. View the full log in the Activity tab.
           </p>
         </div>

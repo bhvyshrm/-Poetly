@@ -135,10 +135,10 @@ export default function AdminPoemsPage() {
         <>
           <div className="space-y-0">
             {poems.map((poem) => (
-              <div key={poem.id} className="flex items-center gap-4 py-4 border-b border-border-subtle group">
+              <div key={poem.id} className="flex items-center gap-4 py-4 border-b border-border-default group">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <Link href={`/poem/${poem.id}`} className="text-sm font-medium text-text-primary hover:text-brand transition-colors truncate">
+                    <Link href={`/poem/${poem.id}`} className="text-sm font-medium text-text-primary hover:underline transition-colors truncate">
                       {poem.title}
                     </Link>
                     <ExternalLink size={12} className="text-text-tertiary opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
@@ -147,7 +147,7 @@ export default function AdminPoemsPage() {
                     <span>{poem.profiles?.display_name || "Unknown"}</span>
                     <span>{new Date(poem.created_at).toLocaleDateString()}</span>
                     {poem.visibility !== "public" && (
-                      <span className="text-warning text-[10px] uppercase">{poem.visibility}</span>
+                      <span className="text-text-tertiary text-[10px] uppercase">{poem.visibility}</span>
                     )}
                   </div>
                 </div>
@@ -159,7 +159,7 @@ export default function AdminPoemsPage() {
                 <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
                   <button
                     onClick={() => setConfirm({ action: "feature", poemId: poem.id, poemTitle: poem.title })}
-                    className="p-1.5 text-text-tertiary hover:text-brand transition-colors"
+                    className="p-1.5 text-text-tertiary hover:text-text-primary transition-colors"
                     title="Feature"
                   >
                     <Star size={14} strokeWidth={1.5} />

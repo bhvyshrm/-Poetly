@@ -73,10 +73,10 @@ export default function PromptDetailPage() {
           backLabel="Prompts"
           badge={
             <span
-              className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${
+              className={`text-[10px] px-2 py-0.5 rounded border font-medium ${
                 prompt.is_active
-                  ? "bg-success-subtle text-success"
-                  : "bg-surface-secondary text-text-tertiary"
+                  ? "bg-surface-secondary text-text-primary border-border-default"
+                  : "bg-surface-secondary text-text-tertiary border-border-default"
               }`}
             >
               {prompt.is_active ? "Active" : "Ended"}
@@ -86,7 +86,7 @@ export default function PromptDetailPage() {
             prompt.is_active ? (
               <Link
                 href={`/write?prompt=${prompt.id}`}
-                className="inline-flex items-center gap-2 px-4 py-2 gradient-brand text-white text-xs md:text-sm font-medium rounded-[var(--radius-full)] hover:opacity-90 transition-opacity"
+                className="inline-flex items-center gap-2 px-4 py-2 min-h-[44px] bg-primary text-background text-xs md:text-sm font-medium rounded-full hover:opacity-90 transition-opacity"
               >
                 <PenLine size={14} strokeWidth={2} /> Write for this Prompt
               </Link>
@@ -100,7 +100,7 @@ export default function PromptDetailPage() {
           </p>
         )}
 
-        <div className="border-t border-border-subtle pt-6">
+        <div className="border-t border-border-default pt-6">
           <h2 className="font-poem text-lg font-medium text-text-primary mb-4 flex items-center justify-between">
             <span>Poems inspired by this prompt</span>
             {poems.length > 0 && (

@@ -51,29 +51,23 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] text-text-primary selection:bg-primary/20 relative">
-      {/* Ambient background mist glow */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <div className="absolute -top-40 -left-40 w-96 h-96 rounded-full bg-primary/5 blur-[120px]" />
-        <div className="absolute top-1/3 -right-40 w-96 h-96 rounded-full bg-secondary/5 blur-[120px]" />
-      </div>
-
+    <div className="min-h-screen bg-[#000000] text-text-primary selection:bg-surface-secondary relative">
       <div className="flex relative z-10">
         {/* Desktop sidebar */}
-        <aside className="hidden lg:flex flex-col w-60 h-screen sticky top-0 glass-surface border-r border-border-subtle/40 shrink-0">
-          <div className="px-5 py-6 border-b border-border-subtle/30 space-y-2">
+        <aside className="hidden lg:flex flex-col w-60 h-screen sticky top-0 bg-[#0A0A0A] border-r border-[#262626] shrink-0">
+          <div className="px-5 py-6 border-b border-[#262626] space-y-2">
             <Link
               href="/"
-              className="inline-flex items-center gap-1.5 text-xs text-text-tertiary hover:text-text-primary transition-colors group"
+              className="inline-flex items-center gap-1.5 text-xs text-text-tertiary hover:text-text-primary transition-colors group min-h-[32px]"
             >
               <ChevronLeft size={13} className="group-hover:-translate-x-0.5 transition-transform" />
               <span>Back to Poetly</span>
             </Link>
             <div className="flex items-center gap-2 pt-1">
-              <div className="w-6 h-6 rounded-lg gradient-brand flex items-center justify-center text-white text-xs font-serif font-bold shadow-xs">
+              <div className="w-6 h-6 rounded-md bg-primary text-background flex items-center justify-center text-xs font-serif font-bold">
                 P
               </div>
-              <h1 className="font-display text-lg font-light text-text-primary tracking-tight">
+              <h1 className="font-display text-lg font-normal text-text-primary tracking-tight">
                 Curator Console
               </h1>
             </div>
@@ -86,45 +80,46 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`flex items-center gap-3 px-3.5 py-2.5 text-xs font-medium rounded-xl transition-all ${
+                  className={`flex items-center gap-3 px-3.5 py-2.5 min-h-[44px] text-xs font-medium rounded-lg transition-colors ${
                     isActive
-                      ? "bg-primary/15 text-primary border border-primary/30 shadow-xs font-semibold"
-                      : "text-text-secondary hover:bg-surface-secondary/60 hover:text-text-primary border border-transparent"
+                      ? "bg-primary text-background font-semibold"
+                      : "text-text-secondary hover:bg-surface-hover hover:text-text-primary"
                   }`}
                 >
-                  <item.icon size={15} strokeWidth={isActive ? 2 : 1.5} className={isActive ? "text-primary" : "text-text-tertiary"} />
+                  <item.icon size={15} strokeWidth={isActive ? 2 : 1.5} className={isActive ? "text-background" : "text-text-tertiary"} />
                   <span>{item.label}</span>
                 </Link>
               );
             })}
           </nav>
 
-          <div className="px-3 py-4 border-t border-border-subtle/30 space-y-2">
+          <div className="px-3 py-4 border-t border-[#262626] space-y-2">
             <button
               onClick={handleSignOut}
               disabled={signingOut}
-              className="flex items-center gap-2.5 px-3.5 py-2 text-xs w-full rounded-xl text-text-tertiary hover:bg-surface-secondary/60 hover:text-red-400 transition-colors cursor-pointer"
+              className="flex items-center gap-2.5 px-3.5 py-2 min-h-[44px] text-xs w-full rounded-lg text-text-tertiary hover:bg-surface-hover hover:text-text-primary transition-colors cursor-pointer"
             >
               <LogOut size={14} />
               <span>{signingOut ? "Signing out..." : "Sign Out"}</span>
             </button>
-            <p className="px-3.5 text-[10px] font-mono text-text-tertiary/60">Poetly Console v2.0</p>
+            <p className="px-3.5 text-[10px] font-mono text-text-tertiary">Poetly Console v2.0</p>
           </div>
         </aside>
 
         {/* Mobile header */}
-        <div className="lg:hidden fixed top-0 left-0 right-0 z-50 glass-surface border-b border-border-subtle/40 backdrop-blur-md">
-          <div className="flex items-center justify-between px-4 py-3">
+        <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-[#0A0A0A] border-b border-[#262626]">
+          <div className="flex items-center justify-between px-4 py-3 min-h-[56px]">
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setMobileOpen(true)}
-                className="text-text-secondary hover:text-text-primary transition-colors p-1"
+                className="text-text-secondary hover:text-text-primary transition-colors p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
+                aria-label="Open navigation menu"
               >
                 <Menu size={20} strokeWidth={1.5} />
               </button>
               <h1 className="font-display text-base text-text-primary font-medium">Curator Console</h1>
             </div>
-            <Link href="/" className="text-xs text-text-tertiary hover:text-text-primary transition-colors">
+            <Link href="/" className="text-xs text-text-tertiary hover:text-text-primary transition-colors min-h-[44px] flex items-center">
               Return to Salon
             </Link>
           </div>
@@ -133,14 +128,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         {/* Mobile sidebar overlay */}
         {mobileOpen && (
           <div className="lg:hidden fixed inset-0 z-[60]">
-            <div className="absolute inset-0 bg-black/60 backdrop-blur-xs" onClick={() => setMobileOpen(false)} />
-            <div className="absolute inset-y-0 left-0 w-64 glass-surface border-r border-border-subtle/40 shadow-2xl animate-fade-in flex flex-col justify-between">
+            <div className="absolute inset-0 bg-black/70" onClick={() => setMobileOpen(false)} />
+            <div className="absolute inset-y-0 left-0 w-64 bg-[#0A0A0A] border-r border-[#262626] shadow-2xl animate-fade-in flex flex-col justify-between">
               <div>
-                <div className="flex items-center justify-between px-5 py-4 border-b border-border-subtle/30">
+                <div className="flex items-center justify-between px-5 py-4 border-b border-[#262626]">
                   <h2 className="font-display text-base text-text-primary font-medium">Curator Navigation</h2>
                   <button
                     onClick={() => setMobileOpen(false)}
-                    className="text-text-tertiary hover:text-text-primary transition-colors p-1"
+                    className="text-text-tertiary hover:text-text-primary transition-colors p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
+                    aria-label="Close navigation menu"
                   >
                     <X size={18} strokeWidth={1.5} />
                   </button>
@@ -153,13 +149,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                         key={item.href}
                         href={item.href}
                         onClick={() => setMobileOpen(false)}
-                        className={`flex items-center gap-3 px-3.5 py-2.5 text-xs font-medium rounded-xl transition-all ${
+                        className={`flex items-center gap-3 px-3.5 py-2.5 min-h-[44px] text-xs font-medium rounded-lg transition-colors ${
                           isActive
-                            ? "bg-primary/15 text-primary border border-primary/30"
-                            : "text-text-secondary hover:bg-surface-secondary/60 hover:text-text-primary border border-transparent"
+                            ? "bg-primary text-background font-semibold"
+                            : "text-text-secondary hover:bg-surface-hover hover:text-text-primary"
                         }`}
                       >
-                        <item.icon size={15} strokeWidth={isActive ? 2 : 1.5} className={isActive ? "text-primary" : "text-text-tertiary"} />
+                        <item.icon size={15} strokeWidth={isActive ? 2 : 1.5} className={isActive ? "text-background" : "text-text-tertiary"} />
                         <span>{item.label}</span>
                       </Link>
                     );
@@ -167,11 +163,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 </nav>
               </div>
 
-              <div className="px-3 py-4 border-t border-border-subtle/30">
+              <div className="px-3 py-4 border-t border-[#262626]">
                 <button
                   onClick={handleSignOut}
                   disabled={signingOut}
-                  className="flex items-center gap-2.5 px-3.5 py-2 text-xs w-full rounded-xl text-text-tertiary hover:text-red-400 transition-colors"
+                  className="flex items-center gap-2.5 px-3.5 py-2 min-h-[44px] text-xs w-full rounded-lg text-text-tertiary hover:text-text-primary transition-colors"
                 >
                   <LogOut size={14} />
                   <span>{signingOut ? "Signing out..." : "Sign Out"}</span>

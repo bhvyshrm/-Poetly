@@ -65,24 +65,24 @@ export default function LibraryPage() {
   const rightRailContent = (
     <div className="space-y-6">
       {/* Sanctuary Bookmarks Card */}
-      <section className="glass-surface rounded-2xl p-5 space-y-4">
-        <div className="flex items-center gap-2 text-primary font-mono text-xs font-semibold">
-          <Bookmark size={14} className="text-primary fill-primary/20" />
+      <section className="bg-surface rounded-[var(--radius-lg)] p-5 border border-border-default space-y-4">
+        <div className="flex items-center gap-2 text-text-primary font-mono text-xs font-medium">
+          <Bookmark size={14} className="text-text-primary fill-text-primary" />
           <span>Sanctuary Keepsakes</span>
         </div>
-        <h4 className="font-display text-lg text-text-primary font-light">
+        <h4 className="font-display text-lg text-text-primary font-normal">
           Preserved Stanzas
         </h4>
         <div className="space-y-3 pt-1 text-xs">
-          <div className="flex items-center justify-between pb-2 border-b border-border-subtle/30">
+          <div className="flex items-center justify-between pb-2 border-b border-border-default">
             <span className="text-text-tertiary">Verses Bookmarked</span>
-            <span className="font-mono font-semibold text-text-primary">{savedPoems.length}</span>
+            <span className="font-mono font-medium text-text-primary">{savedPoems.length}</span>
           </div>
-          <div className="flex items-center justify-between pb-2 border-b border-border-subtle/30">
+          <div className="flex items-center justify-between pb-2 border-b border-border-default">
             <span className="text-text-tertiary">Collections Access</span>
             <Link
               href="/collections"
-              className="text-primary font-mono text-xs hover:underline flex items-center gap-1"
+              className="text-text-primary font-mono text-xs hover:underline flex items-center gap-1"
             >
               <span>View Bindings</span>
               <ArrowRight size={11} />
@@ -90,10 +90,7 @@ export default function LibraryPage() {
           </div>
           <div className="flex items-center justify-between">
             <span className="text-text-tertiary">Atmosphere</span>
-            <span className="font-mono text-secondary flex items-center gap-1">
-              <Sparkles size={12} />
-              Liquid Glass
-            </span>
+            <span className="font-mono text-text-secondary">Monochrome</span>
           </div>
         </div>
       </section>
@@ -108,16 +105,13 @@ export default function LibraryPage() {
       <div className="space-y-6">
         {/* Header */}
         <section className="space-y-2 pt-1">
-          <div className="flex items-center gap-2 text-primary font-mono text-xs font-medium">
-            <Bookmark size={14} className="text-primary fill-primary/20" />
-            <span className="uppercase tracking-widest text-[11px]">Sanctuary Reliquary</span>
-            <span className="text-text-tertiary">/</span>
-            <span className="text-text-secondary">Saved Stanzas</span>
-          </div>
+          <p className="text-xs uppercase tracking-widest text-text-tertiary font-mono">
+            Sanctuary Reliquary / Saved Stanzas
+          </p>
 
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
             <div>
-              <h1 className="font-display text-3xl sm:text-4xl text-text-primary font-light tracking-tight">
+              <h1 className="font-display text-3xl sm:text-4xl text-text-primary font-normal tracking-tight">
                 Saved Verses &amp; Marginalia
               </h1>
               <p className="text-xs sm:text-sm text-text-secondary font-light mt-1">
@@ -136,7 +130,7 @@ export default function LibraryPage() {
                   placeholder="Filter saved poems..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-9 pr-4 py-2 glass-surface border border-border-subtle/50 rounded-full text-xs text-text-primary placeholder:text-text-tertiary outline-none focus:border-primary transition-colors font-sans"
+                  className="w-full pl-9 pr-4 py-2 bg-surface border border-border-default rounded-full text-xs text-text-primary placeholder:text-text-tertiary outline-none focus:border-text-primary transition-colors font-sans"
                 />
               </div>
             )}
@@ -147,12 +141,12 @@ export default function LibraryPage() {
         {authLoading || loading ? (
           <div className="space-y-4">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="h-44 skeleton rounded-2xl" />
+              <div key={i} className="h-44 bg-surface rounded-[var(--radius-lg)] border border-border-default skeleton" />
             ))}
           </div>
         ) : !user ? (
-          <div className="text-center py-16 glass-surface rounded-2xl p-8 border border-border-subtle/40 space-y-4">
-            <p className="font-display text-2xl text-text-primary font-light">
+          <div className="text-center py-16 bg-surface-secondary rounded-[var(--radius-lg)] p-8 border border-border-default space-y-4">
+            <p className="font-display text-2xl text-text-primary font-normal">
               Sign In to Access Your Saved Verses
             </p>
             <p className="font-verse italic text-text-tertiary max-w-md mx-auto text-sm">
@@ -161,7 +155,7 @@ export default function LibraryPage() {
             <div className="pt-2">
               <Link
                 href="/login"
-                className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold text-white gradient-brand rounded-full hover:opacity-95 shadow-md shadow-primary/20 transition-all"
+                className="inline-flex items-center gap-2 px-5 py-2.5 min-h-[44px] text-xs font-medium text-background bg-primary rounded-full hover:opacity-90 transition-opacity"
               >
                 <span>Sign In to Poetly</span>
                 <ArrowRight size={13} />
@@ -175,18 +169,18 @@ export default function LibraryPage() {
             ))}
           </div>
         ) : savedPoems.length > 0 ? (
-          <div className="text-center py-16 glass-surface rounded-2xl p-8 border border-border-subtle/40 space-y-3">
+          <div className="text-center py-16 bg-surface-secondary rounded-[var(--radius-lg)] p-8 border border-border-default space-y-3">
             <p className="font-display text-xl text-text-primary">No Matching Verses</p>
             <p className="font-verse italic text-xs sm:text-sm text-text-tertiary max-w-sm mx-auto">
               No saved poems matched &ldquo;{searchQuery}&rdquo;.
             </p>
           </div>
         ) : (
-          <div className="text-center py-16 glass-surface rounded-2xl p-8 border border-border-subtle/40 space-y-4">
-            <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto text-primary">
+          <div className="text-center py-16 bg-surface-secondary rounded-[var(--radius-lg)] p-8 border border-border-default space-y-4">
+            <div className="w-12 h-12 rounded-full bg-surface border border-border-default flex items-center justify-center mx-auto text-text-primary">
               <BookOpen size={22} />
             </div>
-            <p className="font-display text-2xl text-text-primary font-light">
+            <p className="font-display text-2xl text-text-primary font-normal">
               Your Sanctuary Shelf is Empty
             </p>
             <p className="font-verse italic text-text-tertiary max-w-md mx-auto text-sm">
@@ -195,7 +189,7 @@ export default function LibraryPage() {
             <div className="pt-2">
               <Link
                 href="/explore"
-                className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold text-white gradient-brand rounded-full hover:opacity-95 shadow-md shadow-primary/20 transition-all"
+                className="inline-flex items-center gap-2 px-5 py-2.5 min-h-[44px] text-xs font-medium text-background bg-primary rounded-full hover:opacity-90 transition-opacity"
               >
                 <span>Explore the Salon</span>
                 <ArrowRight size={13} />

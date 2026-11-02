@@ -44,7 +44,7 @@ export default function PromptsPage() {
           description="Find your next poem and participate in community writing exercises."
         />
 
-        <div className="flex gap-1 mb-6 bg-surface-secondary rounded-[var(--radius-full)] p-1">
+        <div className="flex gap-1 mb-6 bg-surface-secondary border border-border-default rounded-full p-1">
           {[
             { id: "active" as const, label: "Active" },
             { id: "archive" as const, label: "Archive" },
@@ -52,9 +52,9 @@ export default function PromptsPage() {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex-1 px-4 py-2 text-xs md:text-sm font-medium rounded-full transition-all duration-200 ${
+              className={`flex-1 px-4 py-2 min-h-[44px] text-xs md:text-sm font-medium rounded-full transition-colors ${
                 activeTab === tab.id
-                  ? "bg-surface text-text-primary shadow-sm"
+                  ? "bg-primary text-background font-semibold"
                   : "text-text-secondary hover:text-text-primary"
               }`}
             >
@@ -66,7 +66,7 @@ export default function PromptsPage() {
         {loading ? (
           <div className="space-y-4">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="h-24 skeleton rounded-[var(--radius-md)]" />
+              <div key={i} className="h-24 bg-surface rounded-[var(--radius-md)] border border-border-default skeleton" />
             ))}
           </div>
         ) : prompts.length > 0 ? (
@@ -75,11 +75,11 @@ export default function PromptsPage() {
               <Link
                 key={prompt.id}
                 href={`/prompts/${prompt.id}`}
-                className="group block p-4 bg-surface border border-border-subtle hover:border-brand/40 rounded-[var(--radius-md)] transition-all duration-200"
+                className="group block p-4 bg-surface border border-border-default hover:border-text-primary rounded-[var(--radius-md)] transition-colors"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0">
-                    <h3 className="font-poem text-lg md:text-xl font-medium text-text-primary mb-1 group-hover:text-brand transition-colors italic">
+                    <h3 className="font-poem text-lg md:text-xl font-medium text-text-primary mb-1 group-hover:underline transition-colors italic">
                       &ldquo;{prompt.title}&rdquo;
                     </h3>
                     {prompt.description && (
@@ -89,10 +89,10 @@ export default function PromptsPage() {
                     )}
                     <div className="flex items-center gap-2 mt-3">
                       <span
-                        className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${
+                        className={`text-[10px] px-2 py-0.5 rounded border font-medium ${
                           prompt.is_active
-                            ? "bg-success-subtle text-success"
-                            : "bg-surface-secondary text-text-tertiary"
+                            ? "bg-surface-secondary text-text-primary border-border-default"
+                            : "bg-surface-secondary text-text-tertiary border-border-default"
                         }`}
                       >
                         {prompt.is_active ? "Active" : "Ended"}

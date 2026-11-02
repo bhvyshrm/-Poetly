@@ -20,8 +20,8 @@ const curatedAnthologies = [
     title: "Solitude at 3 A.M.",
     tag: "solitude",
     category: "Featured",
-    categoryColor: "text-secondary bg-secondary/15 border-secondary/30",
-    hoverBorder: "hover:border-primary/40",
+    categoryColor: "text-text-secondary bg-surface-secondary border-border-default",
+    hoverBorder: "hover:border-text-primary",
     stanzas: "42 stanzas",
     poets: "14 Poets",
     desc: "Late-night contemplation, quiet insomnia, and moonlit windows.",
@@ -30,8 +30,8 @@ const curatedAnthologies = [
     title: "Petrichor & Pavements",
     tag: "petrichor",
     category: "Pastoral",
-    categoryColor: "text-tertiary bg-tertiary/15 border-tertiary/30",
-    hoverBorder: "hover:border-tertiary/40",
+    categoryColor: "text-text-secondary bg-surface-secondary border-border-default",
+    hoverBorder: "hover:border-text-primary",
     stanzas: "29 stanzas",
     poets: "8 Poets",
     desc: "Modern pastoral verses blooming inside heavy metropolitan asphalt.",
@@ -40,8 +40,8 @@ const curatedAnthologies = [
     title: "Translations of Unspoken",
     tag: "haiku",
     category: "Haiku & Verse",
-    categoryColor: "text-primary bg-primary/15 border-primary/30",
-    hoverBorder: "hover:border-primary/40",
+    categoryColor: "text-text-secondary bg-surface-secondary border-border-default",
+    hoverBorder: "hover:border-text-primary",
     stanzas: "68 stanzas",
     poets: "21 Poets",
     desc: "Micro-haikus and translated fragments of unreturned glances.",
@@ -115,11 +115,10 @@ export default function ExplorePage() {
       <div className="space-y-8">
         {/* Editorial Header Section */}
         <header className="space-y-1.5 pt-1">
-          <div className="flex items-center gap-1.5 text-primary text-xs font-medium tracking-wide">
-            <Sparkles size={14} className="text-primary" />
-            <span>Curated Sanctuary of Stanzas</span>
-          </div>
-          <h1 className="font-display text-3xl sm:text-4xl text-text-primary font-light tracking-tight">
+          <p className="text-xs uppercase tracking-widest text-text-tertiary font-mono">
+            Sanctuary of Stanzas
+          </p>
+          <h1 className="font-display text-3xl sm:text-4xl text-text-primary font-normal tracking-tight">
             Explore the Salon
           </h1>
           <p className="text-sm text-text-secondary font-light">
@@ -130,7 +129,7 @@ export default function ExplorePage() {
         {/* Expanded Literary Search & Filter Bar */}
         <section className="space-y-3">
           <form onSubmit={handleSearchSubmit}>
-            <div className="relative glass-surface rounded-2xl p-1.5 focus-within:border-primary/50 transition-all shadow-md flex items-center gap-2">
+            <div className="relative bg-surface border border-border-default rounded-[var(--radius-lg)] p-1.5 focus-within:border-text-primary transition-colors flex items-center gap-2">
               <Search size={18} className="text-text-tertiary ml-3 shrink-0" />
               <input
                 type="text"
@@ -141,7 +140,7 @@ export default function ExplorePage() {
               />
               <button
                 type="submit"
-                className="px-4 py-1.5 rounded-xl bg-surface-secondary/80 hover:bg-surface-secondary text-text-primary text-xs font-semibold transition-all shrink-0"
+                className="px-4 py-2 min-h-[36px] rounded-[var(--radius-md)] bg-surface-secondary hover:bg-surface-hover text-text-primary text-xs font-medium transition-colors shrink-0"
               >
                 Search
               </button>
@@ -153,61 +152,58 @@ export default function ExplorePage() {
             <button
               type="button"
               onClick={() => setActiveTab("poems")}
-              className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
+              className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer min-h-[36px] ${
                 activeTab === "poems"
-                  ? "bg-primary/15 border border-primary/40 text-primary shadow-sm"
-                  : "glass-pill text-text-secondary hover:text-text-primary"
+                  ? "bg-primary text-background font-semibold"
+                  : "bg-surface-secondary text-text-secondary border border-border-default hover:text-text-primary"
               }`}
             >
-              <span className={`w-1.5 h-1.5 rounded-full ${activeTab === "poems" ? "bg-primary" : "bg-text-tertiary"}`} />
               Poems
             </button>
             <button
               type="button"
               onClick={() => setActiveTab("writers")}
-              className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
+              className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer min-h-[36px] ${
                 activeTab === "writers"
-                  ? "bg-primary/15 border border-primary/40 text-primary shadow-sm"
-                  : "glass-pill text-text-secondary hover:text-text-primary"
+                  ? "bg-primary text-background font-semibold"
+                  : "bg-surface-secondary text-text-secondary border border-border-default hover:text-text-primary"
               }`}
             >
-              <span className={`w-1.5 h-1.5 rounded-full ${activeTab === "writers" ? "bg-primary" : "bg-text-tertiary"}`} />
               Writers
             </button>
             <button
               type="button"
               onClick={() => setActiveTab("prompts")}
-              className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
+              className={`shrink-0 px-3.5 py-1.5 rounded-full text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer min-h-[36px] ${
                 activeTab === "prompts"
-                  ? "bg-primary/15 border border-primary/40 text-primary shadow-sm"
-                  : "glass-pill text-text-secondary hover:text-text-primary"
+                  ? "bg-primary text-background font-semibold"
+                  : "bg-surface-secondary text-text-secondary border border-border-default hover:text-text-primary"
               }`}
             >
-              <span className={`w-1.5 h-1.5 rounded-full ${activeTab === "prompts" ? "bg-primary" : "bg-text-tertiary"}`} />
               Prompts
             </button>
             <Link
               href="/collections"
-              className="shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold glass-pill text-text-secondary hover:text-text-primary transition-all flex items-center gap-1"
+              className="shrink-0 px-3.5 py-1.5 rounded-full text-xs font-medium bg-surface-secondary text-text-secondary border border-border-default hover:text-text-primary transition-colors flex items-center gap-1.5 min-h-[36px]"
             >
-              <BookOpen size={13} className="text-secondary" />
+              <BookOpen size={13} className="text-text-tertiary" />
               <span>Collections</span>
             </Link>
           </div>
         </section>
 
-        {/* Featured Spotlight: Curated Anthologies (Glass Bento) */}
+        {/* Featured Spotlight: Curated Anthologies */}
         <section className="space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <BookOpen size={18} className="text-primary" />
+              <BookOpen size={18} className="text-text-primary" />
               <h2 className="font-display text-xl text-text-primary font-medium">
                 Curated Anthologies
               </h2>
             </div>
             <Link
               href="/collections"
-              className="text-xs text-primary hover:underline flex items-center gap-1 font-medium"
+              className="text-xs text-text-secondary hover:text-text-primary hover:underline flex items-center gap-1 font-medium"
             >
               <span>Browse all</span>
               <ArrowRight size={12} />
@@ -219,16 +215,16 @@ export default function ExplorePage() {
               <Link
                 key={item.title}
                 href={`/search?tag=${item.tag}`}
-                className={`glass-surface rounded-2xl p-4 sm:p-5 flex flex-col justify-between ${item.hoverBorder} hover:-translate-y-0.5 transition-all duration-300 relative overflow-hidden group`}
+                className={`bg-surface border border-border-default rounded-[var(--radius-lg)] p-4 sm:p-5 flex flex-col justify-between ${item.hoverBorder} transition-colors group`}
               >
                 <div className="space-y-2">
                   <div className="flex items-center justify-between text-xs text-text-tertiary font-mono">
-                    <span className={`px-2 py-0.5 rounded-md border text-[11px] font-semibold ${item.categoryColor}`}>
+                    <span className={`px-2 py-0.5 rounded border text-[11px] font-medium ${item.categoryColor}`}>
                       {item.category}
                     </span>
                     <span>{item.stanzas}</span>
                   </div>
-                  <h3 className="font-display text-lg text-text-primary font-normal leading-snug group-hover:text-primary transition-colors">
+                  <h3 className="font-display text-lg text-text-primary font-normal leading-snug group-hover:underline">
                     {item.title}
                   </h3>
                   <p className="text-xs text-text-secondary font-light line-clamp-2">
@@ -236,12 +232,12 @@ export default function ExplorePage() {
                   </p>
                 </div>
 
-                <div className="pt-4 flex items-center justify-between border-t border-border-subtle/30 mt-4 text-xs text-text-tertiary">
+                <div className="pt-4 flex items-center justify-between border-t border-border-default mt-4 text-xs text-text-tertiary">
                   <div className="flex items-center gap-1">
                     <Users size={13} />
                     <span>{item.poets}</span>
                   </div>
-                  <ArrowRight size={14} className="text-text-tertiary group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                  <ArrowRight size={14} className="text-text-tertiary group-hover:text-text-primary group-hover:translate-x-0.5 transition-transform" />
                 </div>
               </Link>
             ))}
@@ -249,41 +245,41 @@ export default function ExplorePage() {
         </section>
 
         {/* Discovery Filter Tabs */}
-        <section className="border-b border-border-subtle/40 flex items-center gap-6 sm:gap-8 text-sm overflow-x-auto no-scrollbar">
+        <section className="border-b border-border-default flex items-center gap-6 sm:gap-8 text-sm overflow-x-auto no-scrollbar">
           <button
             type="button"
             onClick={() => setActiveTab("poems")}
-            className={`pb-3 relative font-semibold transition-colors whitespace-nowrap cursor-pointer ${
-              activeTab === "poems" ? "text-primary" : "text-text-tertiary hover:text-text-primary"
+            className={`pb-3 relative font-medium transition-colors whitespace-nowrap cursor-pointer min-h-[44px] flex items-center ${
+              activeTab === "poems" ? "text-text-primary font-semibold" : "text-text-tertiary hover:text-text-primary"
             }`}
           >
             Featured Poems
             {activeTab === "poems" && (
-              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary glow-orchid rounded-full" />
+              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" />
             )}
           </button>
           <button
             type="button"
             onClick={() => setActiveTab("writers")}
-            className={`pb-3 relative font-semibold transition-colors whitespace-nowrap cursor-pointer ${
-              activeTab === "writers" ? "text-primary" : "text-text-tertiary hover:text-text-primary"
+            className={`pb-3 relative font-medium transition-colors whitespace-nowrap cursor-pointer min-h-[44px] flex items-center ${
+              activeTab === "writers" ? "text-text-primary font-semibold" : "text-text-tertiary hover:text-text-primary"
             }`}
           >
             Emerging Voices
             {activeTab === "writers" && (
-              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary glow-orchid rounded-full" />
+              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" />
             )}
           </button>
           <button
             type="button"
             onClick={() => setActiveTab("prompts")}
-            className={`pb-3 relative font-semibold transition-colors whitespace-nowrap cursor-pointer ${
-              activeTab === "prompts" ? "text-primary" : "text-text-tertiary hover:text-text-primary"
+            className={`pb-3 relative font-medium transition-colors whitespace-nowrap cursor-pointer min-h-[44px] flex items-center ${
+              activeTab === "prompts" ? "text-text-primary font-semibold" : "text-text-tertiary hover:text-text-primary"
             }`}
           >
             Active Prompts
             {activeTab === "prompts" && (
-              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary glow-orchid rounded-full" />
+              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" />
             )}
           </button>
         </section>
@@ -303,7 +299,7 @@ export default function ExplorePage() {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-14 px-6 glass-surface rounded-2xl border border-border-subtle/40">
+              <div className="text-center py-14 px-6 bg-surface-secondary rounded-[var(--radius-lg)] border border-border-default">
                 <p className="font-verse text-lg text-text-tertiary italic mb-2">
                   No poems published in the salon yet.
                 </p>
@@ -312,7 +308,7 @@ export default function ExplorePage() {
                 </p>
                 <Link
                   href="/write"
-                  className="inline-flex items-center px-4 py-2 text-xs font-semibold text-white bg-gradient-to-r from-primary-container to-secondary rounded-full hover:opacity-95 shadow-md glowing-btn-aura"
+                  className="inline-flex items-center px-4 py-2 min-h-[44px] text-xs font-medium text-background bg-primary rounded-full hover:opacity-90 transition-opacity"
                 >
                   Write a poem →
                 </Link>
@@ -328,7 +324,7 @@ export default function ExplorePage() {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-14 px-6 glass-surface rounded-2xl border border-border-subtle/40">
+              <div className="text-center py-14 px-6 bg-surface-secondary rounded-[var(--radius-lg)] border border-border-default">
                 <p className="font-verse text-lg text-text-tertiary italic mb-2">
                   No active prompts right now.
                 </p>
@@ -338,13 +334,13 @@ export default function ExplorePage() {
               </div>
             )
           ) : writers.length > 0 ? (
-            <div className="glass-surface rounded-2xl p-3 sm:p-4 divide-y divide-border-subtle/30 space-y-1">
+            <div className="bg-surface rounded-[var(--radius-lg)] border border-border-default p-3 sm:p-4 divide-y divide-border-default space-y-1">
               {writers.map((writer) => (
                 <WriterCard key={writer.id} writer={writer} variant="row" />
               ))}
             </div>
           ) : (
-            <div className="text-center py-14 px-6 glass-surface rounded-2xl border border-border-subtle/40">
+            <div className="text-center py-14 px-6 bg-surface-secondary rounded-[var(--radius-lg)] border border-border-default">
               <p className="font-verse text-lg text-text-tertiary italic mb-2">
                 No writers found yet.
               </p>

@@ -131,15 +131,15 @@ export default function AdminFeaturedPage() {
         </div>
         <button
           onClick={() => { setShowAdd(true); loadAvailable(); }}
-          className="flex items-center gap-1.5 text-xs font-medium text-brand border border-brand/30 hover:border-brand px-3 py-1.5 rounded-full transition-colors"
+          className="flex items-center gap-1.5 text-xs font-medium bg-primary text-background px-3.5 py-2 min-h-[44px] rounded-full hover:opacity-90 transition-opacity"
         >
           <Plus size={12} strokeWidth={2} /> Add Featured
         </button>
       </div>
 
       {error && (
-        <div className="bg-error-subtle border border-error/20 rounded-[var(--radius-md)] p-4 mb-6">
-          <p className="text-sm text-error">{error}</p>
+        <div className="bg-surface-secondary border border-border-default rounded-[var(--radius-md)] p-4 mb-6">
+          <p className="text-sm text-text-primary">{error}</p>
         </div>
       )}
 
@@ -148,19 +148,19 @@ export default function AdminFeaturedPage() {
       ) : items.length > 0 ? (
         <div className="space-y-0">
           {items.map((item, idx) => (
-            <div key={item.id} className="flex items-center gap-3 py-4 border-b border-border-subtle group">
+            <div key={item.id} className="flex items-center gap-3 py-4 border-b border-border-default group">
               <div className="flex flex-col gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
                 <button
                   onClick={() => handleMove(item.id, "up")}
                   disabled={idx === 0}
-                  className="text-text-tertiary hover:text-text-primary disabled:opacity-30 transition-colors"
+                  className="text-text-tertiary hover:text-text-primary disabled:opacity-30 transition-colors p-1"
                 >
                   <ChevronUp size={14} />
                 </button>
                 <button
                   onClick={() => handleMove(item.id, "down")}
                   disabled={idx === items.length - 1}
-                  className="text-text-tertiary hover:text-text-primary disabled:opacity-30 transition-colors"
+                  className="text-text-tertiary hover:text-text-primary disabled:opacity-30 transition-colors p-1"
                 >
                   <ChevronDown size={14} />
                 </button>
@@ -172,12 +172,12 @@ export default function AdminFeaturedPage() {
                   <span className="text-[10px] text-text-tertiary">#{item.position}</span>
                 </div>
                 {item.poem && (
-                  <Link href={`/poem/${item.poem.id}`} className="text-sm font-medium text-text-primary hover:text-brand transition-colors">
+                  <Link href={`/poem/${item.poem.id}`} className="text-sm font-medium text-text-primary hover:underline transition-colors">
                     {item.poem.title}
                   </Link>
                 )}
                 {item.prompt && (
-                  <Link href={`/prompts/${item.prompt.id}`} className="text-sm font-medium text-text-primary hover:text-brand transition-colors italic">
+                  <Link href={`/prompts/${item.prompt.id}`} className="text-sm font-medium text-text-primary hover:underline transition-colors italic">
                     &ldquo;{item.prompt.title}&rdquo;
                   </Link>
                 )}

@@ -68,9 +68,9 @@ export default function AdminActivityPage() {
         <>
           <div className="space-y-0">
             {entries.map((entry) => (
-              <div key={entry.id} className="py-3 border-b border-border-subtle">
+              <div key={entry.id} className="py-3 border-b border-border-default">
                 <div className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-brand mt-2 shrink-0" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-text-primary mt-2 shrink-0" />
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-0.5">
                       <span className="text-sm font-medium text-text-primary">{formatAction(entry.action)}</span>
@@ -100,7 +100,7 @@ export default function AdminActivityPage() {
             <button
               onClick={() => { setPage(page + 1); fetchActivity(false); }}
               disabled={!hasMore || loading}
-              className="text-xs text-brand hover:text-brand-hover disabled:opacity-30 transition-colors"
+              className="text-xs font-medium text-text-primary hover:underline disabled:opacity-30 transition-opacity"
             >
               {loading ? "Loading..." : hasMore ? "Load more" : "No more entries"}
             </button>

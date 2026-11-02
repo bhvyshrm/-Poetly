@@ -85,14 +85,14 @@ export default function TrendingPage() {
           description="Poems gaining attention across the community right now"
         />
 
-        <div className="flex gap-1 mb-6 bg-surface-secondary rounded-[var(--radius-full)] p-1">
+        <div className="flex gap-1 mb-6 bg-surface-secondary border border-border-default rounded-full p-1">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex-1 px-4 py-2 text-xs md:text-sm font-medium rounded-full transition-all duration-200 ${
+              className={`flex-1 px-4 py-2 min-h-[44px] text-xs md:text-sm font-medium rounded-full transition-colors ${
                 activeTab === tab.id
-                  ? "bg-surface text-text-primary shadow-sm"
+                  ? "bg-primary text-background font-semibold"
                   : "text-text-secondary hover:text-text-primary"
               }`}
             >

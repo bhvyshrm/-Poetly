@@ -43,8 +43,8 @@ function LoginForm() {
       <div className="w-full max-w-sm animate-fade-in">
         <div className="text-center mb-12">
           <Link href="/" className="inline-block mb-8">
-            <div className="w-12 h-12 mx-auto rounded-[var(--radius-lg)] gradient-brand flex items-center justify-center shadow-md">
-              <span className="text-white text-xl font-semibold font-display">P</span>
+            <div className="w-12 h-12 mx-auto rounded-[var(--radius-lg)] bg-primary flex items-center justify-center">
+              <span className="text-background text-xl font-semibold font-display">P</span>
             </div>
           </Link>
           <h1 className="font-poem-title text-3xl md:text-4xl text-text-primary mb-3 tracking-tight">
@@ -56,15 +56,15 @@ function LoginForm() {
         </div>
 
         {errorMsg && (
-          <div className="mb-6 p-3 bg-error-subtle border border-error/20 rounded-[var(--radius-md)]">
-            <p className="text-xs text-error">{errorMsg}</p>
+          <div className="mb-6 p-3 bg-surface-secondary border border-border-default rounded-[var(--radius-md)]">
+            <p className="text-xs text-text-primary font-medium">{errorMsg}</p>
           </div>
         )}
 
         <button
           onClick={handleGoogleLogin}
           disabled={loading}
-          className="w-full flex items-center justify-center gap-3 px-5 py-3.5 bg-surface border border-border-subtle rounded-[var(--radius-md)] text-sm font-medium text-text-primary hover:bg-surface-hover hover:border-border-default transition-all duration-200 disabled:opacity-50 shadow-sm"
+          className="w-full flex items-center justify-center gap-3 px-5 py-3.5 min-h-[44px] bg-surface border border-border-default rounded-[var(--radius-md)] text-sm font-medium text-text-primary hover:bg-surface-hover hover:border-text-primary transition-colors disabled:opacity-50"
         >
           {loading ? (
             <div className="w-5 h-5 border-2 border-text-tertiary border-t-transparent rounded-full animate-spin" />

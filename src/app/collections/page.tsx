@@ -77,50 +77,50 @@ export default function CollectionsPage() {
 
   const rightRailContent = (
     <div className="space-y-6">
-      {/* Reading Insights Card from Stitch */}
-      <section className="glass-surface rounded-2xl p-5 space-y-4">
-        <div className="flex items-center gap-2 text-primary font-mono text-xs font-semibold">
-          <Sparkles size={14} className="text-primary" />
+      {/* Reading Insights Card */}
+      <section className="bg-surface rounded-[var(--radius-lg)] p-5 border border-border-default space-y-4">
+        <div className="flex items-center gap-2 text-text-primary font-mono text-xs font-medium">
+          <BookOpen size={14} className="text-text-primary" />
           <span>Reading Sanctuary</span>
         </div>
-        <h4 className="font-display text-lg text-text-primary font-light">
+        <h4 className="font-display text-lg text-text-primary font-normal">
           Personal Reliquary Insights
         </h4>
         <div className="space-y-3 pt-1 text-xs">
-          <div className="flex items-center justify-between pb-2 border-b border-border-subtle/30">
+          <div className="flex items-center justify-between pb-2 border-b border-border-default">
             <span className="text-text-tertiary">Anthologies Bound</span>
-            <span className="font-mono font-semibold text-text-primary">{collections.length}</span>
+            <span className="font-mono font-medium text-text-primary">{collections.length}</span>
           </div>
-          <div className="flex items-center justify-between pb-2 border-b border-border-subtle/30">
+          <div className="flex items-center justify-between pb-2 border-b border-border-default">
             <span className="text-text-tertiary">Library Atmosphere</span>
-            <span className="font-mono text-secondary">Sanctuary Mode</span>
+            <span className="font-mono text-text-secondary">Monochrome</span>
           </div>
           <div className="flex items-center justify-between">
             <span className="text-text-tertiary">Status</span>
-            <span className="text-emerald-400 font-mono text-[11px] flex items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-text-secondary font-mono text-[11px] flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-text-secondary" />
               Synced
             </span>
           </div>
         </div>
       </section>
 
-      {/* Bind Chapbook Physical Export Card from Stitch */}
-      <section className="glass-surface rounded-2xl p-5 space-y-3 border border-secondary/30 relative overflow-hidden">
-        <div className="flex items-center gap-2 text-secondary text-xs font-mono font-semibold">
+      {/* Bind Chapbook Card */}
+      <section className="bg-surface rounded-[var(--radius-lg)] p-5 border border-border-default space-y-3 relative overflow-hidden">
+        <div className="flex items-center gap-2 text-text-secondary text-xs font-mono font-medium">
           <BookMarked size={14} />
           <span>Poetly Press</span>
         </div>
-        <h4 className="font-display text-lg text-text-primary font-light leading-snug">
+        <h4 className="font-display text-lg text-text-primary font-normal leading-snug">
           Bind Physical Chapbook
         </h4>
-        <p className="text-xs text-text-tertiary line-clamp-2 font-light">
+        <p className="text-xs text-text-secondary line-clamp-2 font-light">
           Export your personal collection into formatted letterpress PDF or bespoke bound volume.
         </p>
         <div className="pt-2">
           <Link
             href="/write"
-            className="px-3.5 py-1.5 rounded-full bg-secondary/15 text-secondary border border-secondary/30 hover:bg-secondary/25 text-xs font-semibold inline-flex items-center gap-1.5 transition-colors"
+            className="px-3.5 py-1.5 min-h-[36px] rounded-full bg-surface-secondary text-text-primary border border-border-default hover:bg-surface-hover text-xs font-medium inline-flex items-center gap-1.5 transition-colors"
           >
             <span>Design Folio</span>
             <ArrowRight size={13} />
@@ -138,14 +138,14 @@ export default function CollectionsPage() {
       <div className="space-y-8">
         {/* SECTION 1: HEADER SECTION */}
         <section className="space-y-2 pt-1">
-          <div className="flex items-center gap-2 text-primary font-mono text-xs font-medium">
-            <BookOpen size={14} className="text-primary" />
+          <div className="flex items-center gap-2 text-text-tertiary font-mono text-xs font-medium">
+            <BookOpen size={14} className="text-text-primary" />
             <span className="uppercase tracking-widest text-[11px]">Personal Sanctuary &amp; Curations</span>
-            <span className="text-text-tertiary">/</span>
+            <span>/</span>
             <span className="text-text-secondary">Anthology Bindings</span>
           </div>
 
-          <h1 className="font-display text-3xl sm:text-4xl text-text-primary font-light tracking-tight">
+          <h1 className="font-display text-3xl sm:text-4xl text-text-primary font-normal tracking-tight">
             Collections &amp; Personal Library
           </h1>
 
@@ -154,12 +154,12 @@ export default function CollectionsPage() {
           </p>
 
           {/* Action Row: Filter Pills & New Collection CTA */}
-          <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-b border-border-subtle/40 pb-4">
+          <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-b border-border-default pb-4">
             <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
-              <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-primary/15 text-primary border border-primary/40 shadow-sm shrink-0">
+              <span className="px-3.5 py-1.5 rounded-full text-xs font-medium bg-primary text-background shrink-0 min-h-[36px] flex items-center">
                 All Collections ({collections.length})
               </span>
-              <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold glass-pill text-text-secondary shrink-0">
+              <span className="px-3.5 py-1.5 rounded-full text-xs font-medium bg-surface-secondary text-text-secondary border border-border-default shrink-0 min-h-[36px] flex items-center">
                 Curated by Me
               </span>
             </div>
@@ -167,7 +167,7 @@ export default function CollectionsPage() {
             <button
               type="button"
               onClick={() => setShowCreate(true)}
-              className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-primary-container to-secondary text-white font-semibold text-xs tracking-wider glowing-btn-aura hover:opacity-95 transition-all active:scale-95 cursor-pointer shrink-0 shadow-md"
+              className="flex items-center gap-1.5 px-4 py-2 min-h-[44px] rounded-full bg-primary text-background font-medium text-xs tracking-wider hover:opacity-90 transition-opacity cursor-pointer shrink-0"
             >
               <Plus size={14} />
               <span>New Collection</span>
@@ -177,15 +177,15 @@ export default function CollectionsPage() {
 
         {/* Create Collection Drawer / Card */}
         {showCreate && (
-          <div className="glass-panel-elevated rounded-2xl p-5 sm:p-6 border border-primary/30 animate-fade-in space-y-4">
-            <div className="flex items-center justify-between pb-2 border-b border-border-subtle/30">
+          <div className="bg-surface rounded-[var(--radius-lg)] p-5 sm:p-6 border border-border-default animate-fade-in space-y-4">
+            <div className="flex items-center justify-between pb-2 border-b border-border-default">
               <h3 className="font-display text-lg text-text-primary font-medium">
                 Bind a New Anthology
               </h3>
               <button
                 type="button"
                 onClick={() => setShowCreate(false)}
-                className="text-text-tertiary hover:text-text-primary p-1 cursor-pointer"
+                className="text-text-tertiary hover:text-text-primary p-2 min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer"
                 aria-label="Cancel new collection"
               >
                 <X size={16} />
@@ -197,7 +197,7 @@ export default function CollectionsPage() {
               value={newTitle}
               onChange={(e) => setNewTitle(e.target.value)}
               placeholder="Anthology title (e.g. Nocturnes & Ephemera)..."
-              className="w-full bg-surface-secondary/70 border border-border-subtle/50 rounded-xl px-4 py-2.5 text-sm text-text-primary placeholder:text-text-tertiary focus:outline-none focus:border-primary/50 transition-colors font-sans"
+              className="w-full bg-surface-secondary border border-border-default rounded-[var(--radius-md)] px-4 py-2.5 text-sm text-text-primary placeholder:text-text-tertiary focus:outline-none focus:border-text-primary transition-colors font-sans"
               autoFocus
             />
 
@@ -205,7 +205,7 @@ export default function CollectionsPage() {
               value={newDesc}
               onChange={(e) => setNewDesc(e.target.value)}
               placeholder="Poetic dedication or theme description..."
-              className="w-full bg-surface-secondary/70 border border-border-subtle/50 rounded-xl px-4 py-2.5 text-sm text-text-primary placeholder:text-text-tertiary focus:outline-none focus:border-primary/50 resize-none transition-colors font-verse italic font-light"
+              className="w-full bg-surface-secondary border border-border-default rounded-[var(--radius-md)] px-4 py-2.5 text-sm text-text-primary placeholder:text-text-tertiary focus:outline-none focus:border-text-primary resize-none transition-colors font-verse italic font-light"
               rows={2}
             />
 
@@ -213,7 +213,7 @@ export default function CollectionsPage() {
               <button
                 type="button"
                 onClick={() => setShowCreate(false)}
-                className="text-xs text-text-tertiary hover:text-text-primary px-3 py-1.5 transition-colors cursor-pointer"
+                className="text-xs text-text-secondary hover:text-text-primary px-3 py-2 min-h-[44px] transition-colors cursor-pointer"
               >
                 Cancel
               </button>
@@ -221,7 +221,7 @@ export default function CollectionsPage() {
                 type="button"
                 onClick={handleCreate}
                 disabled={!newTitle.trim()}
-                className="px-4 py-1.5 rounded-full bg-gradient-to-r from-primary-container to-secondary text-white font-semibold text-xs glowing-btn-aura hover:opacity-95 transition-all disabled:opacity-40 cursor-pointer"
+                className="px-4 py-2 min-h-[44px] rounded-full bg-primary text-background font-medium text-xs hover:opacity-90 transition-opacity disabled:opacity-40 cursor-pointer"
               >
                 Create Binder
               </button>
@@ -234,19 +234,19 @@ export default function CollectionsPage() {
           <section className="space-y-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                <h2 className="text-xs font-mono uppercase tracking-wider font-semibold text-text-secondary">
+                <span className="w-2 h-2 rounded-full bg-primary" />
+                <h2 className="text-xs font-mono uppercase tracking-wider font-medium text-text-secondary">
                   Sanctuary Spotlight · Featured Binder
                 </h2>
               </div>
               <span className="text-xs text-text-tertiary font-mono">Curated Selection</span>
             </div>
 
-            <div className="glass-panel-elevated rounded-2xl p-6 sm:p-7 relative overflow-hidden group border border-primary/25 hover:border-primary/40 transition-all duration-300 specular-top-border">
+            <div className="bg-surface rounded-[var(--radius-lg)] p-6 sm:p-7 relative overflow-hidden group border border-border-default hover:border-text-primary transition-colors">
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 relative z-10">
                 <div className="space-y-2 flex-1">
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-secondary px-2.5 py-0.5 rounded-full bg-secondary/15 border border-secondary/30">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-text-secondary px-2.5 py-0.5 rounded bg-surface-secondary border border-border-default">
                       Salon Binder
                     </span>
                     <span className="text-xs text-text-tertiary font-mono">
@@ -254,7 +254,7 @@ export default function CollectionsPage() {
                     </span>
                   </div>
 
-                  <h3 className="font-display italic text-2xl sm:text-3xl text-text-primary group-hover:text-primary transition-colors font-light">
+                  <h3 className="font-display italic text-2xl sm:text-3xl text-text-primary group-hover:underline transition-colors font-light">
                     {featuredCollection.title}
                   </h3>
 
@@ -268,7 +268,7 @@ export default function CollectionsPage() {
                 <div className="shrink-0 sm:self-center">
                   <Link
                     href={`/collections/${featuredCollection.id}`}
-                    className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary-container to-secondary text-white font-semibold text-xs glowing-btn-aura hover:opacity-95 transition-all"
+                    className="flex items-center gap-2 px-5 py-2.5 min-h-[44px] rounded-full bg-primary text-background font-medium text-xs hover:opacity-90 transition-opacity"
                   >
                     <span>Open Sanctuary</span>
                     <ArrowRight size={14} />
@@ -293,7 +293,7 @@ export default function CollectionsPage() {
           {loading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="h-44 glass-surface rounded-2xl skeleton" />
+                <div key={i} className="h-44 bg-surface rounded-[var(--radius-lg)] border border-border-default skeleton" />
               ))}
             </div>
           ) : collections.length > 0 ? (
@@ -303,7 +303,7 @@ export default function CollectionsPage() {
               ))}
             </div>
           ) : !user ? (
-            <div className="text-center py-16 px-6 glass-surface rounded-2xl border border-border-subtle/40 space-y-3">
+            <div className="text-center py-16 px-6 bg-surface-secondary rounded-[var(--radius-lg)] border border-border-default space-y-3">
               <p className="font-verse text-xl text-text-tertiary italic">
                 Organize your favorite poems into personal anthologies.
               </p>
@@ -313,14 +313,14 @@ export default function CollectionsPage() {
               <div className="pt-2">
                 <Link
                   href="/login"
-                  className="inline-flex items-center px-5 py-2 text-xs font-semibold text-white bg-gradient-to-r from-primary-container to-secondary rounded-full hover:opacity-95 shadow-md glowing-btn-aura"
+                  className="inline-flex items-center px-5 py-2.5 min-h-[44px] text-xs font-medium text-background bg-primary rounded-full hover:opacity-90 transition-opacity"
                 >
                   Sign In to Salon →
                 </Link>
               </div>
             </div>
           ) : (
-            <div className="text-center py-16 px-6 glass-surface rounded-2xl border border-border-subtle/40 space-y-3">
+            <div className="text-center py-16 px-6 bg-surface-secondary rounded-[var(--radius-lg)] border border-border-default space-y-3">
               <p className="font-verse text-xl text-text-tertiary italic">
                 No collections bound to your library yet.
               </p>
@@ -331,7 +331,7 @@ export default function CollectionsPage() {
                 <button
                   type="button"
                   onClick={() => setShowCreate(true)}
-                  className="inline-flex items-center px-4 py-2 text-xs font-semibold text-primary hover:underline cursor-pointer"
+                  className="inline-flex items-center px-4 py-2 min-h-[44px] text-xs font-medium text-text-primary hover:underline cursor-pointer"
                 >
                   + Bind your first collection
                 </button>

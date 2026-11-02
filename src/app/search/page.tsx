@@ -16,7 +16,7 @@ export default function SearchPage() {
       fallback={
         <AppShell maxWidth="feed">
           <div className="py-12 flex justify-center">
-            <div className="w-8 h-8 rounded-full border-2 border-brand border-t-transparent animate-spin" />
+            <div className="w-8 h-8 rounded-full border-2 border-primary border-t-transparent animate-spin" />
           </div>
         </AppShell>
       }
@@ -124,19 +124,19 @@ function SearchContent() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search poems, writers, or tags..."
-            className="w-full bg-surface border border-border-subtle focus:border-brand rounded-[var(--radius-md)] outline-none pl-10 pr-4 py-3 text-sm text-text-primary placeholder:text-text-tertiary transition-colors"
+            className="w-full bg-surface border border-border-default focus:border-text-primary rounded-[var(--radius-md)] outline-none pl-10 pr-4 py-3 text-sm text-text-primary placeholder:text-text-tertiary transition-colors"
             autoFocus
           />
         </div>
 
-        <div className="flex gap-1 mb-6 bg-surface-secondary rounded-[var(--radius-full)] p-1">
+        <div className="flex gap-1 mb-6 bg-surface-secondary border border-border-default rounded-full p-1">
           {(["poems", "writers", "tags"] as const).map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`flex-1 px-3 py-2 text-xs font-medium rounded-full transition-all duration-200 capitalize ${
+              className={`flex-1 px-3 py-2 min-h-[44px] text-xs font-medium rounded-full transition-colors capitalize ${
                 activeTab === tab
-                  ? "bg-surface text-text-primary shadow-sm"
+                  ? "bg-primary text-background font-semibold"
                   : "text-text-secondary hover:text-text-primary"
               }`}
             >

@@ -142,7 +142,7 @@ export default function WritersPage() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search writers by name or handle..."
-            className="w-full bg-surface border border-border-subtle rounded-[var(--radius-md)] px-4 py-2.5 text-sm text-text-primary placeholder:text-text-tertiary outline-none focus:border-brand transition-colors"
+            className="w-full bg-surface border border-border-default rounded-[var(--radius-md)] px-4 py-2.5 text-sm text-text-primary placeholder:text-text-tertiary outline-none focus:border-text-primary transition-colors"
           />
         </div>
 

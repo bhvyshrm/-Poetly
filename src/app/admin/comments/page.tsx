@@ -89,13 +89,13 @@ export default function AdminCommentsPage() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search comments..."
-          className="w-full bg-surface border border-border-subtle rounded-[var(--radius-sm)] pl-9 pr-3 py-2 text-sm text-text-primary placeholder:text-text-tertiary outline-none focus:border-brand transition-colors"
+          className="w-full bg-surface border border-border-default rounded-[var(--radius-sm)] pl-9 pr-3 py-2 text-sm text-text-primary placeholder:text-text-tertiary outline-none focus:border-text-primary transition-colors"
         />
       </div>
 
       {error && (
-        <div className="bg-error-subtle border border-error/20 rounded-[var(--radius-md)] p-4 mb-6">
-          <p className="text-sm text-error">{error}</p>
+        <div className="bg-surface-secondary border border-border-default rounded-[var(--radius-md)] p-4 mb-6">
+          <p className="text-sm text-text-primary">{error}</p>
         </div>
       )}
 
@@ -105,7 +105,7 @@ export default function AdminCommentsPage() {
         <>
           <div className="space-y-0">
             {comments.map((comment) => (
-              <div key={comment.id} className="py-4 border-b border-border-subtle group">
+              <div key={comment.id} className="py-4 border-b border-border-default group">
                 <div className="flex items-start gap-3">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1.5">
@@ -115,7 +115,7 @@ export default function AdminCommentsPage() {
                     </div>
                     <p className="text-sm text-text-secondary line-clamp-2">{comment.content}</p>
                     <div className="flex items-center gap-2 mt-1.5">
-                      <Link href={`/poem/${comment.poem_id}`} className="text-[10px] text-text-tertiary hover:text-brand transition-colors flex items-center gap-1">
+                      <Link href={`/poem/${comment.poem_id}`} className="text-[10px] text-text-tertiary hover:text-text-primary transition-colors flex items-center gap-1">
                         View poem <ExternalLink size={10} />
                       </Link>
                     </div>

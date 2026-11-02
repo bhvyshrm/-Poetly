@@ -210,7 +210,7 @@ export default function AdminReportsPage() {
                 value={adminNote}
                 onChange={(e) => setAdminNote(e.target.value)}
                 placeholder="Add a note about this decision..."
-                className="w-full bg-surface-secondary border border-border-subtle rounded-[var(--radius-sm)] px-3 py-2 text-sm text-text-primary placeholder:text-text-tertiary outline-none focus:border-brand resize-none"
+                className="w-full bg-surface-secondary border border-border-default rounded-[var(--radius-sm)] px-3 py-2 text-sm text-text-primary placeholder:text-text-tertiary outline-none focus:border-text-primary resize-none"
                 rows={3}
               />
             </div>
@@ -218,7 +218,7 @@ export default function AdminReportsPage() {
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => setConfirm({ action: "resolve", reportId: selected.id })}
-                className="px-4 py-2 text-xs font-medium bg-success text-white rounded-[var(--radius-sm)] hover:bg-success/90 transition-colors"
+                className="px-4 py-2 min-h-[44px] text-xs font-medium bg-primary text-background rounded-[var(--radius-sm)] hover:opacity-90 transition-opacity"
               >
                 Resolve
               </button>

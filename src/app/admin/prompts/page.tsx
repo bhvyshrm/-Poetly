@@ -39,15 +39,15 @@ export default function AdminPromptsPage() {
         </div>
         <Link
           href="/prompts"
-          className="flex items-center gap-1.5 text-xs font-medium text-brand hover:text-brand-hover transition-colors"
+          className="flex items-center gap-1.5 text-xs font-medium text-text-primary hover:underline transition-colors min-h-[44px]"
         >
           Public Prompts <ExternalLink size={12} strokeWidth={1.5} />
         </Link>
       </div>
 
       {error && (
-        <div className="bg-error-subtle border border-error/20 rounded-[var(--radius-md)] p-4 mb-6">
-          <p className="text-sm text-error">{error}</p>
+        <div className="bg-surface-secondary border border-border-default rounded-[var(--radius-md)] p-4 mb-6">
+          <p className="text-sm text-text-primary">{error}</p>
         </div>
       )}
 
