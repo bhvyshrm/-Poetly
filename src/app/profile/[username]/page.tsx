@@ -258,26 +258,18 @@ export default function ProfileByUsernamePage() {
           <span>Back</span>
         </button>
 
-        {/* 1. PROFILE HEADER / WRITER BANNER & RELIQUARY IDENTITY */}
-        <section className="glass-surface rounded-2xl overflow-hidden border border-border-subtle/40 relative">
-          {/* Atmospheric Literary Banner with Ambient Mist & Gradient */}
-          <div className="h-44 sm:h-52 w-full relative overflow-hidden bg-gradient-to-br from-surface-secondary via-surface to-background">
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-secondary/5 to-transparent pointer-events-none" />
-            <div className="absolute top-4 right-4 flex items-center gap-2">
-              <span className="glass-pill px-3 py-1 rounded-full text-xs font-mono text-secondary flex items-center gap-1.5 shadow-md">
-                <Sparkles size={13} className="text-primary" />
-                <span>Fellow in Residence</span>
-              </span>
-            </div>
-          </div>
+        {/* 1. PROFILE HEADER / WRITER BANNER */}
+        <section className="glass-surface rounded-2xl overflow-hidden border border-border-default relative">
+          {/* Minimal Clean Banner */}
+          <div className="h-28 sm:h-36 w-full relative overflow-hidden bg-surface-secondary border-b border-border-default" />
 
-          {/* Reliquary Identity Content */}
+          {/* Identity Content */}
           <div className="px-5 sm:px-8 pb-6 pt-0 relative">
             {/* Avatar & Action Buttons Row */}
-            <div className="flex flex-wrap items-end justify-between -mt-14 sm:-mt-16 gap-4 mb-4">
+            <div className="flex flex-wrap items-end justify-between -mt-10 sm:-mt-12 gap-4 mb-4">
               {/* Profile Avatar */}
               <div className="relative">
-                <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl glass-panel-elevated p-1 ring-2 ring-primary/40 glow-orchid relative overflow-hidden bg-surface-secondary shrink-0">
+                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl p-1 border border-border-default shadow-sm relative overflow-hidden bg-surface-secondary shrink-0">
                   {profile.profile_image ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -286,7 +278,7 @@ export default function ProfileByUsernamePage() {
                       className="w-full h-full object-cover rounded-xl"
                     />
                   ) : (
-                    <div className="w-full h-full rounded-xl bg-surface-secondary flex items-center justify-center font-display text-2xl sm:text-3xl font-medium text-primary">
+                    <div className="w-full h-full rounded-xl bg-surface-secondary flex items-center justify-center font-display text-2xl sm:text-3xl font-medium text-text-primary">
                       {profile.display_name?.[0]?.toUpperCase() || "P"}
                     </div>
                   )}
@@ -298,27 +290,27 @@ export default function ProfileByUsernamePage() {
                 {isOwnProfile ? (
                   <Link
                     href="/profile/setup"
-                    className="glass-panel-elevated hover:border-primary/50 transition-all px-4 py-2 rounded-xl text-text-primary text-xs font-semibold flex items-center gap-1.5 active:scale-95 cursor-pointer shadow-sm"
+                    className="border border-border-default hover:bg-surface-hover transition-colors px-4 py-2 rounded-full text-text-primary text-xs font-medium flex items-center gap-1.5 active:scale-95 cursor-pointer shadow-none"
                   >
-                    <Edit3 size={14} className="text-primary" />
-                    <span>Edit Salon Profile</span>
+                    <Edit3 size={14} />
+                    <span>Edit Profile</span>
                   </Link>
                 ) : user ? (
                   <button
                     type="button"
                     onClick={handleFollow}
-                    className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all select-none cursor-pointer flex items-center gap-1.5 ${
+                    className={`px-4 py-2 rounded-full text-xs font-medium transition-colors select-none cursor-pointer flex items-center gap-1.5 ${
                       isFollowing
-                        ? "glass-pill text-text-secondary hover:text-error hover:border-error/40"
-                        : "bg-gradient-to-r from-primary-container to-secondary text-white glowing-btn-aura hover:opacity-95"
+                        ? "border border-border-default text-text-secondary hover:text-text-primary hover:bg-surface-hover"
+                        : "bg-primary text-on-primary hover:opacity-90"
                     }`}
                   >
-                    <span>{isFollowing ? "Following" : "Follow Poet"}</span>
+                    <span>{isFollowing ? "Following" : "Follow"}</span>
                   </button>
                 ) : (
                   <Link
                     href="/login"
-                    className="bg-gradient-to-r from-primary-container to-secondary text-white glowing-btn-aura px-4 py-2 rounded-xl text-xs font-semibold hover:opacity-95"
+                    className="bg-primary text-on-primary px-4 py-2 rounded-full text-xs font-medium hover:opacity-90 transition-opacity"
                   >
                     Follow
                   </Link>
@@ -327,7 +319,7 @@ export default function ProfileByUsernamePage() {
                 <button
                   type="button"
                   onClick={handleShare}
-                  className="glass-pill p-2 rounded-xl text-text-secondary hover:text-text-primary active:scale-95 transition-all cursor-pointer"
+                  className="border border-border-default p-2 rounded-full text-text-secondary hover:text-text-primary hover:bg-surface-hover active:scale-95 transition-colors cursor-pointer"
                   title="Share Profile"
                 >
                   <Share2 size={16} />
@@ -337,12 +329,9 @@ export default function ProfileByUsernamePage() {
 
             {/* Identity Headings */}
             <div className="mb-3 space-y-0.5">
-              <div className="flex items-center gap-2">
-                <h1 className="font-display italic text-2xl sm:text-3xl text-text-primary font-normal tracking-tight">
-                  {profile.display_name}
-                </h1>
-                <Sparkles size={16} className="text-primary" />
-              </div>
+              <h1 className="font-display italic text-2xl sm:text-3xl text-text-primary font-normal tracking-tight">
+                {profile.display_name}
+              </h1>
               <p className="text-xs text-text-tertiary font-mono">
                 @{profile.username}
                 {profile.location && ` · ${profile.location}`}
@@ -360,38 +349,38 @@ export default function ProfileByUsernamePage() {
             <div className="flex flex-wrap items-center gap-3 text-xs text-text-tertiary mb-5">
               {profile.website && (
                 <a
-                  href={profile.website}
+                  href={profile.website.startsWith("http") ? profile.website : `https://${profile.website}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-primary hover:underline"
+                  className="inline-flex items-center gap-1 text-text-secondary hover:text-text-primary font-mono transition-colors"
                 >
                   <Globe size={13} />
                   <span>{profile.website.replace(/^https?:\/\//, "")}</span>
                 </a>
               )}
               {profile.location && (
-                <span className="inline-flex items-center gap-1">
-                  <MapPin size={13} className="text-secondary" />
+                <span className="inline-flex items-center gap-1 font-mono">
+                  <MapPin size={13} className="text-text-tertiary" />
                   <span>{profile.location}</span>
                 </span>
               )}
-              <span className="inline-flex items-center gap-1">
+              <span className="inline-flex items-center gap-1 font-mono">
                 <Calendar size={13} className="text-text-tertiary" />
                 <span>Member since {new Date(profile.created_at).toLocaleDateString(undefined, { month: "short", year: "numeric" })}</span>
               </span>
             </div>
 
-            {/* Follower & Literary Stats Row (Grid of 4) */}
-            <div className="grid grid-cols-4 gap-2 pt-4 border-t border-border-subtle/40">
-              <div className="glass-pill rounded-xl p-3 text-center">
-                <div className="font-display text-lg sm:text-xl text-primary font-semibold">
+            {/* Follower & Stanza Stats */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-4 border-t border-border-subtle">
+              <div className="bg-surface-secondary border border-border-default rounded-xl p-3 text-center">
+                <div className="font-display text-lg sm:text-xl text-text-primary font-semibold">
                   {followerCount.toLocaleString()}
                 </div>
                 <div className="text-[10px] text-text-tertiary uppercase tracking-wider font-mono">
-                  Readers
+                  Followers
                 </div>
               </div>
-              <div className="glass-pill rounded-xl p-3 text-center">
+              <div className="bg-surface-secondary border border-border-default rounded-xl p-3 text-center">
                 <div className="font-display text-lg sm:text-xl text-text-primary font-semibold">
                   {followingCount.toLocaleString()}
                 </div>
@@ -399,20 +388,20 @@ export default function ProfileByUsernamePage() {
                   Following
                 </div>
               </div>
-              <div className="glass-pill rounded-xl p-3 text-center">
-                <div className="font-display text-lg sm:text-xl text-secondary font-semibold">
+              <div className="bg-surface-secondary border border-border-default rounded-xl p-3 text-center">
+                <div className="font-display text-lg sm:text-xl text-text-primary font-semibold">
                   {poems.length}
                 </div>
                 <div className="text-[10px] text-text-tertiary uppercase tracking-wider font-mono">
                   Poems
                 </div>
               </div>
-              <div className="glass-pill rounded-xl p-3 text-center">
-                <div className="font-display text-lg sm:text-xl text-tertiary font-semibold">
+              <div className="bg-surface-secondary border border-border-default rounded-xl p-3 text-center">
+                <div className="font-display text-lg sm:text-xl text-text-primary font-semibold">
                   {collections.length}
                 </div>
                 <div className="text-[10px] text-text-tertiary uppercase tracking-wider font-mono">
-                  Anthologies
+                  Collections
                 </div>
               </div>
             </div>
@@ -420,49 +409,49 @@ export default function ProfileByUsernamePage() {
         </section>
 
         {/* 2. PROFILE CONTENT NAVIGATION TABS */}
-        <div className="border-b border-border-subtle/40 flex items-center gap-6 sm:gap-8 text-sm overflow-x-auto no-scrollbar">
+        <div className="border-b border-border-default flex items-center gap-6 sm:gap-8 text-sm overflow-x-auto no-scrollbar">
           <button
             type="button"
             onClick={() => setActiveTab("poems")}
-            className={`pb-3 relative font-semibold transition-colors whitespace-nowrap cursor-pointer flex items-center gap-2 ${
-              activeTab === "poems" ? "text-primary" : "text-text-tertiary hover:text-text-primary"
+            className={`pb-3 relative font-medium transition-colors whitespace-nowrap cursor-pointer flex items-center gap-2 ${
+              activeTab === "poems" ? "text-text-primary font-semibold" : "text-text-tertiary hover:text-text-primary"
             }`}
           >
-            <span>Published Poems</span>
-            <span className="px-2 py-0.5 rounded-full bg-primary/10 text-primary text-[11px] font-mono">
+            <span>Poems</span>
+            <span className="px-2 py-0.5 rounded-full bg-surface-secondary border border-border-default text-text-primary text-[11px] font-mono">
               {poems.length}
             </span>
             {activeTab === "poems" && (
-              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary glow-orchid rounded-full" />
+              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-text-primary rounded-full" />
             )}
           </button>
 
           <button
             type="button"
             onClick={() => setActiveTab("collections")}
-            className={`pb-3 relative font-semibold transition-colors whitespace-nowrap cursor-pointer flex items-center gap-2 ${
-              activeTab === "collections" ? "text-primary" : "text-text-tertiary hover:text-text-primary"
+            className={`pb-3 relative font-medium transition-colors whitespace-nowrap cursor-pointer flex items-center gap-2 ${
+              activeTab === "collections" ? "text-text-primary font-semibold" : "text-text-tertiary hover:text-text-primary"
             }`}
           >
-            <span>Collections &amp; Anthologies</span>
-            <span className="px-2 py-0.5 rounded-full bg-surface-secondary text-text-tertiary text-[11px] font-mono">
+            <span>Collections</span>
+            <span className="px-2 py-0.5 rounded-full bg-surface-secondary border border-border-default text-text-primary text-[11px] font-mono">
               {collections.length}
             </span>
             {activeTab === "collections" && (
-              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary glow-orchid rounded-full" />
+              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-text-primary rounded-full" />
             )}
           </button>
 
           <button
             type="button"
             onClick={() => setActiveTab("about")}
-            className={`pb-3 relative font-semibold transition-colors whitespace-nowrap cursor-pointer ${
-              activeTab === "about" ? "text-primary" : "text-text-tertiary hover:text-text-primary"
+            className={`pb-3 relative font-medium transition-colors whitespace-nowrap cursor-pointer ${
+              activeTab === "about" ? "text-text-primary font-semibold" : "text-text-tertiary hover:text-text-primary"
             }`}
           >
-            About Poet
+            About
             {activeTab === "about" && (
-              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary glow-orchid rounded-full" />
+              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-text-primary rounded-full" />
             )}
           </button>
         </div>
@@ -489,14 +478,14 @@ export default function ProfileByUsernamePage() {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-14 px-6 glass-surface rounded-2xl border border-border-subtle/40">
+              <div className="text-center py-14 px-6 bg-surface-secondary rounded-[var(--radius-lg)] border border-border-default">
                 <p className="font-verse text-lg text-text-tertiary italic mb-2">
                   No poems published in the salon yet.
                 </p>
                 {isOwnProfile && (
                   <Link
                     href="/write"
-                    className="inline-flex items-center px-4 py-2 text-xs font-semibold text-white bg-gradient-to-r from-primary-container to-secondary rounded-full hover:opacity-95 shadow-md glowing-btn-aura mt-3"
+                    className="inline-flex items-center px-4 py-2 min-h-[44px] text-xs font-medium text-background bg-primary rounded-full hover:opacity-90 transition-opacity mt-3"
                   >
                     Write your first poem →
                   </Link>
@@ -509,11 +498,11 @@ export default function ProfileByUsernamePage() {
                 {collections.map((col) => (
                   <div
                     key={col.id}
-                    className="glass-surface rounded-2xl p-5 space-y-3 hover:border-primary/40 transition-all flex flex-col justify-between"
+                    className="bg-surface rounded-[var(--radius-lg)] p-5 border border-border-default hover:border-text-primary transition-all flex flex-col justify-between"
                   >
                     <div className="space-y-1.5">
                       <div className="flex items-center justify-between text-xs text-text-tertiary font-mono">
-                        <span className="text-secondary bg-secondary/15 border border-secondary/30 px-2 py-0.5 rounded-md text-[10px]">
+                        <span className="text-text-secondary bg-surface-secondary border border-border-default px-2 py-0.5 rounded text-[10px]">
                           Chapbook
                         </span>
                         <span>{new Date(col.created_at).toLocaleDateString()}</span>
@@ -529,7 +518,7 @@ export default function ProfileByUsernamePage() {
                     </div>
                     <Link
                       href="/collections"
-                      className="text-xs text-primary font-semibold hover:underline pt-2 border-t border-border-subtle/30 block"
+                      className="text-xs text-text-primary font-medium hover:underline pt-2 border-t border-border-subtle block"
                     >
                       Open Chapbook →
                     </Link>
@@ -537,14 +526,14 @@ export default function ProfileByUsernamePage() {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-14 px-6 glass-surface rounded-2xl border border-border-subtle/40">
+              <div className="text-center py-14 px-6 bg-surface-secondary rounded-[var(--radius-lg)] border border-border-default">
                 <p className="font-verse text-lg text-text-tertiary italic mb-2">
                   No bound anthologies yet.
                 </p>
                 {isOwnProfile && (
                   <Link
                     href="/collections"
-                    className="inline-flex items-center px-4 py-2 text-xs font-semibold text-white bg-gradient-to-r from-primary-container to-secondary rounded-full hover:opacity-95 shadow-md glowing-btn-aura mt-3"
+                    className="inline-flex items-center px-4 py-2 min-h-[44px] text-xs font-medium text-background bg-primary rounded-full hover:opacity-90 transition-opacity mt-3"
                   >
                     Create a collection →
                   </Link>
@@ -552,13 +541,13 @@ export default function ProfileByUsernamePage() {
               </div>
             )
           ) : (
-            <div className="glass-surface rounded-2xl p-6 sm:p-8 space-y-6">
+            <div className="bg-surface rounded-[var(--radius-lg)] p-6 sm:p-8 space-y-6 border border-border-default">
               <div>
                 <h3 className="font-display text-xl text-text-primary font-medium mb-3">
                   Literary Statement
                 </h3>
                 {profile.bio ? (
-                  <p className="font-verse italic text-lg text-text-primary/90 leading-relaxed font-light">
+                  <p className="font-verse italic text-lg text-text-primary leading-relaxed font-light">
                     &ldquo;{profile.bio}&rdquo;
                   </p>
                 ) : (
@@ -568,14 +557,14 @@ export default function ProfileByUsernamePage() {
                 )}
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-border-subtle/40 text-xs">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-border-default text-xs">
                 {profile.location && (
                   <div className="space-y-1">
                     <span className="text-text-tertiary uppercase font-mono tracking-wider text-[10px]">
                       Sanctuary Locale
                     </span>
                     <p className="text-text-primary font-medium flex items-center gap-1.5">
-                      <MapPin size={14} className="text-secondary" />
+                      <MapPin size={14} className="text-text-tertiary" />
                       <span>{profile.location}</span>
                     </p>
                   </div>
@@ -585,7 +574,7 @@ export default function ProfileByUsernamePage() {
                     <span className="text-text-tertiary uppercase font-mono tracking-wider text-[10px]">
                       Marginalia Press
                     </span>
-                    <p className="text-primary font-medium">
+                    <p className="text-text-primary font-medium">
                       <a href={profile.website} target="_blank" rel="noopener noreferrer" className="hover:underline">
                         {profile.website}
                       </a>
@@ -597,7 +586,7 @@ export default function ProfileByUsernamePage() {
                     Salon Guild
                   </span>
                   <p className="text-text-primary font-medium flex items-center gap-1.5">
-                    <Users size={14} className="text-tertiary" />
+                    <Users size={14} className="text-text-tertiary" />
                     <span>Poetly Fellowship</span>
                   </p>
                 </div>
@@ -606,7 +595,7 @@ export default function ProfileByUsernamePage() {
                     Fellow Since
                   </span>
                   <p className="text-text-primary font-medium flex items-center gap-1.5">
-                    <Calendar size={14} className="text-primary" />
+                    <Calendar size={14} className="text-text-tertiary" />
                     <span>{new Date(profile.created_at).toLocaleDateString(undefined, { month: "long", year: "numeric" })}</span>
                   </p>
                 </div>

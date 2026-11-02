@@ -171,7 +171,7 @@ export default function ProfileSetupPage() {
     return (
       <AppShell maxWidth="feed">
         <div className="py-12 flex items-center justify-center">
-          <div className="w-8 h-8 rounded-full border-2 border-brand border-t-transparent animate-spin" />
+          <div className="w-8 h-8 rounded-full border-2 border-primary border-t-transparent animate-spin" />
         </div>
       </AppShell>
     );
@@ -183,7 +183,7 @@ export default function ProfileSetupPage() {
         {isEditing && (
           <button
             onClick={() => router.back()}
-            className="flex items-center gap-1.5 text-xs text-text-tertiary hover:text-text-primary transition-colors mb-6"
+            className="flex items-center gap-1.5 text-xs text-text-tertiary hover:text-text-primary transition-colors mb-6 min-h-[44px]"
           >
             <ArrowLeft size={14} strokeWidth={1.5} /> Back
           </button>
@@ -199,8 +199,8 @@ export default function ProfileSetupPage() {
         </div>
 
         {error && (
-          <div className="mb-6 p-3 bg-error-subtle border border-error/20 rounded-[var(--radius-md)]">
-            <p className="text-xs text-error">{error}</p>
+          <div className="mb-6 p-3 bg-surface-secondary border border-border-default rounded-[var(--radius-md)]">
+            <p className="text-xs text-text-primary font-medium">{error}</p>
           </div>
         )}
 
@@ -220,7 +220,7 @@ export default function ProfileSetupPage() {
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
                 disabled={uploadingImage}
-                className="absolute inset-0 bg-black/40 rounded-[var(--radius-md)] flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+                className="absolute inset-0 bg-black/60 rounded-[var(--radius-md)] flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
                 aria-label="Upload profile image"
               >
                 <Camera size={20} />
@@ -236,7 +236,7 @@ export default function ProfileSetupPage() {
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}
-              className="text-xs text-brand hover:text-brand-hover transition-colors"
+              className="text-xs text-text-secondary hover:text-text-primary transition-colors py-1"
             >
               {uploadingImage ? "Uploading..." : profileImage ? "Change avatar" : "Add avatar"}
             </button>
@@ -253,7 +253,7 @@ export default function ProfileSetupPage() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, ""))}
                 placeholder="yourname"
-                className="w-full bg-surface border border-border-subtle rounded-[var(--radius-md)] pl-7 pr-10 py-2.5 text-sm text-text-primary placeholder:text-text-disabled outline-none focus:border-brand transition-colors"
+                className="w-full bg-surface border border-border-subtle rounded-[var(--radius-md)] pl-7 pr-10 py-2.5 text-sm text-text-primary placeholder:text-text-disabled outline-none focus:border-text-primary transition-colors"
                 required
                 minLength={3}
                 maxLength={20}
@@ -263,10 +263,10 @@ export default function ProfileSetupPage() {
                   <div className="w-4 h-4 border-2 border-text-tertiary border-t-transparent rounded-full animate-spin" />
                 )}
                 {usernameStatus === "available" && (
-                  <span className="text-success text-xs font-bold">✓</span>
+                  <span className="text-text-primary text-xs font-bold">✓</span>
                 )}
                 {usernameStatus === "taken" && (
-                  <span className="text-error text-xs font-bold">✗</span>
+                  <span className="text-text-tertiary text-xs font-bold">✕</span>
                 )}
               </div>
             </div>
@@ -282,7 +282,7 @@ export default function ProfileSetupPage() {
               value={displayName}
               onChange={(e) => setDisplayName(e.target.value)}
               placeholder="Your name"
-              className="w-full bg-surface border border-border-subtle rounded-[var(--radius-md)] px-3 py-2.5 text-sm text-text-primary placeholder:text-text-disabled outline-none focus:border-brand transition-colors"
+              className="w-full bg-surface border border-border-subtle rounded-[var(--radius-md)] px-3 py-2.5 text-sm text-text-primary placeholder:text-text-disabled outline-none focus:border-text-primary transition-colors"
               required
             />
           </div>
@@ -295,7 +295,7 @@ export default function ProfileSetupPage() {
               value={bio}
               onChange={(e) => setBio(e.target.value)}
               placeholder="Tell readers about your writing and soul..."
-              className="w-full bg-surface border border-border-subtle rounded-[var(--radius-md)] px-3 py-2.5 text-sm text-text-primary placeholder:text-text-disabled outline-none focus:border-brand transition-colors resize-none"
+              className="w-full bg-surface border border-border-subtle rounded-[var(--radius-md)] px-3 py-2.5 text-sm text-text-primary placeholder:text-text-disabled outline-none focus:border-text-primary transition-colors resize-none"
               rows={3}
               maxLength={200}
             />
@@ -312,7 +312,7 @@ export default function ProfileSetupPage() {
                 value={website}
                 onChange={(e) => setWebsite(e.target.value)}
                 placeholder="https://..."
-                className="w-full bg-surface border border-border-subtle rounded-[var(--radius-md)] px-3 py-2.5 text-sm text-text-primary placeholder:text-text-disabled outline-none focus:border-brand transition-colors"
+                className="w-full bg-surface border border-border-subtle rounded-[var(--radius-md)] px-3 py-2.5 text-sm text-text-primary placeholder:text-text-disabled outline-none focus:border-text-primary transition-colors"
               />
             </div>
             <div>
@@ -324,7 +324,7 @@ export default function ProfileSetupPage() {
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
                 placeholder="City, Country"
-                className="w-full bg-surface border border-border-subtle rounded-[var(--radius-md)] px-3 py-2.5 text-sm text-text-primary placeholder:text-text-disabled outline-none focus:border-brand transition-colors"
+                className="w-full bg-surface border border-border-subtle rounded-[var(--radius-md)] px-3 py-2.5 text-sm text-text-primary placeholder:text-text-disabled outline-none focus:border-text-primary transition-colors"
               />
             </div>
           </div>
@@ -334,7 +334,7 @@ export default function ProfileSetupPage() {
               <button
                 type="button"
                 onClick={() => router.back()}
-                className="flex-1 py-3 border border-border-default text-text-secondary text-sm font-medium rounded-[var(--radius-full)] hover:bg-surface-hover transition-colors"
+                className="flex-1 min-h-[44px] py-3 border border-border-default text-text-secondary text-sm font-medium rounded-full hover:bg-surface-hover hover:text-text-primary transition-colors"
               >
                 Cancel
               </button>
@@ -342,7 +342,7 @@ export default function ProfileSetupPage() {
             <button
               type="submit"
               disabled={loading || !username.trim() || !displayName.trim() || usernameStatus === "taken"}
-              className="flex-1 py-3 gradient-brand text-white text-sm font-medium rounded-[var(--radius-full)] hover:opacity-90 transition-opacity disabled:opacity-50"
+              className="flex-1 min-h-[44px] py-3 bg-primary text-background text-sm font-medium rounded-full hover:opacity-90 transition-opacity disabled:opacity-40"
             >
               {loading ? "Saving..." : isEditing ? "Save Profile" : "Start Writing"}
             </button>

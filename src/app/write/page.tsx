@@ -31,14 +31,14 @@ const typographyOptions = [
 ];
 
 const moodOptions = [
-  { name: "Midnight", color: "#4A4F7C" },
-  { name: "Rain", color: "#6CA4D9" },
-  { name: "Lavender", color: "#CEBDFF" },
-  { name: "Dawn", color: "#F8ACFF" },
-  { name: "Paper", color: "#E0D7C6" },
-  { name: "Love", color: "#E879F9" },
-  { name: "Solitude", color: "#90CFF1" },
-  { name: "Melancholy", color: "#8B7FB0" },
+  { name: "Midnight" },
+  { name: "Rain" },
+  { name: "Lavender" },
+  { name: "Dawn" },
+  { name: "Paper" },
+  { name: "Love" },
+  { name: "Solitude" },
+  { name: "Melancholy" },
 ];
 
 export default function WritePage() {
@@ -348,22 +348,22 @@ function WritePageInner() {
             Salon Settings
           </h2>
         </div>
-        <span className="text-[10px] text-primary/80 bg-primary/10 border border-primary/20 px-2 py-0.5 rounded-full font-mono">
-          Editorial Mode
+        <span className="text-[10px] text-text-secondary bg-surface-secondary border border-border-default px-2 py-0.5 rounded-full font-mono">
+          Editor Mode
         </span>
       </div>
 
       {/* 1. Anthology / Collection Assignment */}
       <div className="space-y-2">
         <label className="text-[11px] font-semibold text-text-secondary uppercase tracking-wider font-mono">
-          Anthology / Collection
+          Collection
         </label>
         <select
           value={selectedCollectionId}
           onChange={(e) => setSelectedCollectionId(e.target.value)}
-          className="w-full bg-surface-secondary/70 border border-border-subtle/50 rounded-xl px-3 py-2 text-xs text-text-primary focus:outline-none focus:border-primary/50 cursor-pointer"
+          className="w-full bg-surface-secondary border border-border-default rounded-xl px-3 py-2 text-xs text-text-primary focus:outline-none focus:border-text-primary cursor-pointer"
         >
-          <option value="">No anthology assigned</option>
+          <option value="">No collection assigned</option>
           {userCollections.map((col) => (
             <option key={col.id} value={col.id}>
               {col.title}
@@ -375,30 +375,30 @@ function WritePageInner() {
       {/* 2. Publishing Visibility */}
       <div className="space-y-2.5">
         <label className="text-[11px] font-semibold text-text-secondary uppercase tracking-wider font-mono">
-          Publishing Visibility
+          Visibility
         </label>
         <div className="space-y-2">
           <label
             onClick={() => setVisibility("public")}
             className={`flex items-start gap-3 p-2.5 rounded-xl border cursor-pointer transition-colors ${
               visibility === "public"
-                ? "bg-primary/10 border-primary/40"
-                : "bg-surface-secondary/40 border-border-subtle/40 hover:bg-surface-secondary/70"
+                ? "bg-surface-elevated border-text-primary"
+                : "bg-surface-secondary border-border-default hover:bg-surface-hover"
             }`}
           >
             <input
               type="radio"
               checked={visibility === "public"}
               onChange={() => setVisibility("public")}
-              className="mt-1 text-primary focus:ring-0"
+              className="mt-1 text-text-primary focus:ring-0"
             />
             <div className="text-left">
               <span className="font-semibold text-xs text-text-primary flex items-center gap-1.5">
-                <span>Public Salon</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                <span>Public Poem</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-text-primary" />
               </span>
               <p className="text-[11px] text-text-tertiary mt-0.5">
-                Visible to all salon readers &amp; curated anthology feeds
+                Visible to all readers in the discovery feeds
               </p>
             </div>
           </label>
@@ -407,22 +407,22 @@ function WritePageInner() {
             onClick={() => setVisibility("private")}
             className={`flex items-start gap-3 p-2.5 rounded-xl border cursor-pointer transition-colors ${
               visibility === "private"
-                ? "bg-primary/10 border-primary/40"
-                : "bg-surface-secondary/40 border-border-subtle/40 hover:bg-surface-secondary/70"
+                ? "bg-surface-elevated border-text-primary"
+                : "bg-surface-secondary border-border-default hover:bg-surface-hover"
             }`}
           >
             <input
               type="radio"
               checked={visibility === "private"}
               onChange={() => setVisibility("private")}
-              className="mt-1 text-primary focus:ring-0"
+              className="mt-1 text-text-primary focus:ring-0"
             />
             <div className="text-left">
               <span className="font-semibold text-xs text-text-primary">
-                Quiet Draft (Private)
+                Private Draft
               </span>
               <p className="text-[11px] text-text-tertiary mt-0.5">
-                Saved solely in your personal sanctuary notebook
+                Saved solely in your personal account
               </p>
             </div>
           </label>
@@ -432,7 +432,7 @@ function WritePageInner() {
       {/* 3. Atmosphere & Mood */}
       <div className="space-y-2">
         <label className="text-[11px] font-semibold text-text-secondary uppercase tracking-wider font-mono">
-          Atmospheric Tone
+          Tone &amp; Mood
         </label>
         <div className="flex flex-wrap gap-1.5">
           {moodOptions.map((mood) => {
@@ -444,8 +444,8 @@ function WritePageInner() {
                 onClick={() => setSelectedMood(isSelected ? null : mood.name)}
                 className={`px-2.5 py-1 text-xs rounded-full border transition-all cursor-pointer ${
                   isSelected
-                    ? "bg-primary/20 border-primary/60 text-primary font-semibold"
-                    : "glass-pill text-text-secondary hover:text-text-primary"
+                    ? "bg-surface-elevated border-text-primary text-text-primary font-semibold"
+                    : "border border-border-default text-text-secondary hover:text-text-primary hover:bg-surface-hover"
                 }`}
               >
                 #{mood.name.toLowerCase()}
@@ -458,19 +458,19 @@ function WritePageInner() {
       {/* 4. Literary Motifs & Tags */}
       <div className="space-y-2">
         <label className="text-[11px] font-semibold text-text-secondary uppercase tracking-wider font-mono">
-          Literary Motifs &amp; Tags
+          Tags
         </label>
         <div className="flex flex-wrap gap-1.5">
           {tagList.map((tag) => (
             <span
               key={tag}
-              className="px-2.5 py-1 rounded-full bg-primary/15 border border-primary/30 text-primary text-xs flex items-center gap-1 font-medium"
+              className="px-2.5 py-1 rounded-full bg-surface-secondary border border-border-default text-text-primary text-xs flex items-center gap-1 font-medium"
             >
               #{tag}
               <button
                 type="button"
                 onClick={() => handleRemoveTag(tag)}
-                className="hover:text-white cursor-pointer"
+                className="hover:text-text-secondary cursor-pointer"
               >
                 <X size={12} />
               </button>
@@ -484,12 +484,12 @@ function WritePageInner() {
             onChange={(e) => setTagInput(e.target.value)}
             onKeyDown={handleAddTag}
             placeholder="Add tag and press Enter..."
-            className="w-full bg-surface-secondary/70 border border-border-subtle/50 rounded-xl px-3 py-1.5 text-xs text-text-primary placeholder:text-text-tertiary focus:outline-none focus:border-primary/50"
+            className="w-full bg-surface-secondary border border-border-default rounded-xl px-3 py-1.5 text-xs text-text-primary placeholder:text-text-tertiary focus:outline-none focus:border-text-primary"
           />
           <button
             type="button"
             onClick={() => handleAddTag()}
-            className="px-3 py-1.5 rounded-xl glass-pill text-xs font-semibold text-text-secondary hover:text-primary transition-colors shrink-0"
+            className="px-3 py-1.5 rounded-xl border border-border-default text-xs font-semibold text-text-secondary hover:text-text-primary hover:bg-surface-hover transition-colors shrink-0"
           >
             Add
           </button>
@@ -497,8 +497,8 @@ function WritePageInner() {
       </div>
 
       {/* Footnote */}
-      <div className="pt-4 border-t border-border-subtle/30 flex items-center justify-between text-[11px] text-text-tertiary font-verse italic">
-        <span>Poetly Writing Studio</span>
+      <div className="pt-4 border-t border-border-subtle flex items-center justify-between text-[11px] text-text-tertiary font-verse italic">
+        <span>Poetly Writing Desk</span>
         <span>Crafted for quiet words</span>
       </div>
     </aside>
@@ -508,38 +508,38 @@ function WritePageInner() {
     <AppShell maxWidth="wide" rightRail={!focusMode ? rightPanelContent : undefined}>
       <div className="w-full max-w-4xl mx-auto space-y-6">
         {/* SUB-BAR / EDITOR ACTION BAR */}
-        <div className="glass-surface rounded-2xl px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3 sticky top-20 z-20 specular-top-border">
+        <div className="glass-surface rounded-2xl px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3 sticky top-20 z-20 border border-border-default">
           {/* Breadcrumb & Autosave Telemetry */}
           <div className="flex items-center gap-3">
             <Link
               href="/home"
-              className="flex items-center gap-1.5 text-text-tertiary hover:text-primary text-xs font-medium transition-colors group"
+              className="flex items-center gap-1.5 text-text-tertiary hover:text-text-primary text-xs font-medium transition-colors group"
             >
               <ArrowLeft size={14} className="group-hover:-translate-x-0.5 transition-transform" />
               <span>Back</span>
             </Link>
 
-            <span className="w-px h-3.5 bg-border-subtle/50" />
+            <span className="w-px h-3.5 bg-border-subtle" />
 
             {/* Autosave Status */}
             <div className="flex items-center gap-1.5 text-xs text-text-tertiary font-mono">
               {autoSaveStatus === "saving" ? (
                 <>
-                  <Cloud size={14} className="text-primary animate-pulse" />
+                  <Cloud size={14} className="text-text-primary animate-pulse" />
                   <span className="hidden sm:inline">Saving draft...</span>
                 </>
               ) : autoSaveStatus === "saved" ? (
                 <>
-                  <CheckCircle2 size={13} className="text-primary" />
+                  <CheckCircle2 size={13} className="text-text-primary" />
                   <span className="hidden sm:inline">Draft saved</span>
                 </>
               ) : (
-                <span className="text-text-tertiary/70 hidden sm:inline">Unsaved draft</span>
+                <span className="text-text-tertiary hidden sm:inline">Unsaved draft</span>
               )}
             </div>
 
             {/* Telemetry Pill */}
-            <div className="hidden md:flex items-center gap-1.5 text-[11px] text-text-tertiary bg-surface-secondary/60 px-2.5 py-0.5 rounded-full border border-border-subtle/40 font-mono">
+            <div className="hidden md:flex items-center gap-1.5 text-[11px] text-text-tertiary bg-surface-secondary px-2.5 py-0.5 rounded-full border border-border-default font-mono">
               <span>{stanzaCount} {stanzaCount === 1 ? "stanza" : "stanzas"}</span>
               <span>·</span>
               <span>{wordCount} words</span>
@@ -556,8 +556,8 @@ function WritePageInner() {
               onClick={() => setFocusMode(!focusMode)}
               className={`p-1.5 sm:px-2.5 sm:py-1.5 rounded-lg border text-xs font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
                 focusMode
-                  ? "bg-primary/20 border-primary text-primary"
-                  : "glass-pill text-text-secondary hover:text-text-primary"
+                  ? "bg-surface-elevated border-text-primary text-text-primary font-semibold"
+                  : "border-border-default text-text-secondary hover:text-text-primary hover:bg-surface-hover"
               }`}
               title={focusMode ? "Exit Focus Mode" : "Focus Mode"}
             >
@@ -569,10 +569,10 @@ function WritePageInner() {
             <button
               type="button"
               onClick={() => setShowPreview(!showPreview)}
-              className={`px-3 py-1.5 rounded-lg border text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
+              className={`px-3 py-1.5 rounded-lg border text-xs font-medium transition-all cursor-pointer flex items-center gap-1.5 ${
                 showPreview
-                  ? "bg-primary/20 border-primary text-primary"
-                  : "glass-pill text-text-secondary hover:text-text-primary"
+                  ? "bg-surface-elevated border-text-primary text-text-primary font-semibold"
+                  : "border-border-default text-text-secondary hover:text-text-primary hover:bg-surface-hover"
               }`}
             >
               <Eye size={14} />
@@ -583,8 +583,8 @@ function WritePageInner() {
             <button
               type="button"
               onClick={() => setShowSettingsDrawer(!showSettingsDrawer)}
-              className="xl:hidden p-1.5 rounded-lg glass-pill text-text-secondary hover:text-primary"
-              title="Salon Settings"
+              className="xl:hidden p-1.5 rounded-lg border border-border-default text-text-secondary hover:text-text-primary hover:bg-surface-hover cursor-pointer"
+              title="Editor Settings"
             >
               <Sliders size={15} />
             </button>
@@ -594,42 +594,38 @@ function WritePageInner() {
               type="button"
               onClick={handleSaveDraft}
               disabled={saving}
-              className="px-3.5 py-1.5 rounded-full glass-pill hover:border-primary/40 text-xs font-semibold text-text-secondary hover:text-primary transition-all disabled:opacity-40 cursor-pointer flex items-center gap-1.5"
+              className="px-3.5 py-1.5 rounded-full border border-border-default hover:bg-surface-hover text-xs font-medium text-text-secondary hover:text-text-primary transition-all disabled:opacity-40 cursor-pointer flex items-center gap-1.5"
             >
               <Save size={13} />
               <span className="hidden sm:inline">{saving ? "Saving..." : "Save Draft"}</span>
             </button>
 
-            {/* Primary Glowing Action: Publish to Salon */}
+            {/* Primary Publish Action */}
             <button
               type="button"
               onClick={handlePublish}
               disabled={publishing || !content.trim()}
-              className="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-gradient-to-r from-primary-container to-secondary text-white font-semibold text-xs tracking-wider glowing-btn-aura hover:opacity-95 transition-all disabled:opacity-40 cursor-pointer active:scale-95"
+              className="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-primary text-on-primary font-medium text-xs tracking-wider hover:opacity-90 transition-all disabled:opacity-40 cursor-pointer active:scale-95"
             >
               <span>{publishing ? "Publishing..." : "Publish Poem"}</span>
-              <span className="text-xs">✦</span>
             </button>
           </div>
         </div>
 
         {/* EDITORIAL CANVAS */}
-        <div className="glass-surface rounded-2xl p-6 sm:p-10 md:p-12 relative overflow-hidden space-y-6">
+        <div className="glass-surface rounded-2xl p-6 sm:p-10 md:p-12 relative overflow-hidden space-y-6 border border-border-default">
           {/* Daily Prompt Ambient Notification Pill */}
           {promptInfo && (
-            <div className="p-3.5 rounded-2xl bg-gradient-to-r from-tertiary/15 via-surface-secondary/40 to-transparent border border-tertiary/30 flex items-center justify-between gap-3 shadow-sm">
+            <div className="p-3.5 rounded-2xl bg-surface-secondary border border-border-default flex items-center justify-between gap-3 shadow-none">
               <div className="flex items-center gap-2.5 min-w-0">
-                <Sparkles size={18} className="text-tertiary shrink-0" />
-                <div className="text-xs sm:text-sm truncate">
-                  <span className="text-text-tertiary">Writing to Prompt:</span>
-                  <span className="font-semibold text-text-primary italic ml-1.5">
-                    &ldquo;{promptInfo.title}&rdquo;
-                  </span>
-                </div>
+                <span className="text-text-tertiary font-mono text-xs">Prompt:</span>
+                <span className="font-semibold text-text-primary italic truncate text-xs sm:text-sm">
+                  &ldquo;{promptInfo.title}&rdquo;
+                </span>
               </div>
               <div className="flex items-center gap-2 shrink-0">
-                <span className="text-[10px] text-tertiary px-2 py-0.5 rounded-full bg-tertiary/20 border border-tertiary/30 font-mono">
-                  Prompt Seeded
+                <span className="text-[10px] text-text-secondary px-2 py-0.5 rounded-full bg-surface-elevated border border-border-default font-mono">
+                  Linked
                 </span>
                 <button
                   type="button"
@@ -645,8 +641,8 @@ function WritePageInner() {
 
           {showPreview ? (
             <div className="py-6 space-y-8 animate-fade-in">
-              <div className="text-[11px] uppercase tracking-widest text-primary font-mono font-bold">
-                Live Salon Preview
+              <div className="text-[11px] uppercase tracking-widest text-text-tertiary font-mono font-medium">
+                Poem Preview
               </div>
               <h1 className="font-display italic text-3xl sm:text-4xl md:text-5xl text-text-primary font-light tracking-tight">
                 {title || "Untitled"}
@@ -708,24 +704,24 @@ function WritePageInner() {
 
           {/* FLOATING LITERARY TOOLBAR */}
           <div className="sticky bottom-6 z-30 flex justify-center pt-6">
-            <div className="glass-panel-elevated px-4 py-2 rounded-full flex items-center gap-3 shadow-xl border border-white/10">
+            <div className="bg-surface px-4 py-2 rounded-full flex items-center gap-3 shadow-md border border-border-default">
               {/* Indent control */}
               <button
                 type="button"
                 onClick={indentVerse}
-                className="p-1.5 rounded-lg text-text-secondary hover:text-primary transition-colors cursor-pointer text-xs font-mono"
+                className="p-1.5 rounded-lg text-text-secondary hover:text-text-primary transition-colors cursor-pointer text-xs font-mono"
                 title="Add Caesura / Indent"
               >
                 ⇥
               </button>
 
-              <span className="w-px h-4 bg-border-subtle/50" />
+              <span className="w-px h-4 bg-border-subtle" />
 
               {/* Special punctuation */}
               <button
                 type="button"
                 onClick={insertEmDash}
-                className="px-2 py-1 rounded text-xs font-mono text-text-secondary hover:text-primary transition-colors cursor-pointer"
+                className="px-2 py-1 rounded text-xs font-mono text-text-secondary hover:text-text-primary transition-colors cursor-pointer"
                 title="Insert Em-dash (—)"
               >
                 —
@@ -733,13 +729,13 @@ function WritePageInner() {
               <button
                 type="button"
                 onClick={insertAsterism}
-                className="p-1 rounded text-primary hover:opacity-80 transition-colors cursor-pointer text-xs"
+                className="p-1 rounded text-text-primary hover:opacity-80 transition-colors cursor-pointer text-xs"
                 title="Insert Asterism Divider (✦ · · ✦)"
               >
                 ✦
               </button>
 
-              <span className="w-px h-4 bg-border-subtle/50" />
+              <span className="w-px h-4 bg-border-subtle" />
 
               {/* Typography options */}
               <div className="flex items-center gap-1">
@@ -750,7 +746,7 @@ function WritePageInner() {
                     onClick={() => setSelectedTypography(opt.id)}
                     className={`px-2.5 py-1 text-xs rounded-full transition-all cursor-pointer ${
                       selectedTypography === opt.id
-                        ? "bg-primary/20 text-primary font-semibold"
+                        ? "bg-surface-elevated text-text-primary font-semibold border border-border-default"
                         : "text-text-tertiary hover:text-text-primary"
                     }`}
                   >
@@ -759,7 +755,7 @@ function WritePageInner() {
                 ))}
               </div>
 
-              <span className="w-px h-4 bg-border-subtle/50" />
+              <span className="w-px h-4 bg-border-subtle" />
 
               {/* Alignment options */}
               <div className="flex items-center gap-1">
@@ -767,7 +763,7 @@ function WritePageInner() {
                   type="button"
                   onClick={() => setSelectedAlignment("left")}
                   className={`p-1.5 rounded transition-colors cursor-pointer ${
-                    selectedAlignment === "left" ? "text-primary" : "text-text-tertiary hover:text-text-primary"
+                    selectedAlignment === "left" ? "text-text-primary" : "text-text-tertiary hover:text-text-primary"
                   }`}
                   title="Align Left"
                 >
@@ -777,7 +773,7 @@ function WritePageInner() {
                   type="button"
                   onClick={() => setSelectedAlignment("center")}
                   className={`p-1.5 rounded transition-colors cursor-pointer ${
-                    selectedAlignment === "center" ? "text-primary" : "text-text-tertiary hover:text-text-primary"
+                    selectedAlignment === "center" ? "text-text-primary" : "text-text-tertiary hover:text-text-primary"
                   }`}
                   title="Align Center"
                 >
@@ -787,7 +783,7 @@ function WritePageInner() {
                   type="button"
                   onClick={() => setSelectedAlignment("right")}
                   className={`p-1.5 rounded transition-colors cursor-pointer ${
-                    selectedAlignment === "right" ? "text-primary" : "text-text-tertiary hover:text-text-primary"
+                    selectedAlignment === "right" ? "text-text-primary" : "text-text-tertiary hover:text-text-primary"
                   }`}
                   title="Align Right"
                 >
