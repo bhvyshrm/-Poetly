@@ -151,20 +151,20 @@ export default function CanvasPage() {
           <div className="flex items-center gap-2 flex-wrap">
             <button
               onClick={handleReset}
-              className="inline-flex items-center gap-1.5 text-xs font-medium text-text-tertiary hover:text-text-primary transition-colors px-3 py-1.5 rounded-full glass-surface border border-border-subtle/50 hover:border-primary/40"
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-text-secondary hover:text-text-primary transition-colors px-3 py-1.5 rounded-full border border-border-default hover:bg-surface-hover cursor-pointer"
             >
               <RotateCcw size={12} /> Reset
             </button>
             <button
               onClick={handleSaveStyle}
-              className="inline-flex items-center gap-1.5 text-xs font-medium text-text-tertiary hover:text-text-primary transition-colors px-3 py-1.5 rounded-full glass-surface border border-border-subtle/50 hover:border-primary/40"
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-text-secondary hover:text-text-primary transition-colors px-3 py-1.5 rounded-full border border-border-default hover:bg-surface-hover cursor-pointer"
             >
               <Save size={12} /> Save Style
             </button>
             <button
               onClick={handleExport}
               disabled={exporting}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-white gradient-brand px-4 py-1.5 rounded-full transition-all shadow-md shadow-primary/20 hover:opacity-95 disabled:opacity-50 cursor-pointer"
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-on-primary bg-primary px-4 py-1.5 rounded-full transition-opacity hover:opacity-90 disabled:opacity-50 cursor-pointer"
             >
               <Download size={12} /> {exporting ? "Exporting..." : "Download PNG"}
             </button>

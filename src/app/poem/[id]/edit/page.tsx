@@ -25,11 +25,11 @@ const alignmentOptions = [
 ];
 
 const moodOptions = [
-  { name: "Midnight", color: "#4A4F7C" },
-  { name: "Rain", color: "#6CA4D9" },
-  { name: "Love", color: "#E89AC7" },
-  { name: "Hope", color: "#7BC4A0" },
-  { name: "Melancholy", color: "#8B7FB0" },
+  { name: "Midnight" },
+  { name: "Rain" },
+  { name: "Love" },
+  { name: "Hope" },
+  { name: "Melancholy" },
 ];
 
 export default function EditPoemPage() {
@@ -155,14 +155,14 @@ export default function EditPoemPage() {
             <ArrowLeft size={14} strokeWidth={1.5} /> Back
           </Link>
           <div className="flex items-center gap-2">
-            <button onClick={handleSave} disabled={saving} className="flex items-center gap-1.5 text-xs text-text-tertiary hover:text-text-primary transition-colors px-3 py-1.5 rounded-full border border-border-subtle hover:border-border-default disabled:opacity-50">
+            <button onClick={handleSave} disabled={saving} className="flex items-center gap-1.5 text-xs text-text-primary hover:bg-surface-hover transition-colors px-3 py-1.5 rounded-full border border-border-default disabled:opacity-50 cursor-pointer">
               <Save size={12} strokeWidth={1.5} />
               <span className="hidden sm:inline">{saving ? "Saving..." : "Save"}</span>
             </button>
-            <button onClick={() => setShowCanvas(!showCanvas)} className={`flex items-center gap-1.5 text-xs transition-colors px-3 py-1.5 rounded-full border hidden md:flex ${showCanvas ? "border-brand/30 text-brand bg-brand-subtle" : "border-border-subtle text-text-tertiary hover:text-text-primary hover:border-border-default"}`}>
+            <button onClick={() => setShowCanvas(!showCanvas)} className={`flex items-center gap-1.5 text-xs transition-colors px-3 py-1.5 rounded-full border hidden md:flex cursor-pointer ${showCanvas ? "border-text-primary text-text-primary bg-surface-elevated font-medium" : "border-border-default text-text-secondary hover:text-text-primary hover:bg-surface-hover"}`}>
               <Palette size={12} strokeWidth={1.5} /> Canvas
             </button>
-            <button onClick={handleDelete} className="flex items-center gap-1.5 text-xs text-error hover:text-error-hover transition-colors px-3 py-1.5 rounded-full border border-error/20 hover:border-error/40">
+            <button onClick={handleDelete} className="flex items-center gap-1.5 text-xs text-text-secondary hover:text-text-primary transition-colors px-3 py-1.5 rounded-full border border-border-default hover:bg-surface-hover cursor-pointer">
               <Trash2 size={12} strokeWidth={1.5} /> <span className="hidden sm:inline">Delete</span>
             </button>
           </div>
@@ -170,8 +170,8 @@ export default function EditPoemPage() {
 
         <div className="flex gap-8">
           <div className="flex-1 min-w-0">
-            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" className="w-full bg-transparent font-poem-title text-2xl md:text-3xl text-text-primary placeholder:text-text-disabled outline-none mb-8" />
-            <textarea value={content} onChange={(e) => setContent(e.target.value)} placeholder="Start writing..." className={`w-full bg-transparent text-lg text-text-primary placeholder:text-text-disabled outline-none resize-none min-h-[50vh] leading-relaxed ${selectedTypography === "serif" ? "font-poem" : selectedTypography === "editorial" ? "font-editorial" : "font-sans"}`} style={{ textAlign: selectedAlignment as "left" | "center" | "right" }} />
+            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" className="w-full bg-transparent font-poem-title text-2xl md:text-3xl text-text-primary placeholder:text-text-tertiary outline-none mb-8" />
+            <textarea value={content} onChange={(e) => setContent(e.target.value)} placeholder="Start writing..." className={`w-full bg-transparent text-lg text-text-primary placeholder:text-text-tertiary outline-none resize-none min-h-[50vh] leading-relaxed ${selectedTypography === "serif" ? "font-poem" : selectedTypography === "editorial" ? "font-editorial" : "font-sans"}`} style={{ textAlign: selectedAlignment as "left" | "center" | "right" }} />
           </div>
 
           {showCanvas && (
@@ -181,7 +181,7 @@ export default function EditPoemPage() {
                   <p className="text-[11px] font-medium text-text-tertiary tracking-widest uppercase mb-3">Typography</p>
                   <div className="space-y-1">
                     {typographyOptions.map((opt) => (
-                      <button key={opt.id} onClick={() => setSelectedTypography(opt.id)} className={`block w-full text-left px-3 py-2 text-sm rounded-[var(--radius-sm)] transition-colors ${selectedTypography === opt.id ? "bg-brand-subtle text-brand font-medium" : "text-text-secondary hover:bg-surface-hover"}`}>{opt.label}</button>
+                      <button key={opt.id} onClick={() => setSelectedTypography(opt.id)} className={`block w-full text-left px-3 py-2 text-sm rounded-md transition-colors ${selectedTypography === opt.id ? "bg-surface-elevated text-text-primary font-medium" : "text-text-secondary hover:bg-surface-hover"}`}>{opt.label}</button>
                     ))}
                   </div>
                 </div>
@@ -189,7 +189,7 @@ export default function EditPoemPage() {
                   <p className="text-[11px] font-medium text-text-tertiary tracking-widest uppercase mb-3">Alignment</p>
                   <div className="flex gap-1.5">
                     {alignmentOptions.map((opt) => (
-                      <button key={opt.id} onClick={() => setSelectedAlignment(opt.id)} className={`flex-1 px-2 py-1.5 text-xs rounded-[var(--radius-sm)] transition-colors ${selectedAlignment === opt.id ? "bg-brand-subtle text-brand font-medium" : "text-text-secondary hover:bg-surface-hover"}`}>{opt.label}</button>
+                      <button key={opt.id} onClick={() => setSelectedAlignment(opt.id)} className={`flex-1 px-2 py-1.5 text-xs rounded-md transition-colors ${selectedAlignment === opt.id ? "bg-surface-elevated text-text-primary font-medium" : "text-text-secondary hover:bg-surface-hover"}`}>{opt.label}</button>
                     ))}
                   </div>
                 </div>
@@ -197,13 +197,13 @@ export default function EditPoemPage() {
                   <p className="text-[11px] font-medium text-text-tertiary tracking-widest uppercase mb-3">Mood</p>
                   <div className="flex flex-wrap gap-1.5">
                     {moodOptions.map((mood) => (
-                      <button key={mood.name} onClick={() => setSelectedMood(selectedMood === mood.name ? null : mood.name)} className={`px-2.5 py-1 text-[11px] rounded-full border transition-colors ${selectedMood === mood.name ? "border-brand text-brand bg-brand-subtle" : "border-border-subtle text-text-tertiary hover:border-border-default"}`}>{mood.name}</button>
+                      <button key={mood.name} onClick={() => setSelectedMood(selectedMood === mood.name ? null : mood.name)} className={`px-2.5 py-1 text-[11px] rounded-full border transition-colors ${selectedMood === mood.name ? "border-text-primary text-text-primary bg-surface-elevated font-medium" : "border-border-default text-text-secondary hover:text-text-primary"}`}>{mood.name}</button>
                     ))}
                   </div>
                 </div>
                 <div>
                   <p className="text-[11px] font-medium text-text-tertiary tracking-widest uppercase mb-3">Tags</p>
-                  <input type="text" value={tags} onChange={(e) => setTags(e.target.value)} placeholder="love, rain, midnight" className="w-full bg-surface-secondary border border-border-subtle rounded-[var(--radius-sm)] px-3 py-2 text-xs text-text-primary placeholder:text-text-tertiary outline-none focus:border-brand transition-colors" />
+                  <input type="text" value={tags} onChange={(e) => setTags(e.target.value)} placeholder="love, rain, midnight" className="w-full bg-surface-secondary border border-border-default rounded-md px-3 py-2 text-xs text-text-primary placeholder:text-text-tertiary outline-none focus:border-text-primary transition-colors" />
                 </div>
               </div>
             </div>

@@ -214,18 +214,17 @@ export default function PoemCard({
   if (variant === "featured") {
     return (
       <article
-        className={`py-8 md:py-10 border-b border-border-subtle animate-fade-in ${className}`}
+        className={`py-8 md:py-10 border-b border-border-default animate-fade-in ${className}`}
       >
         <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-2 text-xs font-medium text-brand tracking-wider uppercase">
-            <Sparkles size={14} />
+          <div className="flex items-center gap-2 text-xs font-medium text-text-primary tracking-wider uppercase font-mono">
             <span>Featured Poem</span>
           </div>
           <span className="text-xs text-text-tertiary">{timeAgo}</span>
         </div>
 
         <Link href={`/poem/${poem.id}`} className="group block mb-4">
-          <h2 className="font-poem-title text-2xl sm:text-3xl lg:text-4xl text-text-primary group-hover:text-brand transition-colors mb-4">
+          <h2 className="font-poem-title text-2xl sm:text-3xl lg:text-4xl text-text-primary group-hover:underline transition-all mb-4 break-words">
             {poem.title}
           </h2>
           <div className="poem-content-lg text-text-primary/90 leading-relaxed font-poem text-lg">
@@ -237,7 +236,7 @@ export default function PoemCard({
         </Link>
 
         {/* Author Footer */}
-        <div className="flex items-center justify-between pt-4 mt-4 border-t border-border-subtle/60">
+        <div className="flex items-center justify-between pt-4 mt-4 border-t border-border-subtle">
           <Link
             href={`/profile/${authorUsername}`}
             className="flex items-center gap-2.5 group"
@@ -248,7 +247,7 @@ export default function PoemCard({
               size="sm"
             />
             <div>
-              <p className="text-xs sm:text-sm font-medium text-text-primary group-hover:text-brand transition-colors">
+              <p className="text-xs sm:text-sm font-medium text-text-primary group-hover:underline transition-all">
                 {authorName}
               </p>
               <p className="text-[11px] text-text-tertiary">@{authorUsername}</p>
@@ -259,8 +258,8 @@ export default function PoemCard({
             <button
               type="button"
               onClick={handleLike}
-              className={`flex items-center gap-1.5 transition-colors ${
-                isLiked ? "text-brand" : "hover:text-brand"
+              className={`flex items-center gap-1.5 transition-colors cursor-pointer ${
+                isLiked ? "text-text-primary font-semibold" : "text-text-tertiary hover:text-text-primary"
               }`}
             >
               <Heart
@@ -272,7 +271,7 @@ export default function PoemCard({
             </button>
             <Link
               href={`/poem/${poem.id}#comments`}
-              className="flex items-center gap-1.5 hover:text-brand transition-colors"
+              className="flex items-center gap-1.5 text-text-tertiary hover:text-text-primary transition-colors"
             >
               <MessageCircle size={16} strokeWidth={1.75} />
               <span>{commentCount}</span>
@@ -285,14 +284,14 @@ export default function PoemCard({
 
   return (
     <article
-      className={`glass-surface rounded-2xl p-6 sm:p-7 space-y-4 sm:space-y-5 specular-top-border hover:border-border-default/60 transition-all duration-300 mb-6 ${className}`}
+      className={`glass-surface rounded-2xl p-5 sm:p-7 space-y-4 sm:space-y-5 border border-border-default hover:border-border-strong transition-all duration-200 mb-6 ${className}`}
     >
       {/* Header: Author + Meta + Overflow Actions */}
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 min-w-0">
           <Link
             href={`/profile/${authorUsername}`}
-            className="shrink-0 rounded-full focus-visible:outline-none ring-1 ring-primary/30"
+            className="shrink-0 rounded-full focus-visible:outline-none"
           >
             <Avatar
               src={author?.profile_image}
@@ -305,11 +304,11 @@ export default function PoemCard({
             <div className="flex items-center gap-2">
               <Link
                 href={`/profile/${authorUsername}`}
-                className="text-xs sm:text-sm font-semibold text-text-primary hover:text-primary transition-colors truncate block"
+                className="text-xs sm:text-sm font-semibold text-text-primary hover:underline transition-all truncate block"
               >
                 {authorName}
               </Link>
-              <span className="w-1 h-1 rounded-full bg-text-tertiary" />
+              <span className="w-1 h-1 rounded-full bg-text-tertiary shrink-0" />
               <span className="text-xs text-text-tertiary truncate">
                 @{authorUsername}
               </span>
@@ -321,11 +320,11 @@ export default function PoemCard({
         </div>
 
         {/* Overflow Menu */}
-        <div className="relative">
+        <div className="relative shrink-0">
           <button
             type="button"
             onClick={() => setShowActions((prev) => !prev)}
-            className="p-1.5 rounded-full text-text-tertiary hover:text-text-primary hover:bg-surface-hover/60 transition-colors"
+            className="p-1.5 rounded-full text-text-tertiary hover:text-text-primary hover:bg-surface-hover transition-colors cursor-pointer"
             aria-label="More poem actions"
             aria-expanded={showActions}
           >
@@ -339,24 +338,24 @@ export default function PoemCard({
                 onClick={() => setShowActions(false)}
                 aria-hidden="true"
               />
-              <div className="absolute right-0 top-full mt-1 w-48 glass-panel-elevated rounded-xl shadow-xl z-30 py-1.5 text-xs animate-scale-in">
+              <div className="absolute right-0 top-full mt-1 w-48 bg-surface border border-border-default rounded-xl shadow-lg z-30 py-1.5 text-xs animate-scale-in">
                 <Link
                   href={`/poem/${poem.id}/canvas`}
                   onClick={() => setShowActions(false)}
-                  className="w-full px-3.5 py-2 text-left text-text-secondary hover:bg-surface-hover hover:text-primary flex items-center gap-2 transition-colors"
+                  className="w-full px-3.5 py-2 text-left text-text-secondary hover:bg-surface-hover hover:text-text-primary flex items-center gap-2 transition-colors"
                 >
-                  <Sparkles size={14} className="text-primary" />
+                  <Sparkles size={14} />
                   <span>Poetry Canvas card</span>
                 </Link>
 
                 {reportSuccess ? (
-                  <div className="px-3.5 py-2 text-success">Report submitted</div>
+                  <div className="px-3.5 py-2 text-text-primary">Report submitted</div>
                 ) : (
                   <button
                     type="button"
                     onClick={handleReport}
                     disabled={reporting}
-                    className="w-full px-3.5 py-2 text-left text-text-secondary hover:bg-surface-hover hover:text-error flex items-center gap-2 transition-colors disabled:opacity-50"
+                    className="w-full px-3.5 py-2 text-left text-text-secondary hover:bg-surface-hover hover:text-text-primary flex items-center gap-2 transition-colors disabled:opacity-50 cursor-pointer"
                   >
                     <Flag size={14} />
                     <span>{reporting ? "Submitting..." : "Report poem"}</span>
@@ -370,14 +369,14 @@ export default function PoemCard({
 
       {/* Title */}
       <Link href={`/poem/${poem.id}`} className="group block pt-1">
-        <h2 className="font-display italic text-2xl sm:text-3xl text-text-primary font-light group-hover:text-primary transition-colors tracking-tight">
+        <h2 className="font-display italic text-2xl sm:text-3xl text-text-primary font-normal group-hover:underline transition-all tracking-tight break-words">
           {poem.title}
         </h2>
       </Link>
 
       {/* Content excerpt with literary leading */}
       <Link href={`/poem/${poem.id}`} className="group block">
-        <div className="font-verse text-base sm:text-lg text-text-primary/90 font-light leading-relaxed whitespace-pre-line space-y-2">
+        <div className="font-verse text-base sm:text-lg text-text-primary/90 font-light leading-relaxed whitespace-pre-line space-y-2 break-words">
           {preview}
           {lines.length > previewMaxLines && (
             <span className="text-text-tertiary block mt-1">...</span>
@@ -385,18 +384,18 @@ export default function PoemCard({
         </div>
       </Link>
 
-      {/* Mood and Tags in Stitch frosted pills */}
+      {/* Mood and Tags in neutral monochrome pills */}
       {(poem.mood || (poem.tags && poem.tags.length > 0)) && (
         <div className="flex flex-wrap items-center gap-2 pt-1">
           {poem.mood && (
-            <span className="px-2.5 py-0.5 rounded-full bg-surface-secondary/70 text-secondary border border-border-subtle/50 text-[11px] font-medium tracking-wide">
+            <span className="px-2.5 py-0.5 rounded-full bg-surface-secondary text-text-secondary border border-border-default text-[11px] font-medium tracking-wide">
               #{poem.mood.toLowerCase()}
             </span>
           )}
           {(poem.tags || []).slice(0, 4).map((tag) => (
             <span
               key={tag}
-              className="px-2.5 py-0.5 rounded-full bg-surface-secondary/70 text-primary/90 border border-border-subtle/50 text-[11px] font-medium tracking-wide"
+              className="px-2.5 py-0.5 rounded-full bg-surface-secondary text-text-secondary border border-border-default text-[11px] font-medium tracking-wide"
             >
               #{tag.replace(/^#/, "")}
             </span>
@@ -404,15 +403,15 @@ export default function PoemCard({
         </div>
       )}
 
-      {/* Stitch Micro-interactions Footer Toolbar */}
-      <div className="flex items-center justify-between pt-4 border-t border-border-subtle/50 text-text-tertiary select-none">
+      {/* Micro-interactions Footer Toolbar */}
+      <div className="flex items-center justify-between pt-4 border-t border-border-subtle text-text-tertiary select-none">
         <div className="flex items-center gap-6">
           {/* Like */}
           <button
             type="button"
             onClick={handleLike}
-            className={`flex items-center gap-1.5 transition-colors group ${
-              isLiked ? "text-primary font-semibold" : "hover:text-primary"
+            className={`flex items-center gap-1.5 transition-colors group cursor-pointer ${
+              isLiked ? "text-text-primary font-semibold" : "hover:text-text-primary"
             }`}
             aria-label={isLiked ? "Unlike poem" : "Like poem"}
           >
@@ -420,7 +419,7 @@ export default function PoemCard({
               size={18}
               strokeWidth={1.8}
               fill={isLiked ? "currentColor" : "none"}
-              className={`group-hover:scale-110 transition-transform ${isLiked ? "animate-like-pop text-primary" : ""}`}
+              className="group-hover:scale-110 transition-transform"
             />
             <span className="text-xs font-medium">{likeCount}</span>
           </button>
@@ -428,7 +427,7 @@ export default function PoemCard({
           {/* Comments */}
           <Link
             href={`/poem/${poem.id}#comments`}
-            className="flex items-center gap-1.5 hover:text-tertiary transition-colors group"
+            className="flex items-center gap-1.5 hover:text-text-primary transition-colors group"
             aria-label="View comments"
           >
             <MessageCircle size={18} strokeWidth={1.8} className="group-hover:scale-110 transition-transform" />
@@ -441,8 +440,8 @@ export default function PoemCard({
           <button
             type="button"
             onClick={handleSave}
-            className={`transition-colors p-1 rounded-full hover:bg-surface-hover/50 ${
-              isSaved ? "text-primary" : "hover:text-primary"
+            className={`transition-colors p-1 rounded-full hover:bg-surface-hover cursor-pointer ${
+              isSaved ? "text-text-primary" : "hover:text-text-primary"
             }`}
             aria-label={isSaved ? "Unsave poem" : "Save poem"}
           >
@@ -457,7 +456,7 @@ export default function PoemCard({
           <button
             type="button"
             onClick={handleShare}
-            className="hover:text-primary transition-colors p-1 rounded-full hover:bg-surface-hover/50"
+            className="hover:text-text-primary transition-colors p-1 rounded-full hover:bg-surface-hover cursor-pointer"
             aria-label="Share poem"
           >
             <Share2 size={18} strokeWidth={1.8} />

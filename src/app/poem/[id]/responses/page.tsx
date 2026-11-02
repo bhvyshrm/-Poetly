@@ -89,7 +89,7 @@ export default function PoemResponsesPage() {
           </div>
           <Link
             href={`/poem/${poemId}/respond`}
-            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-white gradient-brand rounded-full hover:opacity-95 shadow-md shadow-primary/20 transition-all self-start sm:self-auto shrink-0"
+            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-medium text-on-primary bg-primary rounded-full hover:opacity-90 transition-opacity self-start sm:self-auto shrink-0"
           >
             <PenLine size={13} />
             <span>Write Response</span>
@@ -109,15 +109,15 @@ export default function PoemResponsesPage() {
             ))}
           </div>
         ) : (
-          <div className="text-center py-16 glass-surface rounded-2xl p-8 border border-border-subtle/40 space-y-4">
-            <p className="font-display text-xl text-text-primary">No Resonant Responses Yet</p>
+          <div className="text-center py-16 glass-surface rounded-2xl p-8 border border-border-default space-y-4">
+            <p className="font-display text-xl text-text-primary">No Responses Yet</p>
             <p className="font-verse italic text-xs sm:text-sm text-text-tertiary max-w-sm mx-auto">
-              A response is not a comment. It is a poem written in poetic conversation.
+              A response is not a comment. It is a poem written in conversation.
             </p>
             <div className="pt-2">
               <Link
                 href={`/poem/${poemId}/respond`}
-                className="inline-flex items-center gap-2 px-5 py-2.5 gradient-brand text-white text-xs font-semibold rounded-full shadow-md shadow-primary/20 hover:opacity-95 transition-all"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-on-primary text-xs font-medium rounded-full hover:opacity-90 transition-opacity"
               >
                 <PenLine size={13} />
                 <span>Be the First to Respond</span>

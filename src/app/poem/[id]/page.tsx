@@ -400,10 +400,10 @@ export default function PoemPage() {
           </p>
           <Link
             href="/home"
-            className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold text-white gradient-brand rounded-full hover:opacity-95 shadow-md shadow-primary/20 transition-all"
+            className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-medium text-on-primary bg-primary rounded-full hover:opacity-90 transition-opacity"
           >
             <ArrowLeft size={13} />
-            <span>Return to Salon</span>
+            <span>Return to Home</span>
           </Link>
         </div>
       </AppShell>
@@ -431,14 +431,14 @@ export default function PoemPage() {
               <>
                 <Link
                   href={`/poem/${id}/edit`}
-                  className="inline-flex items-center gap-1.5 text-xs font-medium text-text-tertiary hover:text-primary px-3 py-1.5 rounded-full glass-surface border border-border-subtle/50 hover:border-primary/40 transition-colors"
+                  className="inline-flex items-center gap-1.5 text-xs font-medium text-text-secondary hover:text-text-primary px-3 py-1.5 rounded-full border border-border-default hover:bg-surface-hover transition-colors"
                 >
                   <Edit2 size={12} />
-                  <span>Edit Stanza</span>
+                  <span>Edit</span>
                 </Link>
                 <button
                   onClick={handleDeletePoem}
-                  className="inline-flex items-center gap-1.5 text-xs font-medium text-text-tertiary hover:text-red-400 px-3 py-1.5 rounded-full glass-surface border border-border-subtle/50 hover:border-red-400/40 transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-1.5 text-xs font-medium text-text-secondary hover:text-text-primary px-3 py-1.5 rounded-full border border-border-default hover:bg-surface-hover transition-colors cursor-pointer"
                   title="Delete poem"
                 >
                   <Trash2 size={12} />
@@ -447,7 +447,7 @@ export default function PoemPage() {
             )}
             <button
               onClick={handleShare}
-              className="p-2 rounded-full glass-surface border border-border-subtle/50 text-text-tertiary hover:text-text-primary transition-colors cursor-pointer"
+              className="p-2 rounded-full border border-border-default text-text-secondary hover:text-text-primary hover:bg-surface-hover transition-colors cursor-pointer"
               title="Share stanza"
             >
               <Share2 size={14} />
@@ -456,14 +456,9 @@ export default function PoemPage() {
         </div>
 
         {/* Reading Desk Canvas Card */}
-        <section className="glass-surface rounded-3xl p-6 sm:p-10 md:p-12 border border-border-subtle/50 specular-top-border space-y-8 relative overflow-hidden">
-          {/* Subtle mood gradient overlay if present */}
-          {poem.mood && (
-            <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-primary/5 blur-3xl pointer-events-none" />
-          )}
-
+        <section className="glass-surface rounded-3xl p-6 sm:p-10 md:p-12 border border-border-default space-y-8 relative overflow-hidden">
           {/* Poet Header inside Desk */}
-          <div className="flex items-center gap-3.5 pb-6 border-b border-border-subtle/30">
+          <div className="flex items-center gap-3.5 pb-6 border-b border-border-subtle">
             <Link href={`/profile/${poem.profiles.username}`} className="shrink-0">
               <Avatar
                 src={poem.profiles.profile_image}
@@ -474,7 +469,7 @@ export default function PoemPage() {
             <div className="min-w-0 flex-1">
               <Link
                 href={`/profile/${poem.profiles.username}`}
-                className="font-medium text-sm text-text-primary hover:text-primary transition-colors block truncate"
+                className="font-medium text-sm text-text-primary hover:underline transition-colors block truncate"
               >
                 {poem.profiles.display_name}
               </Link>
@@ -489,12 +484,12 @@ export default function PoemPage() {
           </div>
 
           {/* Title */}
-          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl text-text-primary font-light tracking-tight leading-tight">
+          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl text-text-primary font-normal tracking-tight leading-tight break-words">
             {poem.title}
           </h1>
 
           {/* Literary Verse Body */}
-          <div className="font-verse text-lg sm:text-xl text-stone-800 dark:text-stone-200 leading-loose sm:leading-[2.2] tracking-normal whitespace-pre-line font-light selection:bg-primary/20 selection:text-white">
+          <div className="font-verse text-lg sm:text-xl text-text-primary leading-loose sm:leading-[2.2] tracking-normal whitespace-pre-line font-light break-words">
             {poem.content}
           </div>
 
@@ -510,7 +505,7 @@ export default function PoemPage() {
                 <Link
                   key={tag}
                   href={`/search?tag=${encodeURIComponent(tag)}`}
-                  className="text-xs font-mono text-text-tertiary hover:text-primary px-3 py-1 rounded-full glass-surface border border-border-subtle/40 hover:border-primary/40 transition-colors"
+                  className="text-xs font-mono text-text-secondary hover:text-text-primary px-3 py-1 rounded-full bg-surface-secondary border border-border-default transition-colors"
                 >
                   #{tag}
                 </Link>
@@ -519,20 +514,21 @@ export default function PoemPage() {
           )}
 
           {/* Interaction Bar */}
-          <div className="flex items-center justify-between gap-4 pt-6 border-t border-border-subtle/30">
+          <div className="flex items-center justify-between gap-4 pt-6 border-t border-border-subtle">
             <div className="flex items-center gap-4 sm:gap-6">
               <button
                 onClick={handleLike}
                 className={`flex items-center gap-1.5 text-xs sm:text-sm font-medium transition-all cursor-pointer ${
                   isLiked
-                    ? "text-rose-400 font-semibold"
+                    ? "text-text-primary font-semibold"
                     : "text-text-tertiary hover:text-text-primary"
                 }`}
-                title={isLiked ? "Unlike" : "Appreciate stanza"}
+                title={isLiked ? "Unlike" : "Like poem"}
               >
                 <Heart
                   size={17}
-                  className={isLiked ? "fill-rose-400 text-rose-400 scale-110" : "text-text-tertiary"}
+                  fill={isLiked ? "currentColor" : "none"}
+                  className={isLiked ? "text-text-primary" : "text-text-tertiary"}
                 />
                 <span className="font-mono">{likeCount}</span>
               </button>
@@ -548,15 +544,16 @@ export default function PoemPage() {
               <button
                 onClick={handleSave}
                 className={`flex items-center gap-1.5 text-xs sm:text-sm font-medium transition-colors cursor-pointer ${
-                  isSaved ? "text-primary" : "text-text-tertiary hover:text-text-primary"
+                  isSaved ? "text-text-primary" : "text-text-tertiary hover:text-text-primary"
                 }`}
-                title={isSaved ? "Remove bookmark" : "Preserve on shelf"}
+                title={isSaved ? "Remove bookmark" : "Save poem"}
               >
                 <Bookmark
                   size={17}
-                  className={isSaved ? "fill-primary text-primary" : "text-text-tertiary"}
+                  fill={isSaved ? "currentColor" : "none"}
+                  className={isSaved ? "text-text-primary" : "text-text-tertiary"}
                 />
-                <span className="hidden sm:inline text-xs">{isSaved ? "Preserved" : "Bookmark"}</span>
+                <span className="hidden sm:inline text-xs">{isSaved ? "Saved" : "Save"}</span>
               </button>
             </div>
 
@@ -564,14 +561,14 @@ export default function PoemPage() {
               {responseCount > 0 && (
                 <Link
                   href={`/poem/${id}/responses`}
-                  className="text-xs font-semibold text-secondary hover:underline font-mono"
+                  className="text-xs font-medium text-text-secondary hover:text-text-primary font-mono"
                 >
-                  {responseCount} {responseCount === 1 ? "response stanza" : "responses"} →
+                  {responseCount} {responseCount === 1 ? "response" : "responses"} →
                 </Link>
               )}
               <button
                 onClick={handleReport}
-                className="text-text-tertiary hover:text-red-400 transition-colors p-1"
+                className="text-text-tertiary hover:text-text-primary transition-colors p-1"
                 title="Report content"
               >
                 <Flag size={13} />
@@ -581,28 +578,28 @@ export default function PoemPage() {
         </section>
 
         {/* Resonant Response Invitation */}
-        <section className="glass-surface rounded-2xl p-6 sm:p-8 border border-secondary/30 relative overflow-hidden text-center space-y-4">
-          <div className="w-10 h-10 rounded-full bg-secondary/15 border border-secondary/30 flex items-center justify-center mx-auto text-secondary">
+        <section className="glass-surface rounded-2xl p-6 sm:p-8 border border-border-default relative overflow-hidden text-center space-y-4">
+          <div className="w-10 h-10 rounded-full bg-surface-secondary border border-border-default flex items-center justify-center mx-auto text-text-primary">
             <PenTool size={18} />
           </div>
           <div>
             <h3 className="font-display text-xl sm:text-2xl text-text-primary font-normal">
-              Not a Comment. A Poem.
+              Respond with a Poem
             </h3>
             <p className="font-verse italic text-xs sm:text-sm text-text-secondary max-w-md mx-auto mt-1">
-              Answer verse with verse. Allow your resonance to take literary form in our salon.
+              Answer verse with verse. Allow your resonance to take literary form.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
             <Link
               href={`/poem/${id}/respond`}
-              className="w-full sm:w-auto px-6 py-2.5 rounded-full gradient-brand text-white text-xs font-semibold shadow-md shadow-primary/20 hover:opacity-95 transition-all"
+              className="w-full sm:w-auto px-6 py-2.5 rounded-full bg-primary text-on-primary text-xs font-medium hover:opacity-90 transition-opacity"
             >
               Respond with a Poem
             </Link>
             <Link
               href={`/poem/${id}/canvas`}
-              className="w-full sm:w-auto px-6 py-2.5 rounded-full glass-surface border border-border-subtle/50 text-text-primary hover:border-primary/40 text-xs font-semibold transition-colors"
+              className="w-full sm:w-auto px-6 py-2.5 rounded-full border border-border-default text-text-primary hover:bg-surface-hover text-xs font-medium transition-colors"
             >
               Format as Canvas
             </Link>
@@ -612,31 +609,31 @@ export default function PoemPage() {
         {/* Marginalia Stream (Comments) */}
         <section id="marginalia" className="space-y-6 pt-4">
           <div className="flex items-center justify-between">
-            <h3 className="font-display text-2xl text-text-primary font-light">
+            <h3 className="font-display text-2xl text-text-primary font-normal">
               Marginalia &amp; Reader Notes
             </h3>
-            <span className="font-mono text-xs text-text-tertiary px-2.5 py-0.5 rounded-full glass-surface border border-border-subtle/40">
+            <span className="font-mono text-xs text-text-tertiary px-2.5 py-0.5 rounded-full border border-border-default">
               {comments.length} {comments.length === 1 ? "note" : "notes"}
             </span>
           </div>
 
           {/* New Marginalia Form */}
-          <div className="glass-surface rounded-2xl p-4 sm:p-5 border border-border-subtle/50 space-y-3">
+          <div className="glass-surface rounded-2xl p-4 sm:p-5 border border-border-default space-y-3">
             <textarea
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}
-              placeholder="Inscribe a marginalia note for the author..."
-              className="w-full bg-surface-secondary/60 border border-border-subtle/50 focus:border-primary rounded-xl outline-none p-3.5 text-sm text-text-primary placeholder:text-text-tertiary resize-none font-sans transition-colors"
+              placeholder="Inscribe a note for the author..."
+              className="w-full bg-surface-secondary border border-border-default focus:border-text-primary rounded-xl outline-none p-3.5 text-sm text-text-primary placeholder:text-text-tertiary resize-none font-sans transition-colors"
               rows={3}
             />
             <div className="flex justify-end">
               <button
                 onClick={handleComment}
                 disabled={!commentText.trim() || submittingComment}
-                className="inline-flex items-center gap-2 px-5 py-2 text-xs font-semibold text-white gradient-brand rounded-full hover:opacity-95 disabled:opacity-40 shadow-sm shadow-primary/20 transition-all cursor-pointer"
+                className="inline-flex items-center gap-2 px-5 py-2 text-xs font-medium text-on-primary bg-primary rounded-full hover:opacity-90 disabled:opacity-40 transition-opacity cursor-pointer"
               >
                 <Send size={12} />
-                <span>{submittingComment ? "Inscribing..." : "Inscribe Note"}</span>
+                <span>{submittingComment ? "Submitting..." : "Post Note"}</span>
               </button>
             </div>
           </div>
@@ -647,7 +644,7 @@ export default function PoemPage() {
               {comments.map((comment) => (
                 <div
                   key={comment.id}
-                  className="glass-surface rounded-2xl p-4 sm:p-5 border border-border-subtle/40 flex gap-3.5 group transition-colors hover:border-primary/30"
+                  className="glass-surface rounded-2xl p-4 sm:p-5 border border-border-default flex gap-3.5 group transition-colors hover:border-border-strong"
                 >
                   <Avatar
                     src={comment.profiles?.profile_image}
@@ -660,7 +657,7 @@ export default function PoemPage() {
                       <div className="flex items-center gap-2">
                         <Link
                           href={`/profile/${comment.profiles?.username}`}
-                          className="text-xs font-semibold text-text-primary hover:text-primary transition-colors"
+                          className="text-xs font-semibold text-text-primary hover:underline transition-colors"
                         >
                           {comment.profiles?.display_name || "Reader"}
                         </Link>
@@ -675,14 +672,14 @@ export default function PoemPage() {
                       {user && (user.id === comment.author_id || user.id === poem.author_id) && (
                         <button
                           onClick={() => handleDeleteComment(comment.id)}
-                          className="opacity-0 group-hover:opacity-100 text-text-tertiary hover:text-red-400 transition-opacity p-1 cursor-pointer"
+                          className="opacity-0 group-hover:opacity-100 text-text-tertiary hover:text-text-primary transition-opacity p-1 cursor-pointer"
                           title="Delete note"
                         >
                           <Trash2 size={13} />
                         </button>
                       )}
                     </div>
-                    <p className="text-xs sm:text-sm text-stone-700 dark:text-stone-300 leading-relaxed font-sans">
+                    <p className="text-xs sm:text-sm text-text-secondary leading-relaxed font-sans">
                       {comment.content}
                     </p>
                   </div>
@@ -690,7 +687,7 @@ export default function PoemPage() {
               ))}
             </div>
           ) : (
-            <div className="text-center py-10 glass-surface rounded-2xl p-6 border border-border-subtle/30">
+            <div className="text-center py-10 glass-surface rounded-2xl p-6 border border-border-default">
               <p className="font-verse italic text-xs sm:text-sm text-text-tertiary">
                 No marginalia inscribed yet. Be the first reader to leave a note on this stanza.
               </p>
