@@ -204,7 +204,7 @@ export default function HomeLayout() {
               </p>
               <Link
                 href={!user ? "/login" : "/writers"}
-                className="inline-flex items-center px-4 py-2 text-xs font-semibold text-white bg-gradient-to-r from-primary-container to-secondary rounded-full hover:opacity-95 shadow-md glowing-btn-aura"
+                className="inline-flex items-center px-4 py-2 text-xs font-medium text-on-primary bg-primary rounded-full hover:opacity-90 transition-opacity"
               >
                 {!user ? "Sign in →" : "Discover writers →"}
               </Link>

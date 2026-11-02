@@ -5,27 +5,27 @@ import { Compass, PenLine, RefreshCw } from "lucide-react";
 
 export function EmptyFeedState() {
   return (
-    <div className="glass-surface rounded-2xl p-10 sm:p-14 text-center max-w-lg mx-auto space-y-4 specular-top-border">
-      <div className="w-14 h-14 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto text-primary">
-        <PenLine size={24} />
+    <div className="glass-surface rounded-2xl p-8 sm:p-12 text-center max-w-lg mx-auto space-y-4 border border-border-default">
+      <div className="w-12 h-12 rounded-full bg-surface-secondary border border-border-default flex items-center justify-center mx-auto text-text-primary">
+        <PenLine size={20} />
       </div>
-      <h3 className="font-display text-2xl text-text-primary font-light">
-        Your Poetly is quiet.
+      <h3 className="font-display text-2xl text-text-primary font-normal">
+        Your feed is quiet.
       </h3>
       <p className="font-verse text-base text-text-tertiary italic max-w-sm mx-auto">
-        Discover new voices in the salon or pen something from the heart.
+        Discover new voices or write a poem from the heart.
       </p>
       <div className="flex items-center justify-center gap-3 pt-3">
         <Link
           href="/explore"
-          className="px-4 py-2 rounded-full glass-pill text-xs font-semibold text-text-secondary hover:text-text-primary flex items-center gap-1.5 transition-colors"
+          className="px-4 py-2 rounded-full border border-border-default hover:bg-surface-hover text-xs font-medium text-text-primary flex items-center gap-1.5 transition-colors"
         >
-          <Compass size={14} className="text-secondary" />
+          <Compass size={14} />
           <span>Explore</span>
         </Link>
         <Link
           href="/write"
-          className="px-4 py-2 rounded-full bg-gradient-to-r from-primary-container to-secondary text-white text-xs font-semibold flex items-center gap-1.5 glowing-btn-aura hover:opacity-95 transition-all"
+          className="px-4 py-2 rounded-full bg-primary text-on-primary text-xs font-medium flex items-center gap-1.5 hover:opacity-90 transition-opacity"
         >
           <PenLine size={14} />
           <span>Write Poem</span>
@@ -37,21 +37,21 @@ export function EmptyFeedState() {
 
 export function ErrorFeedState({ onRetry }: { onRetry?: () => void }) {
   return (
-    <div className="glass-surface rounded-2xl p-10 sm:p-14 text-center max-w-lg mx-auto space-y-4 border border-error/30">
-      <div className="w-14 h-14 rounded-full bg-error/10 border border-error/20 flex items-center justify-center mx-auto text-error">
-        <RefreshCw size={24} />
+    <div className="glass-surface rounded-2xl p-8 sm:p-12 text-center max-w-lg mx-auto space-y-4 border border-border-default">
+      <div className="w-12 h-12 rounded-full bg-surface-secondary border border-border-default flex items-center justify-center mx-auto text-text-primary">
+        <RefreshCw size={20} />
       </div>
-      <h3 className="font-display text-2xl text-text-primary font-light">
+      <h3 className="font-display text-2xl text-text-primary font-normal">
         Something went quiet.
       </h3>
       <p className="text-xs text-text-tertiary max-w-sm mx-auto">
-        We couldn&apos;t load the salon feed. Please check your connection.
+        We couldn&apos;t load the feed. Please check your connection.
       </p>
       {onRetry && (
         <div className="pt-2">
           <button
             onClick={onRetry}
-            className="px-4 py-2 rounded-full glass-pill hover:border-primary/40 text-xs font-semibold text-text-primary inline-flex items-center gap-2 transition-all cursor-pointer"
+            className="px-4 py-2 rounded-full border border-border-default hover:bg-surface-hover text-xs font-medium text-text-primary inline-flex items-center gap-2 transition-colors cursor-pointer"
           >
             <RefreshCw size={13} />
             <span>Try again</span>

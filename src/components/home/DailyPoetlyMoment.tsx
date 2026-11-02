@@ -51,64 +51,35 @@ export default function DailyPoetlyMoment() {
   }, []);
 
   return (
-    <div className="space-y-4 sm:space-y-6">
-      {/* Emotional Greeting & Literary Anchor */}
-      <section className="glass-surface rounded-2xl p-5 sm:p-6 relative overflow-hidden specular-top-border">
-        <div className="flex items-start justify-between">
-          <div className="space-y-1">
-            <div className="flex items-center gap-1.5 text-primary text-xs font-medium tracking-wide">
-              <Moon size={14} className="text-primary" />
-              <span>Sanctuary Hours</span>
-            </div>
-            <h1 className="font-display text-2xl sm:text-3xl text-text-primary tracking-tight font-light">
-              {getGreeting()}, {displayName}.
-            </h1>
+    <section className="glass-surface rounded-2xl p-4 sm:p-5 relative border border-border-default">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div className="space-y-1 min-w-0">
+          <div className="flex items-center gap-2 text-text-tertiary text-xs font-mono">
+            <span>{getGreeting()}, {displayName}</span>
+            <span>·</span>
+            <span className="uppercase tracking-wider font-semibold">Today&apos;s Prompt</span>
           </div>
-          <Quote className="text-text-tertiary/20 shrink-0" size={32} />
-        </div>
-        <p className="font-verse text-base sm:text-lg italic text-text-secondary mt-3 pt-3 border-t border-border-subtle/40 font-light leading-relaxed">
-          &ldquo;{moment.line}&rdquo;
-        </p>
-      </section>
-
-      {/* Level 2 Interactive: Daily Prompt Card */}
-      <section className="glass-panel-elevated rounded-2xl p-5 sm:p-6 relative border-t-2 border-t-tertiary">
-        <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-tertiary animate-pulse" />
-            <span className="text-[10px] sm:text-[11px] font-bold uppercase text-tertiary tracking-wider font-mono">
-              Daily Prompt
-            </span>
-          </div>
-          <span className="text-xs text-text-tertiary flex items-center gap-1 font-mono">
-            <Clock size={13} />
-            <span>Today</span>
-          </span>
+          <h2 className="font-display text-lg sm:text-xl text-text-primary font-normal leading-snug truncate">
+            &ldquo;{activePrompt ? activePrompt.title : moment.line}&rdquo;
+          </h2>
         </div>
 
-        <h3 className="font-display text-lg sm:text-2xl leading-snug text-text-primary mb-2 font-light">
-          &ldquo;{activePrompt ? activePrompt.title : "Write about a place you never truly left."}&rdquo;
-        </h3>
-
-        <div className="flex items-center justify-between mt-4 pt-3.5 border-t border-border-subtle/40">
-          <div className="flex items-center gap-1.5 text-text-tertiary text-xs">
-            <PenTool size={14} className="text-primary" />
-            <span>
-              {responseCount > 0
-                ? `${responseCount.toLocaleString()} stanzas penned today`
-                : "Be the first to pen a stanza today"}
+        <div className="flex items-center gap-3 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-border-subtle">
+          {responseCount > 0 && (
+            <span className="text-xs text-text-tertiary font-mono hidden md:inline">
+              {responseCount} penned
             </span>
-          </div>
+          )}
           <Link
             href={activePrompt ? `/write?prompt=${activePrompt.id}` : "/write"}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-tertiary/15 text-tertiary border border-tertiary/30 hover:bg-tertiary/25 text-xs font-semibold transition-all active:scale-95"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-primary text-on-primary text-xs font-medium hover:opacity-90 transition-opacity"
           >
-            <span>Respond to Prompt</span>
+            <span>Write response</span>
             <ArrowRight size={13} />
           </Link>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 }
 

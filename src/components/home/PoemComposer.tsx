@@ -19,16 +19,18 @@ export default function PoemComposer() {
     return (
       <Link
         href="/login"
-        className="glass-surface rounded-2xl p-4 sm:p-5 flex items-center gap-3.5 hover:border-primary/40 transition-colors block group"
+        className="glass-surface rounded-2xl p-4 sm:p-5 flex items-center justify-between gap-3.5 hover:border-border-strong transition-colors block group"
       >
-        <div className="w-10 h-10 rounded-full bg-surface-secondary/80 flex items-center justify-center font-display text-text-tertiary group-hover:text-primary transition-colors text-sm border border-border-subtle">
-          ✦
+        <div className="flex items-center gap-3 min-w-0">
+          <div className="w-9 h-9 rounded-full bg-surface-secondary flex items-center justify-center text-text-tertiary group-hover:text-text-primary transition-colors text-sm border border-border-default shrink-0">
+            ✎
+          </div>
+          <p className="text-xs sm:text-sm text-text-secondary truncate font-verse italic">
+            Leave a quiet verse or thought... Sign in to write.
+          </p>
         </div>
-        <div className="flex-1 text-sm text-text-tertiary group-hover:text-text-secondary transition-colors font-verse italic">
-          Leave a quiet verse or thought... Sign in to write.
-        </div>
-        <span className="text-xs text-primary font-medium tracking-wide">
-          Join Salon →
+        <span className="text-xs text-text-primary font-medium tracking-wide shrink-0">
+          Sign In →
         </span>
       </Link>
     );
@@ -71,10 +73,10 @@ export default function PoemComposer() {
   };
 
   return (
-    <section className="glass-surface rounded-2xl p-4 sm:p-5 transition-all focus-within:border-primary/40 focus-within:ring-1 focus-within:ring-primary/30">
+    <section className="glass-surface rounded-2xl p-4 sm:p-5 transition-all border border-border-default focus-within:border-border-strong">
       <div className="flex items-start gap-3 sm:gap-3.5">
         {/* User Avatar */}
-        <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 mt-0.5 ring-1 ring-primary/20 bg-surface-secondary flex items-center justify-center">
+        <div className="w-9 h-9 rounded-full overflow-hidden shrink-0 mt-0.5 border border-border-default bg-surface-secondary flex items-center justify-center">
           {profile?.profile_image ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
@@ -83,7 +85,7 @@ export default function PoemComposer() {
               className="w-full h-full object-cover"
             />
           ) : (
-            <span className="font-display font-medium text-primary text-sm">
+            <span className="font-display font-medium text-text-primary text-sm">
               {profile?.display_name?.[0]?.toUpperCase() || user?.email?.[0]?.toUpperCase() || "P"}
             </span>
           )}
@@ -100,24 +102,24 @@ export default function PoemComposer() {
             rows={focused || content ? 3 : 2}
           />
 
-          {error && <p className="text-xs text-error mt-1">{error}</p>}
+          {error && <p className="text-xs text-text-secondary mt-1">{error}</p>}
 
-          <div className="flex items-center justify-between pt-2.5 border-t border-border-subtle/40">
+          <div className="flex items-center justify-between pt-2.5 border-t border-border-subtle">
             <div className="flex items-center gap-2">
               <Link
                 href="/write"
-                className="px-2.5 py-1 rounded-lg glass-pill text-xs text-text-secondary hover:text-text-primary flex items-center gap-1.5 transition-colors"
-                title="Open full studio"
+                className="px-2.5 py-1 rounded-lg border border-border-default hover:bg-surface-hover text-xs text-text-secondary hover:text-text-primary flex items-center gap-1.5 transition-colors"
+                title="Open full writing desk"
               >
-                <AlignLeft size={13} className="text-primary/70" />
+                <AlignLeft size={13} />
                 <span>Full Desk</span>
               </Link>
               <Link
                 href="/prompts"
-                className="px-2.5 py-1 rounded-lg glass-pill text-xs text-text-secondary hover:text-text-primary flex items-center gap-1.5 transition-colors"
+                className="px-2.5 py-1 rounded-lg border border-border-default hover:bg-surface-hover text-xs text-text-secondary hover:text-text-primary flex items-center gap-1.5 transition-colors"
                 title="Browse daily prompts"
               >
-                <HelpCircle size={13} className="text-tertiary" />
+                <HelpCircle size={13} />
                 <span>Prompts</span>
               </Link>
             </div>
@@ -139,17 +141,17 @@ export default function PoemComposer() {
                 type="button"
                 onClick={handlePost}
                 disabled={posting || !content.trim()}
-                className="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-gradient-to-r from-primary-container to-secondary text-white font-semibold text-xs tracking-wider glowing-btn-aura hover:opacity-95 transition-all disabled:opacity-40 disabled:pointer-events-none active:scale-95"
+                className="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-primary text-on-primary font-medium text-xs tracking-wider hover:opacity-90 transition-all disabled:opacity-40 disabled:pointer-events-none active:scale-95"
               >
                 {posting ? (
                   <>
                     <Loader2 size={13} className="animate-spin" />
-                    <span>Penning...</span>
+                    <span>Publishing...</span>
                   </>
                 ) : (
                   <>
                     <Send size={12} />
-                    <span>Pen</span>
+                    <span>Publish</span>
                   </>
                 )}
               </button>
