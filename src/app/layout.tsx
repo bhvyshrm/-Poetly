@@ -36,7 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className="h-full" suppressHydrationWarning>
       <head>
-        <meta name="theme-color" content="#D67FA1" />
+        <meta name="theme-color" content="#000000" />
         <link rel="icon" href="/logo.svg" />
       </head>
       <body className="min-h-full flex flex-col">
