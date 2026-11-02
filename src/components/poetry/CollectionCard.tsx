@@ -24,12 +24,12 @@ export default function CollectionCard({
   return (
     <Link
       href={`/collections/${collection.id}`}
-      className={`glass-surface rounded-2xl p-5 sm:p-6 border border-border-subtle/40 hover:border-primary/40 transition-all duration-300 flex flex-col justify-between group h-full hover:-translate-y-0.5 specular-top-border ${className}`}
+      className={`glass-surface rounded-2xl p-5 sm:p-6 border border-border-default hover:border-border-strong transition-all duration-200 flex flex-col justify-between group h-full ${className}`}
     >
       <div className="space-y-3">
         <div className="flex items-center justify-between gap-2">
-          <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-secondary px-2 py-0.5 rounded-full bg-secondary/15 border border-secondary/30">
-            Salon Binder
+          <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-text-secondary px-2 py-0.5 rounded-full bg-surface-secondary border border-border-default">
+            Collection
           </span>
           <span className="text-xs text-text-tertiary font-mono flex items-center gap-1">
             <BookOpen size={12} />
@@ -39,7 +39,7 @@ export default function CollectionCard({
           </span>
         </div>
 
-        <h3 className="font-display text-xl sm:text-2xl text-text-primary group-hover:text-primary transition-colors font-normal leading-snug">
+        <h3 className="font-display text-xl sm:text-2xl text-text-primary group-hover:underline transition-colors font-normal leading-snug">
           {collection.title}
         </h3>
 
@@ -50,12 +50,12 @@ export default function CollectionCard({
         )}
       </div>
 
-      <div className="pt-4 border-t border-border-subtle/30 flex items-center justify-between text-xs text-text-tertiary mt-4">
+      <div className="pt-4 border-t border-border-subtle flex items-center justify-between text-xs text-text-tertiary mt-4">
         <span className="font-mono text-[11px]">
-          Bound {new Date(collection.created_at).toLocaleDateString(undefined, { month: "short", year: "numeric" })}
+          Created {new Date(collection.created_at).toLocaleDateString(undefined, { month: "short", year: "numeric" })}
         </span>
-        <span className="text-primary font-semibold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-          <span>Open Binder</span>
+        <span className="text-text-primary font-semibold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+          <span>View Collection</span>
           <ArrowRight size={13} />
         </span>
       </div>

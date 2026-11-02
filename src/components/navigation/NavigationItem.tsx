@@ -32,12 +32,12 @@ export default function NavigationItem({
         onClick={onClick}
         aria-label={label}
         aria-current={isActive ? "page" : undefined}
-        className={`group relative flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-full border border-primary/40 text-primary hover:bg-primary/10 active:scale-[0.98] font-medium text-xs sm:text-sm transition-all duration-200 select-none shadow-xs ${className}`}
+        className={`group relative flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-full border border-border-strong text-text-primary hover:bg-surface-hover active:scale-[0.98] font-medium text-xs sm:text-sm transition-all duration-200 select-none shadow-xs ${className}`}
       >
         <Icon
           size={16}
-          strokeWidth={2.2}
-          className="transition-transform duration-200 group-hover:rotate-6 shrink-0"
+          strokeWidth={2}
+          className="shrink-0"
         />
         <span className="truncate tracking-wide">{label}</span>
       </Link>
@@ -52,8 +52,8 @@ export default function NavigationItem({
       aria-current={isActive ? "page" : undefined}
       className={`group relative flex items-center justify-between w-full px-3.5 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 select-none ${
         isActive
-          ? "bg-surface-elevated/80 dark:bg-surface-elevated/70 border border-outline-variant/40 dark:border-outline-variant/30 text-primary dark:text-primary shadow-xs"
-          : "text-text-secondary hover:text-text-primary hover:bg-surface-hover/50 active:scale-[0.99]"
+          ? "bg-surface-elevated border border-border-strong text-text-primary shadow-xs font-semibold"
+          : "text-text-secondary hover:text-text-primary hover:bg-surface-hover active:scale-[0.99]"
       } ${className}`}
     >
       <div className="flex items-center gap-3 min-w-0">
@@ -61,7 +61,7 @@ export default function NavigationItem({
           size={18}
           strokeWidth={isActive ? 2.2 : 1.7}
           className={`shrink-0 transition-colors duration-150 ${
-            isActive ? "text-primary" : "text-text-tertiary group-hover:text-text-primary"
+            isActive ? "text-text-primary" : "text-text-tertiary group-hover:text-text-primary"
           }`}
         />
         <span className="truncate">{label}</span>
@@ -69,15 +69,15 @@ export default function NavigationItem({
 
       <div className="flex items-center gap-2 shrink-0">
         {badge !== undefined && (
-          <span className="inline-flex items-center justify-center min-w-4.5 h-4.5 px-1.5 text-[10px] font-semibold rounded-full bg-primary/20 text-primary">
+          <span className="inline-flex items-center justify-center min-w-4.5 h-4.5 px-1.5 text-[10px] font-semibold rounded-full bg-surface-secondary text-text-primary border border-border-default">
             {badge}
           </span>
         )}
 
-        {/* Stitch active indicator dot */}
+        {/* Active indicator dot */}
         {isActive && (
           <span
-            className="w-1.5 h-1.5 rounded-full bg-primary shrink-0 animate-pulse"
+            className="w-1.5 h-1.5 rounded-full bg-text-primary shrink-0"
             aria-hidden="true"
           />
         )}

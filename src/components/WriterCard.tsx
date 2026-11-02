@@ -66,8 +66,8 @@ export default function WriterCard({
           }}
           className={`shrink-0 text-xs font-semibold px-3.5 py-1.5 rounded-full transition-all select-none ${
             isFollowed
-              ? "bg-primary/15 text-primary border border-primary/30 hover:bg-primary/25"
-              : "glass-pill text-text-secondary hover:text-primary hover:border-primary/40"
+              ? "bg-surface-secondary text-text-primary border border-border-default hover:bg-surface-hover"
+              : "bg-primary text-on-primary hover:opacity-90"
           }`}
           aria-label={isFollowed ? `Unfollow ${writer.display_name}` : `Follow ${writer.display_name}`}
         >

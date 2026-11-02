@@ -41,7 +41,7 @@ export default function Avatar({
 
   return (
     <div
-      className={`relative inline-flex items-center justify-center shrink-0 rounded-full overflow-hidden bg-brand-subtle select-none border border-border-subtle ${sizeClass} ${className}`}
+      className={`relative inline-flex items-center justify-center shrink-0 rounded-full overflow-hidden bg-surface-secondary select-none border border-border-default ${sizeClass} ${className}`}
       aria-label={name ? `${name}'s avatar` : "User avatar"}
     >
       {src && !imageFailed ? (
@@ -56,7 +56,7 @@ export default function Avatar({
           className="w-full h-full object-cover"
         />
       ) : (
-        <span className="font-display font-medium text-brand">{initial}</span>
+        <span className="font-display font-medium text-text-primary">{initial}</span>
       )}
     </div>
   );

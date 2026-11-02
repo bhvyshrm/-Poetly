@@ -29,7 +29,7 @@ export default function Logo({ size = "md", withWordmark = true }: { size?: Logo
         />
       ) : (
         <span
-          className="gradient-brand flex items-center justify-center rounded-[var(--radius-sm)] text-white font-display"
+          className="bg-primary flex items-center justify-center rounded-md text-on-primary font-display font-semibold"
           style={{ width: dims.box, height: dims.box }}
           aria-hidden="true"
         >
